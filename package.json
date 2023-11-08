@@ -1,7 +1,7 @@
 {
-  "name": "fathom-contracts-helper",
+  "name": "fathom-sdk",
   "version": "0.1.0",
-  "description": "",
+  "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
   "type": "module",
   "scripts": {
     "build": "npx tsc",
@@ -11,8 +11,12 @@
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier --write ."
   },
-  "author": "Fathom Team",
+  "author": "Fathom.fi",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Into-the-Fathom/fathom-contracts-helper.git"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.15",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
