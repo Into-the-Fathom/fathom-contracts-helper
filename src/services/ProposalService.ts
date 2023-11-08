@@ -1,19 +1,28 @@
-import Xdc3 from "xdc3";
-import {TransactionReceipt} from "xdc3-eth";
-import {keccak256} from "xdc3-utils";
+import Xdc3 from 'xdc3';
+import { TransactionReceipt } from 'xdc3-eth';
+import { keccak256 } from 'xdc3-utils';
+import EventEmitter from 'eventemitter3';
 
-import {SmartContractFactory} from "utils/SmartContractFactory";
-import IProposalService from "interfaces/services/IProposalService";
-import {Web3Utils} from "utils/Web3Utils";
-import {getEstimateGas} from "utils/getEstimateGas";
+import { SmartContractFactory } from '../utils/SmartContractFactory';
+import { Web3Utils } from '../utils/Web3Utils';
+import { getEstimateGas } from '../utils/getEstimateGas';
+
+import {
+  ITransaction,
+  TransactionStatus,
+  TransactionType,
+} from '../interfaces/models/ITransaction';
+import IProposalService from '../interfaces/services/IProposalService';
 
 export default class ProposalService implements IProposalService {
-  provider: Xdc3;
-  chainId: number;
+  public provider: Xdc3;
+  public chainId: number;
+  public emitter: EventEmitter;
 
   constructor(provider: Xdc3, chainId: number) {
     this.provider = provider;
     this.chainId = chainId;
+    this.emitter = new EventEmitter<string | symbol, ITransaction>();
   }
 
   createProposal(
@@ -21,35 +30,55 @@ export default class ProposalService implements IProposalService {
     values: number[],
     callData: string[],
     description: string,
-    account: string
+    account: string,
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.FathomGovernor(this.chainId),
-          this.provider
+          this.provider,
         );
 
-        const options = {from: account, gas: 0};
+        const options = { from: account, gas: 0 };
         const gas = await getEstimateGas(
           FathomGovernor,
-          "propose",
+          'propose',
           [targets, values, callData, description],
-          options
+          options,
         );
 
         options.gas = gas;
         FathomGovernor.methods
           .propose(targets, values, callData, description)
           .send(options)
-          .then((transactionReceipt: TransactionReceipt) => {
-            resolve(transactionReceipt.blockNumber);
+          .on('transactionHash', (hash: string) => {
+            this.emitter.emit('pendingTransaction', {
+              hash: hash,
+              type: TransactionType.CreateProposal,
+              active: false,
+              status: TransactionStatus.None,
+            });
           })
-          .catch((e: Error) => {
-            reject(e);
+          .then((receipt: TransactionReceipt) => {
+            this.emitter.emit('successTransaction', {
+              type: TransactionType.CreateProposal,
+              receipt,
+            });
+            resolve(receipt.blockNumber);
+          })
+          .catch((error: Error) => {
+            this.emitter.emit('errorTransaction', {
+              type: TransactionType.CreateProposal,
+              error,
+            });
+            reject(error);
           });
-      } catch (e: any) {
-        reject(e);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.CreateLock,
+          error,
+        });
+        reject(error);
       }
     });
   }
@@ -59,35 +88,55 @@ export default class ProposalService implements IProposalService {
     values: number[],
     callData: string[],
     description: string,
-    account: string
+    account: string,
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.FathomGovernor(this.chainId),
-          this.provider
+          this.provider,
         );
 
-        const options = {from: account, gas: 0};
+        const options = { from: account, gas: 0 };
         const gas = await getEstimateGas(
           FathomGovernor,
-          "execute",
+          'execute',
           [targets, values, callData, keccak256(description)],
-          options
+          options,
         );
 
         options.gas = gas;
         return FathomGovernor.methods
           .execute(targets, values, callData, keccak256(description))
           .send(options)
+          .on('transactionHash', (hash: string) => {
+            this.emitter.emit('pendingTransaction', {
+              hash: hash,
+              type: TransactionType.ExecuteProposal,
+              active: false,
+              status: TransactionStatus.None,
+            });
+          })
           .then((receipt: TransactionReceipt) => {
+            this.emitter.emit('successTransaction', {
+              type: TransactionType.ExecuteProposal,
+              receipt,
+            });
             resolve(receipt.blockNumber);
           })
-          .catch((e: Error) => {
-            reject(e);
+          .catch((error: Error) => {
+            this.emitter.emit('errorTransaction', {
+              type: TransactionType.ExecuteProposal,
+              error,
+            });
+            reject(error);
           });
-      } catch (e: any) {
-        reject(e);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.ExecuteProposal,
+          error,
+        });
+        reject(error);
       }
     });
   }
@@ -97,34 +146,54 @@ export default class ProposalService implements IProposalService {
     values: number[],
     callData: string[],
     description: string,
-    account: string
+    account: string,
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.FathomGovernor(this.chainId),
-          this.provider
+          this.provider,
         );
 
-        const options = {from: account, gas: 0};
+        const options = { from: account, gas: 0 };
         const gas = await getEstimateGas(
           FathomGovernor,
-          "queue",
+          'queue',
           [targets, values, callData, keccak256(description)],
-          options
+          options,
         );
         options.gas = gas;
         FathomGovernor.methods
           .queue(targets, values, callData, keccak256(description))
           .send(options)
+          .on('transactionHash', (hash: string) => {
+            this.emitter.emit('pendingTransaction', {
+              hash: hash,
+              type: TransactionType.QueueProposal,
+              active: false,
+              status: TransactionStatus.None,
+            });
+          })
           .then((receipt: TransactionReceipt) => {
+            this.emitter.emit('successTransaction', {
+              type: TransactionType.QueueProposal,
+              receipt,
+            });
             resolve(receipt.blockNumber);
           })
-          .catch((e: Error) => {
-            reject(e);
+          .catch((error: Error) => {
+            this.emitter.emit('errorTransaction', {
+              type: TransactionType.QueueProposal,
+              error,
+            });
+            reject(error);
           });
-      } catch (e: any) {
-        reject(e);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.QueueProposal,
+          error,
+        });
+        reject(error);
       }
     });
   }
@@ -132,64 +201,78 @@ export default class ProposalService implements IProposalService {
   castVote(
     proposalId: string,
     account: string,
-    support: string
+    support: string,
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.FathomGovernor(this.chainId),
-          this.provider
+          this.provider,
         );
 
-        const options = {from: account, gas: 0};
+        const options = { from: account, gas: 0 };
         const gas = await getEstimateGas(
           FathomGovernor,
-          "castVote",
+          'castVote',
           [proposalId, support],
-          options
+          options,
         );
         options.gas = gas;
         return FathomGovernor.methods
           .castVote(proposalId, support)
           .send(options)
+          .on('transactionHash', (hash: string) => {
+            this.emitter.emit('pendingTransaction', {
+              hash: hash,
+              type: TransactionType.CastVote,
+              active: false,
+              status: TransactionStatus.None,
+            });
+          })
           .then((receipt: TransactionReceipt) => {
+            this.emitter.emit('successTransaction', {
+              type: TransactionType.CastVote,
+              receipt,
+            });
             resolve(receipt.blockNumber);
           })
-          .catch((e: Error) => {
-            reject(e);
+          .catch((error: Error) => {
+            this.emitter.emit('errorTransaction', {
+              type: TransactionType.CastVote,
+              error,
+            });
+            reject(error);
           });
-      } catch (e: any) {
-        reject(e);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.CastVote,
+          error,
+        });
+        reject(error);
       }
     });
   }
 
-  hasVoted(
-    proposalId: string,
-    account: string
-  ) {
+  hasVoted(proposalId: string, account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.FathomGovernor(this.chainId),
-      this.provider
+      this.provider,
     );
     return FathomGovernor.methods.hasVoted(proposalId, account).call();
   }
 
-  viewProposalState(
-    proposalId: string,
-    account: string
-  ) {
+  viewProposalState(proposalId: string, account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.FathomGovernor(this.chainId),
-      this.provider
+      this.provider,
     );
-    return FathomGovernor.methods.state(proposalId).call({from: account});
+    return FathomGovernor.methods.state(proposalId).call({ from: account });
   }
 
   nextAcceptableProposalTimestamp(account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.FathomGovernor(this.chainId),
-      this.provider
+      this.provider,
     );
 
     return FathomGovernor.methods
@@ -200,7 +283,7 @@ export default class ProposalService implements IProposalService {
   getVBalance(account: string) {
     const VeFathom = Web3Utils.getContractInstance(
       SmartContractFactory.vFathom(this.chainId),
-      this.provider
+      this.provider,
     );
 
     return VeFathom.methods.balanceOf(account).call();
@@ -209,7 +292,7 @@ export default class ProposalService implements IProposalService {
   quorum(blockNumber: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.MainFathomGovernor(this.chainId),
-      this.provider
+      this.provider,
     );
 
     return FathomGovernor.methods.quorum(blockNumber).call();
@@ -218,7 +301,7 @@ export default class ProposalService implements IProposalService {
   proposalVotes(proposalId: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.MainFathomGovernor(this.chainId),
-      this.provider
+      this.provider,
     );
 
     return FathomGovernor.methods.proposalVotes(proposalId).call();
@@ -227,7 +310,7 @@ export default class ProposalService implements IProposalService {
   proposalThreshold() {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.MainFathomGovernor(this.chainId),
-      this.provider
+      this.provider,
     );
 
     return FathomGovernor.methods.proposalThreshold().call();

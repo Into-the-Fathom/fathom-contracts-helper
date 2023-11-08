@@ -1,9 +1,27 @@
 export enum TransactionType {
-  OpenPosition,
-  ClosePosition,
-  StableSwap,
-  Approve,
-  Token,
+  OpenPosition = 'OpenPosition',
+  TopUpPosition = 'TopUpPosition',
+  TopUpPositionAndBorrow = 'TopUpPositionAndBorrow',
+  RepayPosition = 'RepayPosition',
+  Approve = 'Approve',
+
+  CreateProposal = 'CreateProposal',
+  ExecuteProposal = 'ExecuteProposal',
+  QueueProposal = 'QueueProposal',
+  CastVote = 'CastVote',
+
+  SwapTokenToStableCoin = 'SwapTokenToStableCoin',
+  SwapStableCoinToToken = 'SwapStableCoinToToken',
+  AddLiquidity = 'AddLiquidity',
+  RemoveLiquidity = 'RemoveLiquidity',
+  ClaimFeesRewards = 'ClaimFeesRewards',
+  WithdrawClaimedFees = 'WithdrawClaimedFees',
+
+  CreateLock = 'CreateLock',
+  HandleUnlock = 'HandleUnlock',
+  HandleEarlyWithdrawal = 'HandleEarlyWithdrawal',
+  HandleClaimRewards = 'HandleClaimRewards',
+  HandleWithdrawAll = 'HandleWithdrawAll',
 }
 
 export enum TransactionStatus {
@@ -19,4 +37,5 @@ export interface ITransaction {
   status: TransactionStatus;
   title: string;
   message: string;
+  tokenName?: string;
 }

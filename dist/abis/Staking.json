@@ -27445,144 +27445,52 @@
     "ast": {
         "absolutePath": "project:/contracts/dao/staking/packages/StakingPackage.sol",
         "exportedSymbols": {
-            "AccessControlUpgradeable": [
-                335
-            ],
-            "Address": [
-                5164
-            ],
-            "AddressUpgradeable": [
-                861
-            ],
-            "AdminPausable": [
-                10014
-            ],
-            "BoringMath": [
-                7143
-            ],
-            "BoringMath128": [
-                7281
-            ],
-            "BoringMath16": [
-                7465
-            ],
-            "BoringMath208": [
-                7235
-            ],
-            "BoringMath224": [
-                7189
-            ],
-            "BoringMath32": [
-                7419
-            ],
-            "BoringMath48": [
-                7373
-            ],
-            "BoringMath64": [
-                7327
-            ],
-            "BoringMath8": [
-                7511
-            ],
-            "ContextUpgradeable": [
-                903
-            ],
-            "CreateLockParams": [
-                16614
-            ],
-            "ERC165Upgradeable": [
-                1122
-            ],
-            "FullMath": [
-                7644
-            ],
-            "IAccessControlUpgradeable": [
-                408
-            ],
-            "IAdminPausable": [
-                10022
-            ],
-            "IERC165Upgradeable": [
-                1134
-            ],
-            "IERC20": [
-                25636
-            ],
-            "IERC20Permit": [
-                26513
-            ],
-            "IRewardsHandler": [
-                17218
-            ],
-            "IStakingEvents": [
-                17319
-            ],
-            "IStakingGetter": [
-                17377
-            ],
-            "IStakingHandler": [
-                17535
-            ],
-            "IStakingStorage": [
-                17577
-            ],
-            "IVMainToken": [
-                26561
-            ],
-            "IVault": [
-                21633
-            ],
-            "Initializable": [
-                577
-            ],
-            "LockedBalance": [
-                16579
-            ],
-            "MathUpgradeable": [
-                1999
-            ],
-            "RewardsInternals": [
-                18674
-            ],
-            "SafeERC20Staking": [
-                5608
-            ],
-            "Schedule": [
-                16535
-            ],
-            "StakingGetters": [
-                18865
-            ],
-            "StakingHandlers": [
-                20450
-            ],
-            "StakingInternals": [
-                21553
-            ],
-            "StakingPackage": [
-                21562
-            ],
-            "StakingStorage": [
-                16522
-            ],
-            "Stream": [
-                16607
-            ],
-            "StreamStatus": [
-                16528
-            ],
-            "StringsUpgradeable": [
-                1078
-            ],
-            "User": [
-                16552
-            ],
-            "VoteCoefficient": [
-                16568
-            ],
-            "Weight": [
-                16563
-            ]
+            "AccessControlUpgradeable": [335],
+            "Address": [5164],
+            "AddressUpgradeable": [861],
+            "AdminPausable": [10014],
+            "BoringMath": [7143],
+            "BoringMath128": [7281],
+            "BoringMath16": [7465],
+            "BoringMath208": [7235],
+            "BoringMath224": [7189],
+            "BoringMath32": [7419],
+            "BoringMath48": [7373],
+            "BoringMath64": [7327],
+            "BoringMath8": [7511],
+            "ContextUpgradeable": [903],
+            "CreateLockParams": [16614],
+            "ERC165Upgradeable": [1122],
+            "FullMath": [7644],
+            "IAccessControlUpgradeable": [408],
+            "IAdminPausable": [10022],
+            "IERC165Upgradeable": [1134],
+            "IERC20": [25636],
+            "IERC20Permit": [26513],
+            "IRewardsHandler": [17218],
+            "IStakingEvents": [17319],
+            "IStakingGetter": [17377],
+            "IStakingHandler": [17535],
+            "IStakingStorage": [17577],
+            "IVMainToken": [26561],
+            "IVault": [21633],
+            "Initializable": [577],
+            "LockedBalance": [16579],
+            "MathUpgradeable": [1999],
+            "RewardsInternals": [18674],
+            "SafeERC20Staking": [5608],
+            "Schedule": [16535],
+            "StakingGetters": [18865],
+            "StakingHandlers": [20450],
+            "StakingInternals": [21553],
+            "StakingPackage": [21562],
+            "StakingStorage": [16522],
+            "Stream": [16607],
+            "StreamStatus": [16528],
+            "StringsUpgradeable": [1078],
+            "User": [16552],
+            "VoteCoefficient": [16568],
+            "Weight": [16563]
         },
         "id": 21563,
         "license": "AGPL 3.0",
@@ -27590,11 +27498,7 @@
         "nodes": [
             {
                 "id": 21555,
-                "literals": [
-                    "solidity",
-                    "0.8",
-                    ".16"
-                ],
+                "literals": ["solidity", "0.8", ".16"],
                 "nodeType": "PragmaDirective",
                 "src": "63:23:81"
             },
@@ -27629,9 +27533,7 @@
                         "baseName": {
                             "id": 21558,
                             "name": "StakingHandlers",
-                            "nameLocations": [
-                                "178:15:81"
-                            ],
+                            "nameLocations": ["178:15:81"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 20450,
                             "src": "178:15:81"
@@ -27644,9 +27546,7 @@
                         "baseName": {
                             "id": 21560,
                             "name": "StakingGetters",
-                            "nameLocations": [
-                                "195:14:81"
-                            ],
+                            "nameLocations": ["195:14:81"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 18865,
                             "src": "195:14:81"
@@ -27662,23 +27562,8 @@
                 "fullyImplemented": true,
                 "id": 21562,
                 "linearizedBaseContracts": [
-                    21562,
-                    18865,
-                    20450,
-                    10014,
-                    335,
-                    1122,
-                    1134,
-                    408,
-                    903,
-                    577,
-                    10022,
-                    21553,
-                    18674,
-                    17319,
-                    17377,
-                    17535,
-                    16522
+                    21562, 18865, 20450, 10014, 335, 1122, 1134, 408, 903, 577, 10022,
+                    21553, 18674, 17319, 17377, 17535, 16522
                 ],
                 "name": "StakingPackage",
                 "nameLocation": "160:14:81",
@@ -27687,53 +27572,11 @@
                 "scope": 21563,
                 "src": "151:61:81",
                 "usedErrors": [
-                    18229,
-                    18231,
-                    18233,
-                    18235,
-                    18237,
-                    18687,
-                    18689,
-                    18897,
-                    18901,
-                    18905,
-                    18909,
-                    18911,
-                    18913,
-                    18919,
-                    18921,
-                    18923,
-                    18925,
-                    18927,
-                    18929,
-                    18931,
-                    18933,
-                    18935,
-                    18937,
-                    18939,
-                    18941,
-                    18943,
-                    18945,
-                    18947,
-                    18949,
-                    18951,
-                    18953,
-                    18955,
-                    18957,
-                    18959,
-                    18961,
-                    18963,
-                    18965,
-                    18967,
-                    18969,
-                    18971,
-                    20463,
-                    20467,
-                    20469,
-                    20471,
-                    20473,
-                    20475,
-                    20477
+                    18229, 18231, 18233, 18235, 18237, 18687, 18689, 18897, 18901, 18905,
+                    18909, 18911, 18913, 18919, 18921, 18923, 18925, 18927, 18929, 18931,
+                    18933, 18935, 18937, 18939, 18941, 18943, 18945, 18947, 18949, 18951,
+                    18953, 18955, 18957, 18959, 18961, 18963, 18965, 18967, 18969, 18971,
+                    20463, 20467, 20469, 20471, 20473, 20475, 20477
                 ]
             }
         ],

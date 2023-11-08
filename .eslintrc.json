@@ -24,16 +24,9 @@
     // Defer to Prettier
     "@typescript-eslint/indent": "off",
 
-    // xo-typescript overrides
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "import/order": [
-      "error",
-      {
-        "alphabetize": {
-          "order": "asc"
-        }
-      }
-    ],
+    "no-async-promise-executor": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+
     "capitalized-comments": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/ban-types": "off"

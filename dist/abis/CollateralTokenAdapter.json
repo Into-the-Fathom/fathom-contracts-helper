@@ -10218,66 +10218,26 @@
     "ast": {
         "absolutePath": "project:/contracts/main/stablecoin-core/adapters/CollateralTokenAdapter/CollateralTokenAdapter.sol",
         "exportedSymbols": {
-            "Address": [
-                4986
-            ],
-            "AddressUpgradeable": [
-                1193
-            ],
-            "CollateralTokenAdapter": [
-                23388
-            ],
-            "CommonMath": [
-                26590
-            ],
-            "ContextUpgradeable": [
-                1235
-            ],
-            "ERC20Interface": [
-                26601
-            ],
-            "IAccessControlConfig": [
-                6863
-            ],
-            "IAccessControlUpgradeable": [
-                408
-            ],
-            "IBookKeeper": [
-                7052
-            ],
-            "ICagable": [
-                7094
-            ],
-            "ICollateralAdapter": [
-                7121
-            ],
-            "ICollateralPoolConfig": [
-                7322
-            ],
-            "IManager": [
-                7758
-            ],
-            "IProxyRegistry": [
-                7843
-            ],
-            "IToken": [
-                8210
-            ],
-            "IVault": [
-                8223
-            ],
-            "Initializable": [
-                709
-            ],
-            "PausableUpgradeable": [
-                836
-            ],
-            "ReentrancyGuardUpgradeable": [
-                909
-            ],
-            "SafeToken": [
-                26818
-            ]
+            "Address": [4986],
+            "AddressUpgradeable": [1193],
+            "CollateralTokenAdapter": [23388],
+            "CommonMath": [26590],
+            "ContextUpgradeable": [1235],
+            "ERC20Interface": [26601],
+            "IAccessControlConfig": [6863],
+            "IAccessControlUpgradeable": [408],
+            "IBookKeeper": [7052],
+            "ICagable": [7094],
+            "ICollateralAdapter": [7121],
+            "ICollateralPoolConfig": [7322],
+            "IManager": [7758],
+            "IProxyRegistry": [7843],
+            "IToken": [8210],
+            "IVault": [8223],
+            "Initializable": [709],
+            "PausableUpgradeable": [836],
+            "ReentrancyGuardUpgradeable": [909],
+            "SafeToken": [26818]
         },
         "id": 23389,
         "license": "AGPL-3.0-or-later",
@@ -10285,11 +10245,7 @@
         "nodes": [
             {
                 "id": 22745,
-                "literals": [
-                    "solidity",
-                    "0.8",
-                    ".17"
-                ],
+                "literals": ["solidity", "0.8", ".17"],
                 "nodeType": "PragmaDirective",
                 "src": "46:23:105"
             },
@@ -10420,9 +10376,7 @@
                         "baseName": {
                             "id": 22757,
                             "name": "CommonMath",
-                            "nameLocations": [
-                                "683:10:105"
-                            ],
+                            "nameLocations": ["683:10:105"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 26590,
                             "src": "683:10:105"
@@ -10435,9 +10389,7 @@
                         "baseName": {
                             "id": 22759,
                             "name": "ICollateralAdapter",
-                            "nameLocations": [
-                                "695:18:105"
-                            ],
+                            "nameLocations": ["695:18:105"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 7121,
                             "src": "695:18:105"
@@ -10450,9 +10402,7 @@
                         "baseName": {
                             "id": 22761,
                             "name": "PausableUpgradeable",
-                            "nameLocations": [
-                                "715:19:105"
-                            ],
+                            "nameLocations": ["715:19:105"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 836,
                             "src": "715:19:105"
@@ -10465,9 +10415,7 @@
                         "baseName": {
                             "id": 22763,
                             "name": "ReentrancyGuardUpgradeable",
-                            "nameLocations": [
-                                "736:26:105"
-                            ],
+                            "nameLocations": ["736:26:105"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 909,
                             "src": "736:26:105"
@@ -10480,9 +10428,7 @@
                         "baseName": {
                             "id": 22765,
                             "name": "ICagable",
-                            "nameLocations": [
-                                "764:8:105"
-                            ],
+                            "nameLocations": ["764:8:105"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 7094,
                             "src": "764:8:105"
@@ -10504,14 +10450,7 @@
                 "fullyImplemented": true,
                 "id": 23388,
                 "linearizedBaseContracts": [
-                    23388,
-                    7094,
-                    909,
-                    836,
-                    1235,
-                    709,
-                    7121,
-                    26590
+                    23388, 7094, 909, 836, 1235, 709, 7121, 26590
                 ],
                 "name": "CollateralTokenAdapter",
                 "nameLocation": "657:22:105",
@@ -10523,9 +10462,7 @@
                         "libraryName": {
                             "id": 22767,
                             "name": "SafeToken",
-                            "nameLocations": [
-                                "785:9:105"
-                            ],
+                            "nameLocations": ["785:9:105"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 26818,
                             "src": "785:9:105"
@@ -10650,9 +10587,7 @@
                             "pathNode": {
                                 "id": 22776,
                                 "name": "IBookKeeper",
-                                "nameLocations": [
-                                    "904:11:105"
-                                ],
+                                "nameLocations": ["904:11:105"],
                                 "nodeType": "IdentifierPath",
                                 "referencedDeclaration": 7052,
                                 "src": "904:11:105"
@@ -10667,9 +10602,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            7120
-                        ],
+                        "baseFunctions": [7120],
                         "constant": false,
                         "functionSelector": "dca07dc5",
                         "id": 22781,
@@ -10725,9 +10658,7 @@
                             "pathNode": {
                                 "id": 22782,
                                 "name": "IVault",
-                                "nameLocations": [
-                                    "986:6:105"
-                                ],
+                                "nameLocations": ["986:6:105"],
                                 "nodeType": "IdentifierPath",
                                 "referencedDeclaration": 8223,
                                 "src": "986:6:105"
@@ -10796,9 +10727,7 @@
                             "pathNode": {
                                 "id": 22788,
                                 "name": "IProxyRegistry",
-                                "nameLocations": [
-                                    "1132:14:105"
-                                ],
+                                "nameLocations": ["1132:14:105"],
                                 "nodeType": "IdentifierPath",
                                 "referencedDeclaration": 7843,
                                 "src": "1132:14:105"
@@ -11168,9 +11097,7 @@
                             "src": "1674:261:105",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        22824
-                                    ],
+                                    "assignments": [22824],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -11193,9 +11120,7 @@
                                                 "pathNode": {
                                                     "id": 22822,
                                                     "name": "IAccessControlConfig",
-                                                    "nameLocations": [
-                                                        "1684:20:105"
-                                                    ],
+                                                    "nameLocations": ["1684:20:105"],
                                                     "nodeType": "IdentifierPath",
                                                     "referencedDeclaration": 6863,
                                                     "src": "1684:20:105"
@@ -11463,10 +11388,7 @@
                                             "id": 22831,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "1792:7:105",
                                             "typeDescriptions": {
@@ -11742,10 +11664,7 @@
                                             "id": 22847,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "1991:7:105",
                                             "typeDescriptions": {
@@ -11801,9 +11720,7 @@
                             "src": "2152:374:105",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        22869
-                                    ],
+                                    "assignments": [22869],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -11826,9 +11743,7 @@
                                                 "pathNode": {
                                                     "id": 22867,
                                                     "name": "IAccessControlConfig",
-                                                    "nameLocations": [
-                                                        "2162:20:105"
-                                                    ],
+                                                    "nameLocations": ["2162:20:105"],
                                                     "nodeType": "IdentifierPath",
                                                     "referencedDeclaration": 6863,
                                                     "src": "2162:20:105"
@@ -12245,10 +12160,7 @@
                                             "id": 22876,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "2270:7:105",
                                             "typeDescriptions": {
@@ -12304,9 +12216,7 @@
                             "src": "2565:255:105",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        22903
-                                    ],
+                                    "assignments": [22903],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -12329,9 +12239,7 @@
                                                 "pathNode": {
                                                     "id": 22901,
                                                     "name": "IAccessControlConfig",
-                                                    "nameLocations": [
-                                                        "2575:20:105"
-                                                    ],
+                                                    "nameLocations": ["2575:20:105"],
                                                     "nodeType": "IdentifierPath",
                                                     "referencedDeclaration": 6863,
                                                     "src": "2575:20:105"
@@ -12599,10 +12507,7 @@
                                             "id": 22910,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "2683:7:105",
                                             "typeDescriptions": {
@@ -12886,10 +12791,7 @@
                                             "id": 22947,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3170:7:105",
                                             "typeDescriptions": {
@@ -13042,10 +12944,7 @@
                                             "id": 22957,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3257:7:105",
                                             "typeDescriptions": {
@@ -13198,10 +13097,7 @@
                                             "id": 22967,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3357:7:105",
                                             "typeDescriptions": {
@@ -13354,10 +13250,7 @@
                                             "id": 22977,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3454:7:105",
                                             "typeDescriptions": {
@@ -13691,9 +13584,7 @@
                                 "modifierName": {
                                     "id": 22934,
                                     "name": "initializer",
-                                    "nameLocations": [
-                                        "2996:11:105"
-                                    ],
+                                    "nameLocations": ["2996:11:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 611,
                                     "src": "2996:11:105"
@@ -13966,10 +13857,7 @@
                                             "id": 23019,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3862:7:105",
                                             "typeDescriptions": {
@@ -14156,9 +14044,7 @@
                                 "modifierName": {
                                     "id": 23016,
                                     "name": "onlyOwnerOrGov",
-                                    "nameLocations": [
-                                        "3837:14:105"
-                                    ],
+                                    "nameLocations": ["3837:14:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 22899,
                                     "src": "3837:14:105"
@@ -14382,9 +14268,7 @@
                                 "modifierName": {
                                     "id": 23045,
                                     "name": "onlyOwnerOrGov",
-                                    "nameLocations": [
-                                        "4107:14:105"
-                                    ],
+                                    "nameLocations": ["4107:14:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 22899,
                                     "src": "4107:14:105"
@@ -14444,9 +14328,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7093
-                        ],
+                        "baseFunctions": [7093],
                         "body": {
                             "id": 23080,
                             "nodeType": "Block",
@@ -14606,9 +14488,7 @@
                                 "modifierName": {
                                     "id": 23063,
                                     "name": "nonReentrant",
-                                    "nameLocations": [
-                                        "4261:12:105"
-                                    ],
+                                    "nameLocations": ["4261:12:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 880,
                                     "src": "4261:12:105"
@@ -14622,9 +14502,7 @@
                                 "modifierName": {
                                     "id": 23065,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "4274:9:105"
-                                    ],
+                                    "nameLocations": ["4274:9:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 22845,
                                     "src": "4274:9:105"
@@ -14715,9 +14593,7 @@
                                 "modifierName": {
                                     "id": 23083,
                                     "name": "onlyOwnerOrGov",
-                                    "nameLocations": [
-                                        "4408:14:105"
-                                    ],
+                                    "nameLocations": ["4408:14:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 22899,
                                     "src": "4408:14:105"
@@ -14802,9 +14678,7 @@
                                 "modifierName": {
                                     "id": 23092,
                                     "name": "onlyOwnerOrGov",
-                                    "nameLocations": [
-                                        "4482:14:105"
-                                    ],
+                                    "nameLocations": ["4482:14:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 22899,
                                     "src": "4482:14:105"
@@ -14920,10 +14794,7 @@
                                             "id": 23106,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "4593:7:105",
                                             "typeDescriptions": {
@@ -15076,10 +14947,7 @@
                                             "id": 23113,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "4673:7:105",
                                             "typeDescriptions": {
@@ -15247,9 +15115,7 @@
                                 "modifierName": {
                                     "id": 23103,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "4573:9:105"
-                                    ],
+                                    "nameLocations": ["4573:9:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 22845,
                                     "src": "4573:9:105"
@@ -15309,9 +15175,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7106
-                        ],
+                        "baseFunctions": [7106],
                         "body": {
                             "id": 23157,
                             "nodeType": "Block",
@@ -15422,9 +15286,7 @@
                                 "modifierName": {
                                     "id": 23144,
                                     "name": "nonReentrant",
-                                    "nameLocations": [
-                                        "5201:12:105"
-                                    ],
+                                    "nameLocations": ["5201:12:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 880,
                                     "src": "5201:12:105"
@@ -15438,9 +15300,7 @@
                                 "modifierName": {
                                     "id": 23146,
                                     "name": "whenNotPaused",
-                                    "nameLocations": [
-                                        "5214:13:105"
-                                    ],
+                                    "nameLocations": ["5214:13:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 758,
                                     "src": "5214:13:105"
@@ -15454,9 +15314,7 @@
                                 "modifierName": {
                                     "id": 23148,
                                     "name": "onlyProxyWalletOrWhiteListed",
-                                    "nameLocations": [
-                                        "5228:28:105"
-                                    ],
+                                    "nameLocations": ["5228:28:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 22865,
                                     "src": "5228:28:105"
@@ -15576,9 +15434,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7115
-                        ],
+                        "baseFunctions": [7115],
                         "body": {
                             "id": 23180,
                             "nodeType": "Block",
@@ -15673,9 +15529,7 @@
                                 "modifierName": {
                                     "id": 23168,
                                     "name": "nonReentrant",
-                                    "nameLocations": [
-                                        "5652:12:105"
-                                    ],
+                                    "nameLocations": ["5652:12:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 880,
                                     "src": "5652:12:105"
@@ -15689,9 +15543,7 @@
                                 "modifierName": {
                                     "id": 23170,
                                     "name": "whenNotPaused",
-                                    "nameLocations": [
-                                        "5665:13:105"
-                                    ],
+                                    "nameLocations": ["5665:13:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 758,
                                     "src": "5665:13:105"
@@ -15705,9 +15557,7 @@
                                 "modifierName": {
                                     "id": 23172,
                                     "name": "onlyProxyWalletOrWhiteListed",
-                                    "nameLocations": [
-                                        "5679:28:105"
-                                    ],
+                                    "nameLocations": ["5679:28:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 22865,
                                     "src": "5679:28:105"
@@ -15888,9 +15738,7 @@
                                         "src": "5963:634:105",
                                         "statements": [
                                             {
-                                                "assignments": [
-                                                    23193
-                                                ],
+                                                "assignments": [23193],
                                                 "declarations": [
                                                     {
                                                         "constant": false,
@@ -16134,10 +15982,7 @@
                                                         "id": 23201,
                                                         "name": "require",
                                                         "nodeType": "Identifier",
-                                                        "overloadedDeclarations": [
-                                                            4294967278,
-                                                            4294967278
-                                                        ],
+                                                        "overloadedDeclarations": [4294967278, 4294967278],
                                                         "referencedDeclaration": 4294967278,
                                                         "src": "6065:7:105",
                                                         "typeDescriptions": {
@@ -16693,9 +16538,7 @@
                                 "modifierName": {
                                     "id": 23186,
                                     "name": "nonReentrant",
-                                    "nameLocations": [
-                                        "5925:12:105"
-                                    ],
+                                    "nameLocations": ["5925:12:105"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 880,
                                     "src": "5925:12:105"
@@ -16840,10 +16683,7 @@
                                             "id": 23261,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "6945:7:105",
                                             "typeDescriptions": {
@@ -17963,10 +17803,7 @@
                                                         "id": 23336,
                                                         "name": "require",
                                                         "nodeType": "Identifier",
-                                                        "overloadedDeclarations": [
-                                                            4294967278,
-                                                            4294967278
-                                                        ],
+                                                        "overloadedDeclarations": [4294967278, 4294967278],
                                                         "referencedDeclaration": 4294967278,
                                                         "src": "7968:7:105",
                                                         "typeDescriptions": {

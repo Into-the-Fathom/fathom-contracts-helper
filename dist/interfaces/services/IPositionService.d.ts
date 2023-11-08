@@ -1,5 +1,5 @@
-import Xdc3 from "xdc3";
-import ICollateralPool from "interfaces/ICollateralPool";
+import Xdc3 from 'xdc3';
+import ICollateralPool from '../models/ICollateralPool';
 export default interface IPositionService {
     openPosition(address: string, pool: ICollateralPool, collateral: string, fathomToken: string): Promise<number | Error>;
     topUpPositionAndBorrow(address: string, pool: ICollateralPool, collateral: string, fathomToken: string, positionId: string): Promise<number | Error>;
@@ -11,7 +11,7 @@ export default interface IPositionService {
     approvalStatus(address: string, tokenAddress: string, collateral: string): Promise<boolean>;
     balanceStableCoin(address: string): Promise<string>;
     approveStableCoin(address: string): Promise<number | Error>;
-    approvalStatusStableCoin(valueToCheck: string | number, address: string): Promise<boolean>;
+    approvalStatusStableCoin(maxPositionDebtValue: number, address: string): Promise<boolean>;
     partiallyClosePosition(positionId: string, pool: ICollateralPool, address: string, debt: string, collateralValue: string): Promise<number | Error>;
     getDebtValue(debtShare: number, poolId: string): Promise<string>;
     getPositionDebtCeiling(poolId: string): Promise<string>;

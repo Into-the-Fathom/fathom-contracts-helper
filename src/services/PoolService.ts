@@ -1,8 +1,7 @@
-import Xdc3 from "xdc3";
-
-import { SmartContractFactory } from "utils/SmartContractFactory";
-import IPoolService from "interfaces/services/IPoolService";
-import { Web3Utils } from "utils/Web3Utils";
+import Xdc3 from 'xdc3';
+import IPoolService from '../interfaces/services/IPoolService';
+import { SmartContractFactory } from '../utils/SmartContractFactory';
+import { Web3Utils } from '../utils/Web3Utils';
 
 export default class PoolService implements IPoolService {
   provider: Xdc3;
@@ -13,24 +12,19 @@ export default class PoolService implements IPoolService {
     this.chainId = chainId;
   }
 
-  getUserTokenBalance(
-    address: string,
-    forAddress: string,
-  ) {
+  getUserTokenBalance(address: string, forAddress: string) {
     const BEP20 = Web3Utils.getContractInstance(
       SmartContractFactory.BEP20(forAddress),
-      this.provider
+      this.provider,
     );
 
     return BEP20.methods.balanceOf(address).call();
   }
 
-  getTokenDecimals(
-    forAddress: string,
-  ) {
+  getTokenDecimals(forAddress: string) {
     const BEP20 = Web3Utils.getContractInstance(
       SmartContractFactory.BEP20(forAddress),
-      this.provider
+      this.provider,
     );
 
     return BEP20.methods.decimals().call();
@@ -57,9 +51,9 @@ export default class PoolService implements IPoolService {
     const collateralTokenAdapter = Web3Utils.getContractInstance(
       {
         address: forAddress,
-        abi
+        abi,
       },
-      this.provider
+      this.provider,
     );
 
     return collateralTokenAdapter.methods.collateralToken().call();

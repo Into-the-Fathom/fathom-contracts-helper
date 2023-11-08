@@ -5008,30 +5008,14 @@
     "ast": {
         "absolutePath": "project:/contracts/main/price-oracles/DexPriceOracle.sol",
         "exportedSymbols": {
-            "AddressUpgradeable": [
-                1193
-            ],
-            "DexPriceOracle": [
-                10351
-            ],
-            "FathomSwapLibrary": [
-                11122
-            ],
-            "IFathomDEXOracle": [
-                7458
-            ],
-            "IFathomSwapFactory": [
-                5131
-            ],
-            "IFathomSwapPair": [
-                5373
-            ],
-            "IToken": [
-                8210
-            ],
-            "Initializable": [
-                709
-            ]
+            "AddressUpgradeable": [1193],
+            "DexPriceOracle": [10351],
+            "FathomSwapLibrary": [11122],
+            "IFathomDEXOracle": [7458],
+            "IFathomSwapFactory": [5131],
+            "IFathomSwapPair": [5373],
+            "IToken": [8210],
+            "Initializable": [709]
         },
         "id": 10352,
         "license": "AGPL-3.0-or-later",
@@ -5039,11 +5023,7 @@
         "nodes": [
             {
                 "id": 10186,
-                "literals": [
-                    "solidity",
-                    "0.8",
-                    ".17"
-                ],
+                "literals": ["solidity", "0.8", ".17"],
                 "nodeType": "PragmaDirective",
                 "src": "46:23:80"
             },
@@ -5114,9 +5094,7 @@
                         "baseName": {
                             "id": 10192,
                             "name": "Initializable",
-                            "nameLocations": [
-                                "343:13:80"
-                            ],
+                            "nameLocations": ["343:13:80"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 709,
                             "src": "343:13:80"
@@ -5129,9 +5107,7 @@
                         "baseName": {
                             "id": 10194,
                             "name": "IFathomDEXOracle",
-                            "nameLocations": [
-                                "358:16:80"
-                            ],
+                            "nameLocations": ["358:16:80"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 7458,
                             "src": "358:16:80"
@@ -5146,11 +5122,7 @@
                 "contractKind": "contract",
                 "fullyImplemented": true,
                 "id": 10351,
-                "linearizedBaseContracts": [
-                    10351,
-                    7458,
-                    709
-                ],
+                "linearizedBaseContracts": [10351, 7458, 709],
                 "name": "DexPriceOracle",
                 "nameLocation": "325:14:80",
                 "nodeType": "ContractDefinition",
@@ -5315,10 +5287,7 @@
                                             "id": 10204,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "485:7:80",
                                             "typeDescriptions": {
@@ -5402,9 +5371,7 @@
                                 "modifierName": {
                                     "id": 10201,
                                     "name": "initializer",
-                                    "nameLocations": [
-                                        "463:11:80"
-                                    ],
+                                    "nameLocations": ["463:11:80"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 611,
                                     "src": "463:11:80"
@@ -5464,9 +5431,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7457
-                        ],
+                        "baseFunctions": [7457],
                         "body": {
                             "id": 10349,
                             "nodeType": "Block",
@@ -5548,10 +5513,7 @@
                                             "id": 10232,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "838:7:80",
                                             "typeDescriptions": {
@@ -5580,9 +5542,7 @@
                                     "src": "838:55:80"
                                 },
                                 {
-                                    "assignments": [
-                                        10240
-                                    ],
+                                    "assignments": [10240],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -5715,10 +5675,7 @@
                                     "src": "904:68:80"
                                 },
                                 {
-                                    "assignments": [
-                                        10249,
-                                        null
-                                    ],
+                                    "assignments": [10249, null],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -5836,9 +5793,7 @@
                                     "src": "982:65:80"
                                 },
                                 {
-                                    "assignments": [
-                                        10257
-                                    ],
+                                    "assignments": [10257],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -5873,9 +5828,7 @@
                                     "src": "1058:10:80"
                                 },
                                 {
-                                    "assignments": [
-                                        10260
-                                    ],
+                                    "assignments": [10260],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -6259,9 +6212,7 @@
                                     }
                                 },
                                 {
-                                    "assignments": [
-                                        10289
-                                    ],
+                                    "assignments": [10289],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -6380,9 +6331,7 @@
                                     "src": "1283:45:80"
                                 },
                                 {
-                                    "assignments": [
-                                        10297
-                                    ],
+                                    "assignments": [10297],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -6501,10 +6450,7 @@
                                     "src": "1338:45:80"
                                 },
                                 {
-                                    "assignments": [
-                                        10305,
-                                        10307
-                                    ],
+                                    "assignments": [10305, 10307],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -6953,9 +6899,7 @@
                                     "src": "1394:181:80"
                                 },
                                 {
-                                    "assignments": [
-                                        10336
-                                    ],
+                                    "assignments": [10336],
                                     "declarations": [
                                         {
                                             "constant": false,

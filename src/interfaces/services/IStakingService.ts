@@ -1,48 +1,45 @@
-import Xdc3 from "xdc3";
+import Xdc3 from 'xdc3';
 
 export default interface IStakingService {
   createLock(
     account: string,
     stakePosition: number,
-    unlockPeriod: number
+    unlockPeriod: number,
   ): Promise<number | Error>;
 
   handleUnlock(
     account: string,
     lockId: number,
-    amount: number
+    amount: number,
   ): Promise<number | Error>;
 
   handleEarlyWithdrawal(
     account: string,
-    lockId: number
+    lockId: number,
   ): Promise<number | Error>;
 
   handleClaimRewards(
     account: string,
-    streamId: number
+    streamId: number,
   ): Promise<number | Error>;
 
-  handleWithdrawAll(
-    account: string,
-    streamId: number
-  ): Promise<number | Error>;
+  handleWithdrawAll(account: string, streamId: number): Promise<number | Error>;
 
   approveStakingFTHM(
     address: string,
-    fthmTokenAddress: string
+    fthmTokenAddress: string,
   ): Promise<number | Error>;
 
   approvalStatusStakingFTHM(
     address: string,
     stakingPosition: number,
-    fthmTokenAddress: string
+    fthmTokenAddress: string,
   ): Promise<boolean>;
 
   getStreamClaimableAmountPerLock(
     streamId: number,
     account: string,
-    lockId: number
+    lockId: number,
   ): Promise<number>;
 
   getPairPrice(token0: string, token1: string): Promise<number>;

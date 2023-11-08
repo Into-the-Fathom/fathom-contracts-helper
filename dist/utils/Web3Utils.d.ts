@@ -1,12 +1,14 @@
-import Xdc3 from "xdc3";
-import { AbiItem as XdcAbiItem } from "xdc3-utils";
-interface XdcContractMetaData {
+import Xdc3 from 'xdc3';
+import { Contract } from 'xdc3-eth-contract';
+import { AbiItem } from 'xdc3-utils';
+export interface XdcContractMetaData {
     address: string;
-    abi: XdcAbiItem[];
+    abi: AbiItem[];
 }
 export declare class Web3Utils {
-    static getContractInstance(contractMetaData: XdcContractMetaData, library: Xdc3): any;
-    static getContractInstanceFrom(abi: XdcAbiItem[], address: string, library: Xdc3): any;
+    static contracts: Map<string, Contract>;
+    static getContractInstance(contractMetaData: XdcContractMetaData, provider: Xdc3): Contract;
+    static getContractInstanceFrom(abi: AbiItem[], address: string, provider: Xdc3): Contract;
+    static clearContracts(): void;
 }
-export {};
 //# sourceMappingURL=Web3Utils.d.ts.map

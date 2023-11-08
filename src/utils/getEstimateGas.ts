@@ -1,4 +1,4 @@
-import { ESTIMATE_GAS_MULTIPLIER } from 'utils/Constants';
+import { ESTIMATE_GAS_MULTIPLIER } from './Constants';
 import { Contract } from 'xdc3-eth-contract';
 
 export const getEstimateGas = async (

@@ -1,21 +1,22 @@
-import BEP20Abi from 'abis/BEP20.json';
-import CollateralPoolConfigAbi from 'abis/CollateralPoolConfig.json';
-import CollateralTokenAdapterAbi from 'abis/CollateralTokenAdapter.json';
-import DexPriceOracle from 'abis/DexPriceOracle.json';
-import FathomStableCoinProxyActionAbi from 'abis/FathomStablecoinProxyActions.json';
-import Governor from 'abis/Governor.json';
-import MainToken from 'abis/MainToken.json';
-import MainTokenGovernor from 'abis/MainTokenGovernor.json';
-import ProxyWalletAbi from 'abis/ProxyWallet.json';
-import ProxyWalletRegistryAbi from 'abis/ProxyWalletRegistry.json';
-import StableSwapModule from 'abis/StableSwapModule.json';
-import StableSwapModuleWrapper from 'abis/StableSwapModuleWrapper.json';
-import Staking from 'abis/Staking.json';
-import StakingGetter from 'abis/StakingGetter.json';
-import VeFathomAbi from 'abis/vFathom.json';
-
-import { APOTHEM_ADDRESSES, XDC_ADDRESSES } from 'addresses';
 import { AbiItem } from 'xdc3-utils';
+import BEP20Abi from '../abis/BEP20.json';
+import CollateralPoolConfigAbi from '../abis/CollateralPoolConfig.json';
+import CollateralTokenAdapterAbi from '../abis/CollateralTokenAdapter.json';
+import DexPriceOracle from '../abis/DexPriceOracle.json';
+import FathomStableCoinProxyActionAbi from '../abis/FathomStablecoinProxyActions.json';
+import Governor from '../abis/Governor.json';
+import MainToken from '../abis/MainToken.json';
+import MainTokenGovernor from '../abis/MainTokenGovernor.json';
+import ProxyWalletAbi from '../abis/ProxyWallet.json';
+import ProxyWalletRegistryAbi from '../abis/ProxyWalletRegistry.json';
+import StableSwapModule from '../abis/StableSwapModule.json';
+import StableSwapModuleWrapper from '../abis/StableSwapModuleWrapper.json';
+import Staking from '../abis/Staking.json';
+import StakingGetter from '../abis/StakingGetter.json';
+import VeFathomAbi from '../abis/vFathom.json';
+
+import { APOTHEM_ADDRESSES, XDC_ADDRESSES } from '../addresses';
+
 import { ChainId } from '../types';
 
 export class SmartContractFactory {
@@ -187,5 +188,11 @@ export class SmartContractFactory {
 
   public static CollateralTokenAdapterAbi() {
     return CollateralTokenAdapterAbi.abi as AbiItem[];
+  }
+
+  public static getAddressByContractName(chainId: number, name: string) {
+    const addresses = SmartContractFactory.Addresses(chainId);
+    // @ts-ignore
+    return addresses[name] ? addresses[name] : '';
   }
 }

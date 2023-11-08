@@ -1,5 +1,5 @@
-import { SmartContractFactory } from "utils/SmartContractFactory";
-import { Web3Utils } from "utils/Web3Utils";
+import { SmartContractFactory } from '../utils/SmartContractFactory';
+import { Web3Utils } from '../utils/Web3Utils';
 export default class PoolService {
     constructor(provider, chainId) {
         this.provider = provider;
@@ -9,8 +9,8 @@ export default class PoolService {
         const BEP20 = Web3Utils.getContractInstance(SmartContractFactory.BEP20(forAddress), this.provider);
         return BEP20.methods.balanceOf(address).call();
     }
-    getTokenDecimals(forAddress, library) {
-        const BEP20 = Web3Utils.getContractInstance(SmartContractFactory.BEP20(forAddress), library);
+    getTokenDecimals(forAddress) {
+        const BEP20 = Web3Utils.getContractInstance(SmartContractFactory.BEP20(forAddress), this.provider);
         return BEP20.methods.decimals().call();
     }
     async getDexPrice(forAddress) {
@@ -29,11 +29,11 @@ export default class PoolService {
         }, this.provider);
         return collateralTokenAdapter.methods.collateralToken().call();
     }
-    setChainId(chainId) {
-        this.chainId = chainId;
-    }
     setProvider(provider) {
         this.provider = provider;
+    }
+    setChainId(chainId) {
+        this.chainId = chainId;
     }
 }
 //# sourceMappingURL=PoolService.js.map

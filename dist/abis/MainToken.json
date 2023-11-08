@@ -9535,21 +9535,11 @@
     "ast": {
         "absolutePath": "project:/contracts/dao/tokens/MainToken.sol",
         "exportedSymbols": {
-            "Context": [
-                5186
-            ],
-            "ERC20": [
-                25567
-            ],
-            "IERC20": [
-                25636
-            ],
-            "IERC20Metadata": [
-                26481
-            ],
-            "MainToken": [
-                26602
-            ]
+            "Context": [5186],
+            "ERC20": [25567],
+            "IERC20": [25636],
+            "IERC20Metadata": [26481],
+            "MainToken": [26602]
         },
         "id": 26603,
         "license": "MIT",
@@ -9557,11 +9547,7 @@
         "nodes": [
             {
                 "id": 26563,
-                "literals": [
-                    "solidity",
-                    "0.8",
-                    ".16"
-                ],
+                "literals": ["solidity", "0.8", ".16"],
                 "nodeType": "PragmaDirective",
                 "src": "58:23:112"
             },
@@ -9584,9 +9570,7 @@
                         "baseName": {
                             "id": 26565,
                             "name": "ERC20",
-                            "nameLocations": [
-                                "134:5:112"
-                            ],
+                            "nameLocations": ["134:5:112"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 25567,
                             "src": "134:5:112"
@@ -9601,13 +9585,7 @@
                 "contractKind": "contract",
                 "fullyImplemented": true,
                 "id": 26602,
-                "linearizedBaseContracts": [
-                    26602,
-                    25567,
-                    26481,
-                    25636,
-                    5186
-                ],
+                "linearizedBaseContracts": [26602, 25567, 26481, 25636, 5186],
                 "name": "MainToken",
                 "nameLocation": "121:9:112",
                 "nodeType": "ContractDefinition",
@@ -9902,9 +9880,7 @@
                                 "modifierName": {
                                     "id": 26576,
                                     "name": "ERC20",
-                                    "nameLocations": [
-                                        "240:5:112"
-                                    ],
+                                    "nameLocations": ["240:5:112"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 25567,
                                     "src": "240:5:112"
@@ -10047,16 +10023,7 @@
                 ],
                 "scope": 26603,
                 "src": "112:296:112",
-                "usedErrors": [
-                    25004,
-                    25006,
-                    25008,
-                    25010,
-                    25012,
-                    25014,
-                    25016,
-                    25018
-                ]
+                "usedErrors": [25004, 25006, 25008, 25010, 25012, 25014, 25016, 25018]
             }
         ],
         "src": "58:351:112"

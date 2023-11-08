@@ -14619,69 +14619,27 @@
     "ast": {
         "absolutePath": "project:/contracts/dao/staking/helpers/StakingGettersHelper.sol",
         "exportedSymbols": {
-            "AccessControl": [
-                6154
-            ],
-            "Context": [
-                5186
-            ],
-            "CreateLockParams": [
-                16614
-            ],
-            "ERC165": [
-                6824
-            ],
-            "IAccessControl": [
-                6227
-            ],
-            "IAdminPausable": [
-                10022
-            ],
-            "IERC165": [
-                6836
-            ],
-            "IStakingGetter": [
-                17377
-            ],
-            "IStakingGetterHelper": [
-                16694
-            ],
-            "IStakingHandler": [
-                17535
-            ],
-            "IStakingHelper": [
-                16715
-            ],
-            "IStakingStorage": [
-                17577
-            ],
-            "LockedBalance": [
-                16579
-            ],
-            "Schedule": [
-                16535
-            ],
-            "StakingGettersHelper": [
-                17183
-            ],
-            "Stream": [
-                16607
-            ],
-            "StreamStatus": [
-                16528
-            ],
-            "Strings": [
-                5834
-            ],
-            "User": [
-                16552
-            ],
-            "VoteCoefficient": [
-                16568
-            ],
-            "Weight": [
-                16563
-            ]
+            "AccessControl": [6154],
+            "Context": [5186],
+            "CreateLockParams": [16614],
+            "ERC165": [6824],
+            "IAccessControl": [6227],
+            "IAdminPausable": [10022],
+            "IERC165": [6836],
+            "IStakingGetter": [17377],
+            "IStakingGetterHelper": [16694],
+            "IStakingHandler": [17535],
+            "IStakingHelper": [16715],
+            "IStakingStorage": [17577],
+            "LockedBalance": [16579],
+            "Schedule": [16535],
+            "StakingGettersHelper": [17183],
+            "Stream": [16607],
+            "StreamStatus": [16528],
+            "Strings": [5834],
+            "User": [16552],
+            "VoteCoefficient": [16568],
+            "Weight": [16563]
         },
         "id": 17184,
         "license": "AGPL 3.0",
@@ -14689,11 +14647,7 @@
         "nodes": [
             {
                 "id": 16717,
-                "literals": [
-                    "solidity",
-                    "0.8",
-                    ".16"
-                ],
+                "literals": ["solidity", "0.8", ".16"],
                 "nodeType": "PragmaDirective",
                 "src": "62:23:69"
             },
@@ -14764,9 +14718,7 @@
                         "baseName": {
                             "id": 16723,
                             "name": "IStakingGetterHelper",
-                            "nameLocations": [
-                                "351:20:69"
-                            ],
+                            "nameLocations": ["351:20:69"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 16694,
                             "src": "351:20:69"
@@ -14779,9 +14731,7 @@
                         "baseName": {
                             "id": 16725,
                             "name": "AccessControl",
-                            "nameLocations": [
-                                "373:13:69"
-                            ],
+                            "nameLocations": ["373:13:69"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 6154,
                             "src": "373:13:69"
@@ -14796,15 +14746,7 @@
                 "contractKind": "contract",
                 "fullyImplemented": true,
                 "id": 17183,
-                "linearizedBaseContracts": [
-                    17183,
-                    6154,
-                    6824,
-                    6836,
-                    6227,
-                    5186,
-                    16694
-                ],
+                "linearizedBaseContracts": [17183, 6154, 6824, 6836, 6227, 5186, 16694],
                 "name": "StakingGettersHelper",
                 "nameLocation": "327:20:69",
                 "nodeType": "ContractDefinition",
@@ -15083,18 +15025,14 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            16687
-                        ],
+                        "baseFunctions": [16687],
                         "body": {
                             "id": 16771,
                             "nodeType": "Block",
                             "src": "770:98:69",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        16763
-                                    ],
+                                    "assignments": [16763],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -15118,9 +15056,7 @@
                                                     "pathNode": {
                                                         "id": 16760,
                                                         "name": "LockedBalance",
-                                                        "nameLocations": [
-                                                            "780:13:69"
-                                                        ],
+                                                        "nameLocations": ["780:13:69"],
                                                         "nodeType": "IdentifierPath",
                                                         "referencedDeclaration": 16579,
                                                         "src": "780:13:69"
@@ -15321,9 +15257,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            16693
-                        ],
+                        "baseFunctions": [16693],
                         "body": {
                             "id": 16782,
                             "nodeType": "Block",
@@ -15413,9 +15347,7 @@
                                         "pathNode": {
                                             "id": 16775,
                                             "name": "Weight",
-                                            "nameLocations": [
-                                                "927:6:69"
-                                            ],
+                                            "nameLocations": ["927:6:69"],
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 16563,
                                             "src": "927:6:69"
@@ -15439,18 +15371,14 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            16648
-                        ],
+                        "baseFunctions": [16648],
                         "body": {
                             "id": 16821,
                             "nodeType": "Block",
                             "src": "1110:183:69",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        16803
-                                    ],
+                                    "assignments": [16803],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -15473,9 +15401,7 @@
                                                 "pathNode": {
                                                     "id": 16801,
                                                     "name": "LockedBalance",
-                                                    "nameLocations": [
-                                                        "1120:13:69"
-                                                    ],
+                                                    "nameLocations": ["1120:13:69"],
                                                     "nodeType": "IdentifierPath",
                                                     "referencedDeclaration": 16579,
                                                     "src": "1120:13:69"
@@ -15949,18 +15875,14 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            16655
-                        ],
+                        "baseFunctions": [16655],
                         "body": {
                             "id": 16875,
                             "nodeType": "Block",
                             "src": "1386:337:69",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        16834
-                                    ],
+                                    "assignments": [16834],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -15984,9 +15906,7 @@
                                                     "pathNode": {
                                                         "id": 16831,
                                                         "name": "LockedBalance",
-                                                        "nameLocations": [
-                                                            "1396:13:69"
-                                                        ],
+                                                        "nameLocations": ["1396:13:69"],
                                                         "nodeType": "IdentifierPath",
                                                         "referencedDeclaration": 16579,
                                                         "src": "1396:13:69"
@@ -16158,9 +16078,7 @@
                                     }
                                 },
                                 {
-                                    "assignments": [
-                                        16848
-                                    ],
+                                    "assignments": [16848],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -16395,9 +16313,7 @@
                                     },
                                     "id": 16872,
                                     "initializationExpression": {
-                                        "assignments": [
-                                            16852
-                                        ],
+                                        "assignments": [16852],
                                         "declarations": [
                                             {
                                                 "constant": false,
@@ -16592,18 +16508,14 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            16664
-                        ],
+                        "baseFunctions": [16664],
                         "body": {
                             "id": 16933,
                             "nodeType": "Block",
                             "src": "1839:396:69",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        16890
-                                    ],
+                                    "assignments": [16890],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -16627,9 +16539,7 @@
                                                     "pathNode": {
                                                         "id": 16887,
                                                         "name": "LockedBalance",
-                                                        "nameLocations": [
-                                                            "1849:13:69"
-                                                        ],
+                                                        "nameLocations": ["1849:13:69"],
                                                         "nodeType": "IdentifierPath",
                                                         "referencedDeclaration": 16579,
                                                         "src": "1849:13:69"
@@ -16801,9 +16711,7 @@
                                     }
                                 },
                                 {
-                                    "assignments": [
-                                        16904
-                                    ],
+                                    "assignments": [16904],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -17085,9 +16993,7 @@
                                     },
                                     "id": 16930,
                                     "initializationExpression": {
-                                        "assignments": [
-                                            16908
-                                        ],
+                                        "assignments": [16908],
                                         "declarations": [
                                             {
                                                 "constant": false,
@@ -17309,18 +17215,14 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            16671
-                        ],
+                        "baseFunctions": [16671],
                         "body": {
                             "id": 16987,
                             "nodeType": "Block",
                             "src": "2326:335:69",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        16946
-                                    ],
+                                    "assignments": [16946],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -17344,9 +17246,7 @@
                                                     "pathNode": {
                                                         "id": 16943,
                                                         "name": "LockedBalance",
-                                                        "nameLocations": [
-                                                            "2336:13:69"
-                                                        ],
+                                                        "nameLocations": ["2336:13:69"],
                                                         "nodeType": "IdentifierPath",
                                                         "referencedDeclaration": 16579,
                                                         "src": "2336:13:69"
@@ -17518,9 +17418,7 @@
                                     }
                                 },
                                 {
-                                    "assignments": [
-                                        16960
-                                    ],
+                                    "assignments": [16960],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -17755,9 +17653,7 @@
                                     },
                                     "id": 16984,
                                     "initializationExpression": {
-                                        "assignments": [
-                                            16964
-                                        ],
+                                        "assignments": [16964],
                                         "declarations": [
                                             {
                                                 "constant": false,
@@ -17952,18 +17848,14 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            16680
-                        ],
+                        "baseFunctions": [16680],
                         "body": {
                             "id": 17045,
                             "nodeType": "Block",
                             "src": "2772:405:69",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        17000
-                                    ],
+                                    "assignments": [17000],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -17986,9 +17878,7 @@
                                                 "pathNode": {
                                                     "id": 16998,
                                                     "name": "LockedBalance",
-                                                    "nameLocations": [
-                                                        "2782:13:69"
-                                                    ],
+                                                    "nameLocations": ["2782:13:69"],
                                                     "nodeType": "IdentifierPath",
                                                     "referencedDeclaration": 16579,
                                                     "src": "2782:13:69"
@@ -18194,9 +18084,7 @@
                                     }
                                 },
                                 {
-                                    "assignments": [
-                                        17017
-                                    ],
+                                    "assignments": [17017],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -18259,9 +18147,7 @@
                                     "src": "2940:35:69"
                                 },
                                 {
-                                    "assignments": [
-                                        17022
-                                    ],
+                                    "assignments": [17022],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -18324,9 +18210,7 @@
                                     "src": "2985:26:69"
                                 },
                                 {
-                                    "assignments": [
-                                        17027
-                                    ],
+                                    "assignments": [17027],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -18441,9 +18325,7 @@
                                     "src": "3021:65:69"
                                 },
                                 {
-                                    "assignments": [
-                                        17035
-                                    ],
+                                    "assignments": [17035],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -18706,18 +18588,14 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            16631
-                        ],
+                        "baseFunctions": [16631],
                         "body": {
                             "id": 17089,
                             "nodeType": "Block",
                             "src": "3289:275:69",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        17061
-                                    ],
+                                    "assignments": [17061],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -18741,9 +18619,7 @@
                                                     "pathNode": {
                                                         "id": 17058,
                                                         "name": "LockedBalance",
-                                                        "nameLocations": [
-                                                            "3299:13:69"
-                                                        ],
+                                                        "nameLocations": ["3299:13:69"],
                                                         "nodeType": "IdentifierPath",
                                                         "referencedDeclaration": 16579,
                                                         "src": "3299:13:69"
@@ -19198,9 +19074,7 @@
                                         "pathNode": {
                                             "id": 17053,
                                             "name": "LockedBalance",
-                                            "nameLocations": [
-                                                "3267:13:69"
-                                            ],
+                                            "nameLocations": ["3267:13:69"],
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 16579,
                                             "src": "3267:13:69"
@@ -19407,9 +19281,7 @@
                                             "pathNode": {
                                                 "id": 17094,
                                                 "name": "LockedBalance",
-                                                "nameLocations": [
-                                                    "3632:13:69"
-                                                ],
+                                                "nameLocations": ["3632:13:69"],
                                                 "nodeType": "IdentifierPath",
                                                 "referencedDeclaration": 16579,
                                                 "src": "3632:13:69"
@@ -19447,9 +19319,7 @@
                             "src": "3832:691:69",
                             "statements": [
                                 {
-                                    "assignments": [
-                                        17118
-                                    ],
+                                    "assignments": [17118],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -19472,9 +19342,7 @@
                                                 "pathNode": {
                                                     "id": 17116,
                                                     "name": "Weight",
-                                                    "nameLocations": [
-                                                        "3842:6:69"
-                                                    ],
+                                                    "nameLocations": ["3842:6:69"],
                                                     "nodeType": "IdentifierPath",
                                                     "referencedDeclaration": 16563,
                                                     "src": "3842:6:69"
@@ -19525,9 +19393,7 @@
                                     "src": "3842:35:69"
                                 },
                                 {
-                                    "assignments": [
-                                        17123
-                                    ],
+                                    "assignments": [17123],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -19646,9 +19512,7 @@
                                     "src": "3887:71:69"
                                 },
                                 {
-                                    "assignments": [
-                                        17131
-                                    ],
+                                    "assignments": [17131],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -19764,9 +19628,7 @@
                                     }
                                 },
                                 {
-                                    "assignments": [
-                                        17141
-                                    ],
+                                    "assignments": [17141],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -20414,9 +20276,7 @@
                                         "pathNode": {
                                             "id": 17171,
                                             "name": "Weight",
-                                            "nameLocations": [
-                                                "4574:6:69"
-                                            ],
+                                            "nameLocations": ["4574:6:69"],
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 16563,
                                             "src": "4574:6:69"
@@ -20442,11 +20302,7 @@
                 ],
                 "scope": 17184,
                 "src": "318:4338:69",
-                "usedErrors": [
-                    16730,
-                    16732,
-                    16734
-                ]
+                "usedErrors": [16730, 16732, 16734]
             }
         ],
         "src": "62:4595:69"

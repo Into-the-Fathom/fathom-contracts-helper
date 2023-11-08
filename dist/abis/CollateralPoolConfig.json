@@ -12124,30 +12124,14 @@
     "ast": {
         "absolutePath": "project:/contracts/main/stablecoin-core/config/CollateralPoolConfig.sol",
         "exportedSymbols": {
-            "AddressUpgradeable": [
-                1193
-            ],
-            "CollateralPoolConfig": [
-                25113
-            ],
-            "IAccessControlConfig": [
-                6863
-            ],
-            "IAccessControlUpgradeable": [
-                408
-            ],
-            "ICollateralPoolConfig": [
-                7322
-            ],
-            "IGenericTokenAdapter": [
-                7528
-            ],
-            "IPriceFeed": [
-                7803
-            ],
-            "Initializable": [
-                709
-            ]
+            "AddressUpgradeable": [1193],
+            "CollateralPoolConfig": [25113],
+            "IAccessControlConfig": [6863],
+            "IAccessControlUpgradeable": [408],
+            "ICollateralPoolConfig": [7322],
+            "IGenericTokenAdapter": [7528],
+            "IPriceFeed": [7803],
+            "Initializable": [709]
         },
         "id": 25114,
         "license": "AGPL-3.0-or-later",
@@ -12155,11 +12139,7 @@
         "nodes": [
             {
                 "id": 23825,
-                "literals": [
-                    "solidity",
-                    "0.8",
-                    ".17"
-                ],
+                "literals": ["solidity", "0.8", ".17"],
                 "nodeType": "PragmaDirective",
                 "src": "46:23:109"
             },
@@ -12230,9 +12210,7 @@
                         "baseName": {
                             "id": 23831,
                             "name": "Initializable",
-                            "nameLocations": [
-                                "381:13:109"
-                            ],
+                            "nameLocations": ["381:13:109"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 709,
                             "src": "381:13:109"
@@ -12245,9 +12223,7 @@
                         "baseName": {
                             "id": 23833,
                             "name": "ICollateralPoolConfig",
-                            "nameLocations": [
-                                "396:21:109"
-                            ],
+                            "nameLocations": ["396:21:109"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 7322,
                             "src": "396:21:109"
@@ -12262,11 +12238,7 @@
                 "contractKind": "contract",
                 "fullyImplemented": true,
                 "id": 25113,
-                "linearizedBaseContracts": [
-                    25113,
-                    7322,
-                    709
-                ],
+                "linearizedBaseContracts": [25113, 7322, 709],
                 "name": "CollateralPoolConfig",
                 "nameLocation": "357:20:109",
                 "nodeType": "ContractDefinition",
@@ -12387,10 +12359,7 @@
                                 "pathNode": {
                                     "id": 23841,
                                     "name": "ICollateralPoolConfig.CollateralPool",
-                                    "nameLocations": [
-                                        "490:21:109",
-                                        "512:14:109"
-                                    ],
+                                    "nameLocations": ["490:21:109", "512:14:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 7154,
                                     "src": "490:36:109"
@@ -12427,9 +12396,7 @@
                             "pathNode": {
                                 "id": 23845,
                                 "name": "IAccessControlConfig",
-                                "nameLocations": [
-                                    "558:20:109"
-                                ],
+                                "nameLocations": ["558:20:109"],
                                 "nodeType": "IdentifierPath",
                                 "referencedDeclaration": 6863,
                                 "src": "558:20:109"
@@ -14188,10 +14155,7 @@
                                             "id": 23973,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "2432:7:109",
                                             "typeDescriptions": {
@@ -14339,9 +14303,7 @@
                                 "modifierName": {
                                     "id": 23991,
                                     "name": "initializer",
-                                    "nameLocations": [
-                                        "2611:11:109"
-                                    ],
+                                    "nameLocations": ["2611:11:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 611,
                                     "src": "2611:11:109"
@@ -14527,10 +14489,7 @@
                                             "id": 24030,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3186:7:109",
                                             "typeDescriptions": {
@@ -14634,10 +14593,7 @@
                                             "id": 24040,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3318:7:109",
                                             "typeDescriptions": {
@@ -14801,10 +14757,7 @@
                                             "id": 24047,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3403:7:109",
                                             "typeDescriptions": {
@@ -15316,10 +15269,7 @@
                                             "id": 24086,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "3888:7:109",
                                             "typeDescriptions": {
@@ -15465,10 +15415,7 @@
                                             "id": 24097,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "4005:7:109",
                                             "typeDescriptions": {
@@ -15745,10 +15692,7 @@
                                             "id": 24119,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "4237:7:109",
                                             "typeDescriptions": {
@@ -15936,10 +15880,7 @@
                                             "id": 24133,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "4412:7:109",
                                             "typeDescriptions": {
@@ -16047,10 +15988,7 @@
                                             "id": 24140,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "4558:7:109",
                                             "typeDescriptions": {
@@ -16386,10 +16324,7 @@
                                             "id": 24162,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "4846:7:109",
                                             "typeDescriptions": {
@@ -16565,10 +16500,7 @@
                                             "id": 24172,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "4924:7:109",
                                             "typeDescriptions": {
@@ -16824,10 +16756,7 @@
                                             "id": 24190,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "5115:7:109",
                                             "typeDescriptions": {
@@ -16999,10 +16928,7 @@
                                             "id": 24201,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "5230:7:109",
                                             "typeDescriptions": {
@@ -17110,10 +17036,7 @@
                                             "id": 24212,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "5374:7:109",
                                             "typeDescriptions": {
@@ -17608,9 +17531,7 @@
                                 "modifierName": {
                                     "id": 24027,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "3166:9:109"
-                                    ],
+                                    "nameLocations": ["3166:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "3166:9:109"
@@ -17969,9 +17890,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7174
-                        ],
+                        "baseFunctions": [7174],
                         "body": {
                             "id": 24290,
                             "nodeType": "Block",
@@ -18142,10 +18061,7 @@
                                             "id": 24264,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "6029:7:109",
                                             "typeDescriptions": {
@@ -18570,10 +18486,7 @@
                                             "id": 24300,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "6442:7:109",
                                             "typeDescriptions": {
@@ -18799,9 +18712,7 @@
                                 "modifierName": {
                                     "id": 24297,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "6422:9:109"
-                                    ],
+                                    "nameLocations": ["6422:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "6422:9:109"
@@ -19009,10 +18920,7 @@
                                             "id": 24334,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "6863:7:109",
                                             "typeDescriptions": {
@@ -19238,9 +19146,7 @@
                                 "modifierName": {
                                     "id": 24331,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "6843:9:109"
-                                    ],
+                                    "nameLocations": ["6843:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "6843:9:109"
@@ -19326,9 +19232,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7195
-                        ],
+                        "baseFunctions": [7195],
                         "body": {
                             "id": 24400,
                             "nodeType": "Block",
@@ -19552,10 +19456,7 @@
                                             "id": 24369,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "7264:7:109",
                                             "typeDescriptions": {
@@ -19781,9 +19682,7 @@
                                 "modifierName": {
                                     "id": 24366,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "7244:9:109"
-                                    ],
+                                    "nameLocations": ["7244:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "7244:9:109"
@@ -20005,10 +19904,7 @@
                                             "id": 24410,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "7794:7:109",
                                             "typeDescriptions": {
@@ -20184,10 +20080,7 @@
                                             "id": 24420,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "7877:7:109",
                                             "typeDescriptions": {
@@ -20333,10 +20226,7 @@
                                             "id": 24431,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "7984:7:109",
                                             "typeDescriptions": {
@@ -20651,9 +20541,7 @@
                                 "modifierName": {
                                     "id": 24407,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "7774:9:109"
-                                    ],
+                                    "nameLocations": ["7774:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "7774:9:109"
@@ -20915,10 +20803,7 @@
                                             "id": 24470,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "8354:7:109",
                                             "typeDescriptions": {
@@ -21144,9 +21029,7 @@
                                 "modifierName": {
                                     "id": 24467,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "8334:9:109"
-                                    ],
+                                    "nameLocations": ["8334:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "8334:9:109"
@@ -21313,10 +21196,7 @@
                                             "id": 24508,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "9542:7:109",
                                             "typeDescriptions": {
@@ -21424,10 +21304,7 @@
                                             "id": 24515,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "9688:7:109",
                                             "typeDescriptions": {
@@ -21659,9 +21536,7 @@
                                 "modifierName": {
                                     "id": 24505,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "9522:9:109"
-                                    ],
+                                    "nameLocations": ["9522:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "9522:9:109"
@@ -21877,10 +21752,7 @@
                                             "id": 24546,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "10071:7:109",
                                             "typeDescriptions": {
@@ -22056,10 +21928,7 @@
                                             "id": 24556,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "10160:7:109",
                                             "typeDescriptions": {
@@ -22285,9 +22154,7 @@
                                 "modifierName": {
                                     "id": 24543,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "10051:9:109"
-                                    ],
+                                    "nameLocations": ["10051:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "10051:9:109"
@@ -22523,10 +22390,7 @@
                                             "id": 24591,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "10540:7:109",
                                             "typeDescriptions": {
@@ -22752,9 +22616,7 @@
                                 "modifierName": {
                                     "id": 24588,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "10520:9:109"
-                                    ],
+                                    "nameLocations": ["10520:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "10520:9:109"
@@ -22989,10 +22851,7 @@
                                             "id": 24626,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "10943:7:109",
                                             "typeDescriptions": {
@@ -23218,9 +23077,7 @@
                                 "modifierName": {
                                     "id": 24623,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "10923:9:109"
-                                    ],
+                                    "nameLocations": ["10923:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "10923:9:109"
@@ -23391,10 +23248,7 @@
                                             "id": 24661,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "11393:7:109",
                                             "typeDescriptions": {
@@ -23620,9 +23474,7 @@
                                 "modifierName": {
                                     "id": 24658,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "11373:9:109"
-                                    ],
+                                    "nameLocations": ["11373:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "11373:9:109"
@@ -23708,9 +23560,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7181
-                        ],
+                        "baseFunctions": [7181],
                         "body": {
                             "id": 24717,
                             "nodeType": "Block",
@@ -23881,10 +23731,7 @@
                                             "id": 24691,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "11761:7:109",
                                             "typeDescriptions": {
@@ -24187,9 +24034,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7188
-                        ],
+                        "baseFunctions": [7188],
                         "body": {
                             "id": 24759,
                             "nodeType": "Block",
@@ -24360,10 +24205,7 @@
                                             "id": 24726,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "12159:7:109",
                                             "typeDescriptions": {
@@ -24467,10 +24309,7 @@
                                             "id": 24738,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "12276:7:109",
                                             "typeDescriptions": {
@@ -24903,10 +24742,7 @@
                                             "id": 24769,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "12656:7:109",
                                             "typeDescriptions": {
@@ -25177,9 +25013,7 @@
                                 "modifierName": {
                                     "id": 24766,
                                     "name": "onlyOwner",
-                                    "nameLocations": [
-                                        "12636:9:109"
-                                    ],
+                                    "nameLocations": ["12636:9:109"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 23987,
                                     "src": "12636:9:109"
@@ -25266,9 +25100,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7200
-                        ],
+                        "baseFunctions": [7200],
                         "body": {
                             "id": 24823,
                             "nodeType": "Block",
@@ -25439,10 +25271,7 @@
                                             "id": 24803,
                                             "name": "require",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                4294967278,
-                                                4294967278
-                                            ],
+                                            "overloadedDeclarations": [4294967278, 4294967278],
                                             "referencedDeclaration": 4294967278,
                                             "src": "12977:7:109",
                                             "typeDescriptions": {
@@ -25632,9 +25461,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7208
-                        ],
+                        "baseFunctions": [7208],
                         "body": {
                             "id": 24837,
                             "nodeType": "Block",
@@ -25758,10 +25585,7 @@
                                         "pathNode": {
                                             "id": 24829,
                                             "name": "ICollateralPoolConfig.CollateralPool",
-                                            "nameLocations": [
-                                                "13288:21:109",
-                                                "13310:14:109"
-                                            ],
+                                            "nameLocations": ["13288:21:109", "13310:14:109"],
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 7154,
                                             "src": "13288:36:109"
@@ -25785,9 +25609,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7215
-                        ],
+                        "baseFunctions": [7215],
                         "body": {
                             "id": 24851,
                             "nodeType": "Block",
@@ -25943,9 +25765,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7222
-                        ],
+                        "baseFunctions": [7222],
                         "body": {
                             "id": 24865,
                             "nodeType": "Block",
@@ -26101,9 +25921,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7229
-                        ],
+                        "baseFunctions": [7229],
                         "body": {
                             "id": 24879,
                             "nodeType": "Block",
@@ -26259,9 +26077,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7236
-                        ],
+                        "baseFunctions": [7236],
                         "body": {
                             "id": 24893,
                             "nodeType": "Block",
@@ -26417,9 +26233,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7250
-                        ],
+                        "baseFunctions": [7250],
                         "body": {
                             "id": 24907,
                             "nodeType": "Block",
@@ -26575,9 +26389,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7243
-                        ],
+                        "baseFunctions": [7243],
                         "body": {
                             "id": 24921,
                             "nodeType": "Block",
@@ -26733,9 +26545,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7257
-                        ],
+                        "baseFunctions": [7257],
                         "body": {
                             "id": 24935,
                             "nodeType": "Block",
@@ -26892,9 +26702,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7264
-                        ],
+                        "baseFunctions": [7264],
                         "body": {
                             "id": 24949,
                             "nodeType": "Block",
@@ -27050,9 +26858,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7271
-                        ],
+                        "baseFunctions": [7271],
                         "body": {
                             "id": 24963,
                             "nodeType": "Block",
@@ -27208,9 +27014,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7278
-                        ],
+                        "baseFunctions": [7278],
                         "body": {
                             "id": 24977,
                             "nodeType": "Block",
@@ -27366,9 +27170,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7285
-                        ],
+                        "baseFunctions": [7285],
                         "body": {
                             "id": 24991,
                             "nodeType": "Block",
@@ -27525,9 +27327,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7292
-                        ],
+                        "baseFunctions": [7292],
                         "body": {
                             "id": 25005,
                             "nodeType": "Block",
@@ -27683,9 +27483,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7299
-                        ],
+                        "baseFunctions": [7299],
                         "body": {
                             "id": 25019,
                             "nodeType": "Block",
@@ -27841,9 +27639,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7306
-                        ],
+                        "baseFunctions": [7306],
                         "body": {
                             "id": 25033,
                             "nodeType": "Block",
@@ -27999,9 +27795,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7313
-                        ],
+                        "baseFunctions": [7313],
                         "body": {
                             "id": 25047,
                             "nodeType": "Block",
@@ -28158,9 +27952,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            7321
-                        ],
+                        "baseFunctions": [7321],
                         "body": {
                             "id": 25111,
                             "nodeType": "Block",
@@ -28841,9 +28633,7 @@
                                         "pathNode": {
                                             "id": 25053,
                                             "name": "CollateralPoolInfo",
-                                            "nameLocations": [
-                                                "16133:18:109"
-                                            ],
+                                            "nameLocations": ["16133:18:109"],
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 7167,
                                             "src": "16133:18:109"

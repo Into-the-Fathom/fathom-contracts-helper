@@ -1,4 +1,4 @@
-export default interface ILockPosition {
+export default interface ITimeObject {
   hour: number;
   min: number;
   sec: number;

@@ -88,7 +88,7 @@
     // "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
     // "inlineSourceMap": true,                          /* Include sourcemap files inside the emitted JavaScript. */
     // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
-    "outDir": "./dist",
+    "outDir": "./dist"
     /* Specify an output folder for all emitted files. */
     // "removeComments": true,                           /* Disable emitting comments. */
     // "noEmit": true,                                   /* Disable emitting files from a compilation. */
@@ -141,11 +141,11 @@
     /* Skip type checking all .d.ts files. */
   },
   "exclude": [
-//    "node_modules",
-//    "packages/*/dist",
-//    "packages/*/node_modules",
-//    "packages/*/src/**/*.test.ts",
-//    "packages/*/src/**/_mocks.ts"
+    //    "node_modules",
+    //    "packages/*/dist",
+    //    "packages/*/node_modules",
+    //    "packages/*/src/**/*.test.ts",
+    //    "packages/*/src/**/_mocks.ts"
     "src/types.ts",
     "src/interfaces/*"
   ]

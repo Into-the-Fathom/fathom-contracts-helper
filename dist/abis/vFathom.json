@@ -22362,75 +22362,29 @@
     "ast": {
         "absolutePath": "project:/contracts/dao/tokens/VMainToken.sol",
         "exportedSymbols": {
-            "AccessControl": [
-                6154
-            ],
-            "Address": [
-                3038
-            ],
-            "Context": [
-                5186
-            ],
-            "Counters": [
-                10258
-            ],
-            "ECDSA": [
-                6634
-            ],
-            "EIP712": [
-                6800
-            ],
-            "ERC165": [
-                6824
-            ],
-            "ERC20": [
-                25567
-            ],
-            "ERC20Permit": [
-                25813
-            ],
-            "ERC20Votes": [
-                26460
-            ],
-            "IAccessControl": [
-                6227
-            ],
-            "IERC165": [
-                6836
-            ],
-            "IERC20": [
-                25636
-            ],
-            "IERC20Metadata": [
-                26481
-            ],
-            "IERC20Permit": [
-                26513
-            ],
-            "IVMainToken": [
-                26561
-            ],
-            "IVotes": [
-                15904
-            ],
-            "Initializable": [
-                2708
-            ],
-            "Math": [
-                7719
-            ],
-            "Pausable": [
-                10130
-            ],
-            "SafeCast": [
-                9570
-            ],
-            "Strings": [
-                5834
-            ],
-            "VMainToken": [
-                26903
-            ]
+            "AccessControl": [6154],
+            "Address": [3038],
+            "Context": [5186],
+            "Counters": [10258],
+            "ECDSA": [6634],
+            "EIP712": [6800],
+            "ERC165": [6824],
+            "ERC20": [25567],
+            "ERC20Permit": [25813],
+            "ERC20Votes": [26460],
+            "IAccessControl": [6227],
+            "IERC165": [6836],
+            "IERC20": [25636],
+            "IERC20Metadata": [26481],
+            "IERC20Permit": [26513],
+            "IVMainToken": [26561],
+            "IVotes": [15904],
+            "Initializable": [2708],
+            "Math": [7719],
+            "Pausable": [10130],
+            "SafeCast": [9570],
+            "Strings": [5834],
+            "VMainToken": [26903]
         },
         "id": 26904,
         "license": "MIT",
@@ -22438,11 +22392,7 @@
         "nodes": [
             {
                 "id": 26604,
-                "literals": [
-                    "solidity",
-                    "0.8",
-                    ".16"
-                ],
+                "literals": ["solidity", "0.8", ".16"],
                 "nodeType": "PragmaDirective",
                 "src": "58:23:113"
             },
@@ -22513,9 +22463,7 @@
                         "baseName": {
                             "id": 26610,
                             "name": "IVMainToken",
-                            "nameLocations": [
-                                "336:11:113"
-                            ],
+                            "nameLocations": ["336:11:113"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 26561,
                             "src": "336:11:113"
@@ -22528,9 +22476,7 @@
                         "baseName": {
                             "id": 26612,
                             "name": "Pausable",
-                            "nameLocations": [
-                                "349:8:113"
-                            ],
+                            "nameLocations": ["349:8:113"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 10130,
                             "src": "349:8:113"
@@ -22543,9 +22489,7 @@
                         "baseName": {
                             "id": 26614,
                             "name": "AccessControl",
-                            "nameLocations": [
-                                "359:13:113"
-                            ],
+                            "nameLocations": ["359:13:113"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 6154,
                             "src": "359:13:113"
@@ -22558,9 +22502,7 @@
                         "baseName": {
                             "id": 26616,
                             "name": "Initializable",
-                            "nameLocations": [
-                                "374:13:113"
-                            ],
+                            "nameLocations": ["374:13:113"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 2708,
                             "src": "374:13:113"
@@ -22573,9 +22515,7 @@
                         "baseName": {
                             "id": 26618,
                             "name": "ERC20Votes",
-                            "nameLocations": [
-                                "389:10:113"
-                            ],
+                            "nameLocations": ["389:10:113"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 26460,
                             "src": "389:10:113"
@@ -22591,23 +22531,8 @@
                 "fullyImplemented": true,
                 "id": 26903,
                 "linearizedBaseContracts": [
-                    26903,
-                    26460,
-                    25813,
-                    6800,
-                    26513,
-                    25567,
-                    26481,
-                    25636,
-                    2708,
-                    6154,
-                    6824,
-                    6836,
-                    6227,
-                    10130,
-                    5186,
-                    15904,
-                    26561
+                    26903, 26460, 25813, 6800, 26513, 25567, 26481, 25636, 2708, 6154,
+                    6824, 6836, 6227, 10130, 5186, 15904, 26561
                 ],
                 "name": "VMainToken",
                 "nameLocation": "322:10:113",
@@ -23060,9 +22985,7 @@
                                 "modifierName": {
                                     "id": 26648,
                                     "name": "ERC20Votes",
-                                    "nameLocations": [
-                                        "920:10:113"
-                                    ],
+                                    "nameLocations": ["920:10:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 26460,
                                     "src": "920:10:113"
@@ -23148,9 +23071,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            26530
-                        ],
+                        "baseFunctions": [26530],
                         "body": {
                             "id": 26717,
                             "nodeType": "Block",
@@ -23758,9 +23679,7 @@
                                 "modifierName": {
                                     "id": 26667,
                                     "name": "initializer",
-                                    "nameLocations": [
-                                        "1082:11:113"
-                                    ],
+                                    "nameLocations": ["1082:11:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 2610,
                                     "src": "1082:11:113"
@@ -23788,9 +23707,7 @@
                                 "modifierName": {
                                     "id": 26669,
                                     "name": "onlyRole",
-                                    "nameLocations": [
-                                        "1094:8:113"
-                                    ],
+                                    "nameLocations": ["1094:8:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 5873,
                                     "src": "1094:8:113"
@@ -23884,9 +23801,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            26555
-                        ],
+                        "baseFunctions": [26555],
                         "body": {
                             "id": 26738,
                             "nodeType": "Block",
@@ -24080,9 +23995,7 @@
                                 "modifierName": {
                                     "id": 26723,
                                     "name": "onlyRole",
-                                    "nameLocations": [
-                                        "1593:8:113"
-                                    ],
+                                    "nameLocations": ["1593:8:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 5873,
                                     "src": "1593:8:113"
@@ -24148,9 +24061,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            26560
-                        ],
+                        "baseFunctions": [26560],
                         "body": {
                             "id": 26759,
                             "nodeType": "Block",
@@ -24344,9 +24255,7 @@
                                 "modifierName": {
                                     "id": 26744,
                                     "name": "onlyRole",
-                                    "nameLocations": [
-                                        "1779:8:113"
-                                    ],
+                                    "nameLocations": ["1779:8:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 5873,
                                     "src": "1779:8:113"
@@ -24412,9 +24321,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            26533
-                        ],
+                        "baseFunctions": [26533],
                         "body": {
                             "id": 26770,
                             "nodeType": "Block",
@@ -24483,9 +24390,7 @@
                                 "modifierName": {
                                     "id": 26763,
                                     "name": "onlyRole",
-                                    "nameLocations": [
-                                        "1945:8:113"
-                                    ],
+                                    "nameLocations": ["1945:8:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 5873,
                                     "src": "1945:8:113"
@@ -24522,9 +24427,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            26536
-                        ],
+                        "baseFunctions": [26536],
                         "body": {
                             "id": 26781,
                             "nodeType": "Block",
@@ -24593,9 +24496,7 @@
                                 "modifierName": {
                                     "id": 26774,
                                     "name": "onlyRole",
-                                    "nameLocations": [
-                                        "2035:8:113"
-                                    ],
+                                    "nameLocations": ["2035:8:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 5873,
                                     "src": "2035:8:113"
@@ -24632,9 +24533,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            26543
-                        ],
+                        "baseFunctions": [26543],
                         "body": {
                             "id": 26803,
                             "nodeType": "Block",
@@ -24682,9 +24581,7 @@
                                             "id": 26793,
                                             "name": "_mint",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                26100
-                                            ],
+                                            "overloadedDeclarations": [26100],
                                             "referencedDeclaration": 26100,
                                             "src": "2182:5:113",
                                             "typeDescriptions": {
@@ -24809,9 +24706,7 @@
                                 "modifierName": {
                                     "id": 26789,
                                     "name": "onlyRole",
-                                    "nameLocations": [
-                                        "2150:8:113"
-                                    ],
+                                    "nameLocations": ["2150:8:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 5873,
                                     "src": "2150:8:113"
@@ -24904,9 +24799,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            26550
-                        ],
+                        "baseFunctions": [26550],
                         "body": {
                             "id": 26820,
                             "nodeType": "Block",
@@ -24954,9 +24847,7 @@
                                             "id": 26815,
                                             "name": "_burn",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                26122
-                                            ],
+                                            "overloadedDeclarations": [26122],
                                             "referencedDeclaration": 26122,
                                             "src": "2336:5:113",
                                             "typeDescriptions": {
@@ -25011,9 +24902,7 @@
                                 "modifierName": {
                                     "id": 26811,
                                     "name": "onlyRole",
-                                    "nameLocations": [
-                                        "2304:8:113"
-                                    ],
+                                    "nameLocations": ["2304:8:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 5873,
                                     "src": "2304:8:113"
@@ -25482,9 +25371,7 @@
                         "visibility": "internal"
                     },
                     {
-                        "baseFunctions": [
-                            25556
-                        ],
+                        "baseFunctions": [25556],
                         "body": {
                             "id": 26882,
                             "nodeType": "Block",
@@ -25712,9 +25599,7 @@
                                 "modifierName": {
                                     "id": 26862,
                                     "name": "whenNotPaused",
-                                    "nameLocations": [
-                                        "2772:13:113"
-                                    ],
+                                    "nameLocations": ["2772:13:113"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 10048,
                                     "src": "2772:13:113"
@@ -25835,9 +25720,7 @@
                         "visibility": "internal"
                     },
                     {
-                        "baseFunctions": [
-                            26151
-                        ],
+                        "baseFunctions": [26151],
                         "body": {
                             "id": 26901,
                             "nodeType": "Block",
@@ -26066,22 +25949,8 @@
                 "scope": 26904,
                 "src": "313:2796:113",
                 "usedErrors": [
-                    25004,
-                    25006,
-                    25008,
-                    25010,
-                    25012,
-                    25014,
-                    25016,
-                    25018,
-                    25667,
-                    25669,
-                    25850,
-                    25852,
-                    25854,
-                    25856,
-                    26640,
-                    26642
+                    25004, 25006, 25008, 25010, 25012, 25014, 25016, 25018, 25667, 25669,
+                    25850, 25852, 25854, 25856, 26640, 26642
                 ]
             }
         ],

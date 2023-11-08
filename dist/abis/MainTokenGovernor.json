@@ -45669,105 +45669,39 @@
     "ast": {
         "absolutePath": "project:/contracts/dao/governance/MainTokenGovernor.sol",
         "exportedSymbols": {
-            "AccessControl": [
-                6154
-            ],
-            "Address": [
-                5164
-            ],
-            "AddressUpgradeable": [
-                861
-            ],
-            "Context": [
-                5186
-            ],
-            "DoubleEndedQueue": [
-                10599
-            ],
-            "ECDSA": [
-                6634
-            ],
-            "EIP712": [
-                6800
-            ],
-            "ERC165": [
-                6824
-            ],
-            "Governor": [
-                13169
-            ],
-            "GovernorCountingSimple": [
-                15023
-            ],
-            "GovernorSettings": [
-                15206
-            ],
-            "GovernorTimelockControl": [
-                15619
-            ],
-            "GovernorVotes": [
-                15673
-            ],
-            "GovernorVotesQuorumFraction": [
-                15795
-            ],
-            "IAccessControl": [
-                6227
-            ],
-            "IERC165": [
-                6836
-            ],
-            "IERC20": [
-                25636
-            ],
-            "IERC20Permit": [
-                26513
-            ],
-            "IEmergencyStop": [
-                15911
-            ],
-            "IGovernor": [
-                16222
-            ],
-            "IGovernorTimelock": [
-                15835
-            ],
-            "IRelay": [
-                16243
-            ],
-            "ISupportingTokens": [
-                16258
-            ],
-            "ITimelockController": [
-                16433
-            ],
-            "IVotes": [
-                15904
-            ],
-            "Initializable": [
-                577
-            ],
-            "MainTokenGovernor": [
-                13777
-            ],
-            "ProposalCore": [
-                13185
-            ],
-            "SafeCast": [
-                9570
-            ],
-            "SafeERC20": [
-                5467
-            ],
-            "Strings": [
-                5834
-            ],
-            "TimelockController": [
-                14810
-            ],
-            "Timers": [
-                10813
-            ]
+            "AccessControl": [6154],
+            "Address": [5164],
+            "AddressUpgradeable": [861],
+            "Context": [5186],
+            "DoubleEndedQueue": [10599],
+            "ECDSA": [6634],
+            "EIP712": [6800],
+            "ERC165": [6824],
+            "Governor": [13169],
+            "GovernorCountingSimple": [15023],
+            "GovernorSettings": [15206],
+            "GovernorTimelockControl": [15619],
+            "GovernorVotes": [15673],
+            "GovernorVotesQuorumFraction": [15795],
+            "IAccessControl": [6227],
+            "IERC165": [6836],
+            "IERC20": [25636],
+            "IERC20Permit": [26513],
+            "IEmergencyStop": [15911],
+            "IGovernor": [16222],
+            "IGovernorTimelock": [15835],
+            "IRelay": [16243],
+            "ISupportingTokens": [16258],
+            "ITimelockController": [16433],
+            "IVotes": [15904],
+            "Initializable": [577],
+            "MainTokenGovernor": [13777],
+            "ProposalCore": [13185],
+            "SafeCast": [9570],
+            "SafeERC20": [5467],
+            "Strings": [5834],
+            "TimelockController": [14810],
+            "Timers": [10813]
         },
         "id": 13778,
         "license": "MIT",
@@ -45775,11 +45709,7 @@
         "nodes": [
             {
                 "id": 13187,
-                "literals": [
-                    "solidity",
-                    "0.8",
-                    ".16"
-                ],
+                "literals": ["solidity", "0.8", ".16"],
                 "nodeType": "PragmaDirective",
                 "src": "58:23:51"
             },
@@ -45922,9 +45852,7 @@
                         "baseName": {
                             "id": 13199,
                             "name": "IRelay",
-                            "nameLocations": [
-                                "579:6:51"
-                            ],
+                            "nameLocations": ["579:6:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 16243,
                             "src": "579:6:51"
@@ -45937,9 +45865,7 @@
                         "baseName": {
                             "id": 13201,
                             "name": "ISupportingTokens",
-                            "nameLocations": [
-                                "591:17:51"
-                            ],
+                            "nameLocations": ["591:17:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 16258,
                             "src": "591:17:51"
@@ -45952,9 +45878,7 @@
                         "baseName": {
                             "id": 13203,
                             "name": "IEmergencyStop",
-                            "nameLocations": [
-                                "614:14:51"
-                            ],
+                            "nameLocations": ["614:14:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 15911,
                             "src": "614:14:51"
@@ -45967,9 +45891,7 @@
                         "baseName": {
                             "id": 13205,
                             "name": "Governor",
-                            "nameLocations": [
-                                "634:8:51"
-                            ],
+                            "nameLocations": ["634:8:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 13169,
                             "src": "634:8:51"
@@ -45982,9 +45904,7 @@
                         "baseName": {
                             "id": 13207,
                             "name": "GovernorSettings",
-                            "nameLocations": [
-                                "648:16:51"
-                            ],
+                            "nameLocations": ["648:16:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 15206,
                             "src": "648:16:51"
@@ -45997,9 +45917,7 @@
                         "baseName": {
                             "id": 13209,
                             "name": "GovernorCountingSimple",
-                            "nameLocations": [
-                                "670:22:51"
-                            ],
+                            "nameLocations": ["670:22:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 15023,
                             "src": "670:22:51"
@@ -46012,9 +45930,7 @@
                         "baseName": {
                             "id": 13211,
                             "name": "GovernorVotes",
-                            "nameLocations": [
-                                "698:13:51"
-                            ],
+                            "nameLocations": ["698:13:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 15673,
                             "src": "698:13:51"
@@ -46027,9 +45943,7 @@
                         "baseName": {
                             "id": 13213,
                             "name": "GovernorVotesQuorumFraction",
-                            "nameLocations": [
-                                "717:27:51"
-                            ],
+                            "nameLocations": ["717:27:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 15795,
                             "src": "717:27:51"
@@ -46042,9 +45956,7 @@
                         "baseName": {
                             "id": 13215,
                             "name": "GovernorTimelockControl",
-                            "nameLocations": [
-                                "750:23:51"
-                            ],
+                            "nameLocations": ["750:23:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 15619,
                             "src": "750:23:51"
@@ -46060,22 +45972,8 @@
                 "fullyImplemented": true,
                 "id": 13777,
                 "linearizedBaseContracts": [
-                    13777,
-                    15619,
-                    15795,
-                    15673,
-                    15023,
-                    15206,
-                    13169,
-                    15835,
-                    16222,
-                    6800,
-                    6824,
-                    6836,
-                    5186,
-                    15911,
-                    16258,
-                    16243
+                    13777, 15619, 15795, 15673, 15023, 15206, 13169, 15835, 16222, 6800,
+                    6824, 6836, 5186, 15911, 16258, 16243
                 ],
                 "name": "MainTokenGovernor",
                 "nameLocation": "554:17:51",
@@ -46087,9 +45985,7 @@
                         "libraryName": {
                             "id": 13217,
                             "name": "SafeERC20",
-                            "nameLocations": [
-                                "786:9:51"
-                            ],
+                            "nameLocations": ["786:9:51"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 5467,
                             "src": "786:9:51"
@@ -46102,9 +45998,7 @@
                             "pathNode": {
                                 "id": 13218,
                                 "name": "IERC20",
-                                "nameLocations": [
-                                    "800:6:51"
-                                ],
+                                "nameLocations": ["800:6:51"],
                                 "nodeType": "IdentifierPath",
                                 "referencedDeclaration": 25636,
                                 "src": "800:6:51"
@@ -46317,9 +46211,7 @@
                                 "modifierName": {
                                     "id": 13251,
                                     "name": "Governor",
-                                    "nameLocations": [
-                                        "1266:8:51"
-                                    ],
+                                    "nameLocations": ["1266:8:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 13169,
                                     "src": "1266:8:51"
@@ -46371,9 +46263,7 @@
                                 "modifierName": {
                                     "id": 13258,
                                     "name": "GovernorSettings",
-                                    "nameLocations": [
-                                        "1358:16:51"
-                                    ],
+                                    "nameLocations": ["1358:16:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15206,
                                     "src": "1358:16:51"
@@ -46401,9 +46291,7 @@
                                 "modifierName": {
                                     "id": 13263,
                                     "name": "GovernorVotes",
-                                    "nameLocations": [
-                                        "1446:13:51"
-                                    ],
+                                    "nameLocations": ["1446:13:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15673,
                                     "src": "1446:13:51"
@@ -46435,9 +46323,7 @@
                                 "modifierName": {
                                     "id": 13266,
                                     "name": "GovernorVotesQuorumFraction",
-                                    "nameLocations": [
-                                        "1476:27:51"
-                                    ],
+                                    "nameLocations": ["1476:27:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15795,
                                     "src": "1476:27:51"
@@ -46465,9 +46351,7 @@
                                 "modifierName": {
                                     "id": 13269,
                                     "name": "GovernorTimelockControl",
-                                    "nameLocations": [
-                                        "1515:23:51"
-                                    ],
+                                    "nameLocations": ["1515:23:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15619,
                                     "src": "1515:23:51"
@@ -46504,9 +46388,7 @@
                                         "pathNode": {
                                             "id": 13232,
                                             "name": "IVotes",
-                                            "nameLocations": [
-                                                "991:6:51"
-                                            ],
+                                            "nameLocations": ["991:6:51"],
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 15904,
                                             "src": "991:6:51"
@@ -46541,9 +46423,7 @@
                                         "pathNode": {
                                             "id": 13235,
                                             "name": "TimelockController",
-                                            "nameLocations": [
-                                                "1014:18:51"
-                                            ],
+                                            "nameLocations": ["1014:18:51"],
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 14810,
                                             "src": "1014:18:51"
@@ -46736,9 +46616,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            16232
-                        ],
+                        "baseFunctions": [16232],
                         "body": {
                             "id": 13311,
                             "nodeType": "Block",
@@ -46845,10 +46723,7 @@
                                     }
                                 },
                                 {
-                                    "assignments": [
-                                        13295,
-                                        13297
-                                    ],
+                                    "assignments": [13295, 13297],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -47098,9 +46973,7 @@
                                 "modifierName": {
                                     "id": 13282,
                                     "name": "onlyGovernance",
-                                    "nameLocations": [
-                                        "2081:14:51"
-                                    ],
+                                    "nameLocations": ["2081:14:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 11041,
                                     "src": "2081:14:51"
@@ -47193,9 +47066,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            16242
-                        ],
+                        "baseFunctions": [16242],
                         "body": {
                             "id": 13352,
                             "nodeType": "Block",
@@ -47287,10 +47158,7 @@
                                     }
                                 },
                                 {
-                                    "assignments": [
-                                        13334,
-                                        13336
-                                    ],
+                                    "assignments": [13334, 13336],
                                     "declarations": [
                                         {
                                             "constant": false,
@@ -47408,9 +47276,7 @@
                                             "isLValue": false,
                                             "isPure": false,
                                             "lValueRequested": false,
-                                            "names": [
-                                                "value"
-                                            ],
+                                            "names": ["value"],
                                             "nodeType": "FunctionCallOptions",
                                             "options": [
                                                 {
@@ -47576,9 +47442,7 @@
                                 "modifierName": {
                                     "id": 13322,
                                     "name": "onlyGovernance",
-                                    "nameLocations": [
-                                        "2886:14:51"
-                                    ],
+                                    "nameLocations": ["2886:14:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 11041,
                                     "src": "2886:14:51"
@@ -47698,10 +47562,7 @@
                         "visibility": "external"
                     },
                     {
-                        "baseFunctions": [
-                            11699,
-                            16000
-                        ],
+                        "baseFunctions": [11699, 16000],
                         "body": {
                             "id": 13380,
                             "nodeType": "Block",
@@ -47843,9 +47704,7 @@
                                 {
                                     "id": 13366,
                                     "name": "Governor",
-                                    "nameLocations": [
-                                        "3332:8:51"
-                                    ],
+                                    "nameLocations": ["3332:8:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 13169,
                                     "src": "3332:8:51"
@@ -47853,9 +47712,7 @@
                                 {
                                     "id": 13367,
                                     "name": "IGovernor",
-                                    "nameLocations": [
-                                        "3342:9:51"
-                                    ],
+                                    "nameLocations": ["3342:9:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 16222,
                                     "src": "3342:9:51"
@@ -48047,9 +47904,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            16016
-                        ],
+                        "baseFunctions": [16016],
                         "body": {
                             "id": 13408,
                             "nodeType": "Block",
@@ -48129,9 +47984,7 @@
                                             "id": 13401,
                                             "name": "_cancel",
                                             "nodeType": "Identifier",
-                                            "overloadedDeclarations": [
-                                                13763
-                                            ],
+                                            "overloadedDeclarations": [13763],
                                             "referencedDeclaration": 13763,
                                             "src": "3768:7:51",
                                             "typeDescriptions": {
@@ -48179,9 +48032,7 @@
                                 "modifierName": {
                                     "id": 13396,
                                     "name": "onlyMultiSig",
-                                    "nameLocations": [
-                                        "3720:12:51"
-                                    ],
+                                    "nameLocations": ["3720:12:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 11054,
                                     "src": "3720:12:51"
@@ -48383,9 +48234,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            15910
-                        ],
+                        "baseFunctions": [15910],
                         "body": {
                             "id": 13495,
                             "nodeType": "Block",
@@ -48434,9 +48283,7 @@
                                         "src": "4164:278:51",
                                         "statements": [
                                             {
-                                                "assignments": [
-                                                    13431
-                                                ],
+                                                "assignments": [13431],
                                                 "declarations": [
                                                     {
                                                         "constant": false,
@@ -48509,9 +48356,7 @@
                                                 "src": "4178:41:51"
                                             },
                                             {
-                                                "assignments": [
-                                                    13437
-                                                ],
+                                                "assignments": [13437],
                                                 "declarations": [
                                                     {
                                                         "constant": false,
@@ -48949,9 +48794,7 @@
                                     },
                                     "id": 13463,
                                     "initializationExpression": {
-                                        "assignments": [
-                                            13420
-                                        ],
+                                        "assignments": [13420],
                                         "declarations": [
                                             {
                                                 "constant": false,
@@ -49152,10 +48995,7 @@
                                         "src": "4482:177:51",
                                         "statements": [
                                             {
-                                                "assignments": [
-                                                    13472,
-                                                    null
-                                                ],
+                                                "assignments": [13472, null],
                                                 "declarations": [
                                                     {
                                                         "constant": false,
@@ -49266,9 +49106,7 @@
                                                         "isLValue": false,
                                                         "isPure": false,
                                                         "lValueRequested": false,
-                                                        "names": [
-                                                            "value"
-                                                        ],
+                                                        "names": ["value"],
                                                         "nodeType": "FunctionCallOptions",
                                                         "options": [
                                                             {
@@ -49482,9 +49320,7 @@
                                 "modifierName": {
                                     "id": 13413,
                                     "name": "onlyMultiSig",
-                                    "nameLocations": [
-                                        "4056:12:51"
-                                    ],
+                                    "nameLocations": ["4056:12:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 11054,
                                     "src": "4056:12:51"
@@ -49521,9 +49357,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            16251
-                        ],
+                        "baseFunctions": [16251],
                         "body": {
                             "id": 13509,
                             "nodeType": "Block",
@@ -49602,9 +49436,7 @@
                                 "modifierName": {
                                     "id": 13502,
                                     "name": "onlyGovernance",
-                                    "nameLocations": [
-                                        "4975:14:51"
-                                    ],
+                                    "nameLocations": ["4975:14:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 11041,
                                     "src": "4975:14:51"
@@ -49670,9 +49502,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            16257
-                        ],
+                        "baseFunctions": [16257],
                         "body": {
                             "id": 13523,
                             "nodeType": "Block",
@@ -49751,9 +49581,7 @@
                                 "modifierName": {
                                     "id": 13516,
                                     "name": "onlyGovernance",
-                                    "nameLocations": [
-                                        "5296:14:51"
-                                    ],
+                                    "nameLocations": ["5296:14:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 11041,
                                     "src": "5296:14:51"
@@ -49819,10 +49647,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            12216,
-                            15144
-                        ],
+                        "baseFunctions": [12216, 15144],
                         "body": {
                             "id": 13536,
                             "nodeType": "Block",
@@ -49898,9 +49723,7 @@
                                 {
                                     "id": 13526,
                                     "name": "Governor",
-                                    "nameLocations": [
-                                        "5414:8:51"
-                                    ],
+                                    "nameLocations": ["5414:8:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 13169,
                                     "src": "5414:8:51"
@@ -49908,9 +49731,7 @@
                                 {
                                     "id": 13527,
                                     "name": "GovernorSettings",
-                                    "nameLocations": [
-                                        "5424:16:51"
-                                    ],
+                                    "nameLocations": ["5424:16:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15206,
                                     "src": "5424:16:51"
@@ -49965,10 +49786,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            12073,
-                            15410
-                        ],
+                        "baseFunctions": [12073, 15410],
                         "body": {
                             "id": 13552,
                             "nodeType": "Block",
@@ -50062,9 +49880,7 @@
                                 {
                                     "id": 13541,
                                     "name": "Governor",
-                                    "nameLocations": [
-                                        "5583:8:51"
-                                    ],
+                                    "nameLocations": ["5583:8:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 13169,
                                     "src": "5583:8:51"
@@ -50072,9 +49888,7 @@
                                 {
                                     "id": 13542,
                                     "name": "GovernorTimelockControl",
-                                    "nameLocations": [
-                                        "5593:23:51"
-                                    ],
+                                    "nameLocations": ["5593:23:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15619,
                                     "src": "5593:23:51"
@@ -50157,10 +49971,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            15126,
-                            16209
-                        ],
+                        "baseFunctions": [15126, 16209],
                         "body": {
                             "id": 13565,
                             "nodeType": "Block",
@@ -50236,9 +50047,7 @@
                                 {
                                     "id": 13555,
                                     "name": "IGovernor",
-                                    "nameLocations": [
-                                        "5743:9:51"
-                                    ],
+                                    "nameLocations": ["5743:9:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 16222,
                                     "src": "5743:9:51"
@@ -50246,9 +50055,7 @@
                                 {
                                     "id": 13556,
                                     "name": "GovernorSettings",
-                                    "nameLocations": [
-                                        "5754:16:51"
-                                    ],
+                                    "nameLocations": ["5754:16:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15206,
                                     "src": "5754:16:51"
@@ -50303,10 +50110,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            15135,
-                            16214
-                        ],
+                        "baseFunctions": [15135, 16214],
                         "body": {
                             "id": 13578,
                             "nodeType": "Block",
@@ -50382,9 +50186,7 @@
                                 {
                                     "id": 13568,
                                     "name": "IGovernor",
-                                    "nameLocations": [
-                                        "5884:9:51"
-                                    ],
+                                    "nameLocations": ["5884:9:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 16222,
                                     "src": "5884:9:51"
@@ -50392,9 +50194,7 @@
                                 {
                                     "id": 13569,
                                     "name": "GovernorSettings",
-                                    "nameLocations": [
-                                        "5895:16:51"
-                                    ],
+                                    "nameLocations": ["5895:16:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15206,
                                     "src": "5895:16:51"
@@ -50449,10 +50249,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            15758,
-                            16221
-                        ],
+                        "baseFunctions": [15758, 16221],
                         "body": {
                             "id": 13594,
                             "nodeType": "Block",
@@ -50546,9 +50343,7 @@
                                 {
                                     "id": 13583,
                                     "name": "IGovernor",
-                                    "nameLocations": [
-                                        "6039:9:51"
-                                    ],
+                                    "nameLocations": ["6039:9:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 16222,
                                     "src": "6039:9:51"
@@ -50556,9 +50351,7 @@
                                 {
                                     "id": 13584,
                                     "name": "GovernorVotesQuorumFraction",
-                                    "nameLocations": [
-                                        "6050:27:51"
-                                    ],
+                                    "nameLocations": ["6050:27:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15795,
                                     "src": "6050:27:51"
@@ -50641,10 +50434,7 @@
                         "visibility": "public"
                     },
                     {
-                        "baseFunctions": [
-                            12176,
-                            15475
-                        ],
+                        "baseFunctions": [12176, 15475],
                         "body": {
                             "id": 13611,
                             "nodeType": "Block",
@@ -50738,9 +50528,7 @@
                                 {
                                     "id": 13599,
                                     "name": "Governor",
-                                    "nameLocations": [
-                                        "6208:8:51"
-                                    ],
+                                    "nameLocations": ["6208:8:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 13169,
                                     "src": "6208:8:51"
@@ -50748,9 +50536,7 @@
                                 {
                                     "id": 13600,
                                     "name": "GovernorTimelockControl",
-                                    "nameLocations": [
-                                        "6218:23:51"
-                                    ],
+                                    "nameLocations": ["6218:23:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15619,
                                     "src": "6218:23:51"
@@ -50817,9 +50603,7 @@
                                         "pathNode": {
                                             "id": 13602,
                                             "name": "ProposalState",
-                                            "nameLocations": [
-                                                "6252:13:51"
-                                            ],
+                                            "nameLocations": ["6252:13:51"],
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 15926,
                                             "src": "6252:13:51"
@@ -51601,9 +51385,7 @@
                                     },
                                     "id": 13689,
                                     "initializationExpression": {
-                                        "assignments": [
-                                            13659
-                                        ],
+                                        "assignments": [13659],
                                         "declarations": [
                                             {
                                                 "constant": false,
@@ -51796,10 +51578,7 @@
                         "visibility": "internal"
                     },
                     {
-                        "baseFunctions": [
-                            12433,
-                            15520
-                        ],
+                        "baseFunctions": [12433, 15520],
                         "body": {
                             "id": 13734,
                             "nodeType": "Block",
@@ -52055,9 +51834,7 @@
                                 {
                                     "id": 13711,
                                     "name": "Governor",
-                                    "nameLocations": [
-                                        "7271:8:51"
-                                    ],
+                                    "nameLocations": ["7271:8:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 13169,
                                     "src": "7271:8:51"
@@ -52065,9 +51842,7 @@
                                 {
                                     "id": 13712,
                                     "name": "GovernorTimelockControl",
-                                    "nameLocations": [
-                                        "7281:23:51"
-                                    ],
+                                    "nameLocations": ["7281:23:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15619,
                                     "src": "7281:23:51"
@@ -52258,10 +52033,7 @@
                         "visibility": "internal"
                     },
                     {
-                        "baseFunctions": [
-                            12594,
-                            15570
-                        ],
+                        "baseFunctions": [12594, 15570],
                         "body": {
                             "id": 13762,
                             "nodeType": "Block",
@@ -52402,9 +52174,7 @@
                                 {
                                     "id": 13748,
                                     "name": "Governor",
-                                    "nameLocations": [
-                                        "7668:8:51"
-                                    ],
+                                    "nameLocations": ["7668:8:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 13169,
                                     "src": "7668:8:51"
@@ -52412,9 +52182,7 @@
                                 {
                                     "id": 13749,
                                     "name": "GovernorTimelockControl",
-                                    "nameLocations": [
-                                        "7678:23:51"
-                                    ],
+                                    "nameLocations": ["7678:23:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15619,
                                     "src": "7678:23:51"
@@ -52606,10 +52374,7 @@
                         "visibility": "internal"
                     },
                     {
-                        "baseFunctions": [
-                            13135,
-                            15582
-                        ],
+                        "baseFunctions": [13135, 15582],
                         "body": {
                             "id": 13775,
                             "nodeType": "Block",
@@ -52684,9 +52449,7 @@
                                 {
                                     "id": 13765,
                                     "name": "Governor",
-                                    "nameLocations": [
-                                        "7853:8:51"
-                                    ],
+                                    "nameLocations": ["7853:8:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 13169,
                                     "src": "7853:8:51"
@@ -52694,9 +52457,7 @@
                                 {
                                     "id": 13766,
                                     "name": "GovernorTimelockControl",
-                                    "nameLocations": [
-                                        "7863:23:51"
-                                    ],
+                                    "nameLocations": ["7863:23:51"],
                                     "nodeType": "IdentifierPath",
                                     "referencedDeclaration": 15619,
                                     "src": "7863:23:51"
@@ -52755,45 +52516,10 @@
                 "scope": 13778,
                 "src": "545:7404:51",
                 "usedErrors": [
-                    10265,
-                    10952,
-                    10954,
-                    10956,
-                    10958,
-                    10960,
-                    10962,
-                    10964,
-                    10966,
-                    10968,
-                    10970,
-                    10972,
-                    10974,
-                    10976,
-                    10978,
-                    10980,
-                    10982,
-                    10984,
-                    10986,
-                    10988,
-                    10990,
-                    10992,
-                    10994,
-                    10996,
-                    10998,
-                    11000,
-                    11002,
-                    11004,
-                    13229,
-                    13231,
-                    14837,
-                    14839,
-                    15054,
-                    15056,
-                    15234,
-                    15236,
-                    15238,
-                    15694,
-                    15696
+                    10265, 10952, 10954, 10956, 10958, 10960, 10962, 10964, 10966, 10968,
+                    10970, 10972, 10974, 10976, 10978, 10980, 10982, 10984, 10986, 10988,
+                    10990, 10992, 10994, 10996, 10998, 11000, 11002, 11004, 13229, 13231,
+                    14837, 14839, 15054, 15056, 15234, 15236, 15238, 15694, 15696
                 ]
             }
         ],

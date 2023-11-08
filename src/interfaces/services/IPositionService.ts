@@ -1,5 +1,5 @@
-import ICollateralPool from "interfaces/models/ICollateralPool";
-import Xdc3 from "xdc3";
+import Xdc3 from 'xdc3';
+import ICollateralPool from '../models/ICollateralPool';
 
 export default interface IPositionService {
   openPosition(
@@ -32,13 +32,10 @@ export default interface IPositionService {
     positionId: string,
     pool: ICollateralPool,
     address: string,
-    collateral: string
+    collateral: string,
   ): Promise<number | Error>;
 
-  approve(
-    address: string,
-    tokenAddress: string,
-  ): Promise<number | Error>;
+  approve(address: string, tokenAddress: string): Promise<number | Error>;
 
   approvalStatus(
     address: string,
@@ -48,28 +45,24 @@ export default interface IPositionService {
 
   balanceStableCoin(address: string): Promise<string>;
 
-  approveStableCoin(
-    address: string
-  ): Promise<number | Error>;
+  approveStableCoin(address: string): Promise<number | Error>;
 
-  approvalStatusStableCoin(maxPositionDebtValue: number, address: string): Promise<boolean>;
+  approvalStatusStableCoin(
+    maxPositionDebtValue: number,
+    address: string,
+  ): Promise<boolean>;
 
   partiallyClosePosition(
     positionId: string,
     pool: ICollateralPool,
     address: string,
     debt: string,
-    collateralValue: string
+    collateralValue: string,
   ): Promise<number | Error>;
 
-  getDebtValue(
-    debtShare: number,
-    poolId: string
-  ): Promise<string>;
+  getDebtValue(debtShare: number, poolId: string): Promise<string>;
 
-  getPositionDebtCeiling(
-    poolId: string
-  ): Promise<string>;
+  getPositionDebtCeiling(poolId: string): Promise<string>;
 
   isWhitelisted(address: string): Promise<boolean>;
 

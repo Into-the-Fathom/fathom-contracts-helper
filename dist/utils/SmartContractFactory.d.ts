@@ -1,6 +1,7 @@
-import { AbiItem } from "xdc3-utils";
+import { AbiItem } from 'xdc3-utils';
+import { ChainId } from '../types';
 export declare class SmartContractFactory {
-    static Addresses(chainId: number): {
+    static Addresses(chainId: ChainId): {
         FXD: string;
         xUSDT: string;
         WXDC: string;
@@ -107,5 +108,6 @@ export declare class SmartContractFactory {
         address: string;
     };
     static CollateralTokenAdapterAbi(): AbiItem[];
+    static getAddressByContractName(chainId: number, name: string): any;
 }
 //# sourceMappingURL=SmartContractFactory.d.ts.map
