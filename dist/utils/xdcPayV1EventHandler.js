@@ -1,5 +1,3 @@
-import { SKIP_ERRORS } from './Constants';
-import { debounce } from './debounce';
 /**
  * Xdc pay v1 is not resolve after send transaction. We need to catch
  * @param contract
@@ -7,19 +5,24 @@ import { debounce } from './debounce';
  * @param eventEmitter
  * @param type
  */
-export const xdcPayV1EventHandler = (contract, resolve, eventEmitter, type) => {
+export const xdcPayV1EventHandler = (contract, resolve, reject, eventEmitter, type) => {
     /**
      * Block for XDC Pay.
      */
-    contract.events.allEvents(debounce((eventData, receipt) => {
-        if (SKIP_ERRORS.includes(eventData === null || eventData === void 0 ? void 0 : eventData.code)) {
+    contract.once('allEvents', (error, event) => {
+        if (error) {
+            eventEmitter.emit('errorTransaction', {
+                type,
+                error,
+            });
+            reject(error);
             return;
         }
         eventEmitter.emit('successTransaction', {
-            type: type,
-            receipt,
+            type,
+            event,
         });
-        resolve(receipt.blockNumber);
-    }, 500));
+        resolve(event.blockNumber);
+    });
 };
 //# sourceMappingURL=xdcPayV1EventHandler.js.map

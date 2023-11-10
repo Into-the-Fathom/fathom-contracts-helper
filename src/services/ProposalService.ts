@@ -13,7 +13,7 @@ import {
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import IProposalService from '../interfaces/services/IProposalService';
-import {xdcPayV1EventHandler} from "../utils/xdcPayV1EventHandler";
+import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 
 export default class ProposalService implements IProposalService {
   public provider: Xdc3;
@@ -52,6 +52,7 @@ export default class ProposalService implements IProposalService {
         xdcPayV1EventHandler(
           FathomGovernor,
           resolve,
+          reject,
           this.emitter,
           TransactionType.CreateProposal,
         );
@@ -117,6 +118,7 @@ export default class ProposalService implements IProposalService {
         xdcPayV1EventHandler(
           FathomGovernor,
           resolve,
+          reject,
           this.emitter,
           TransactionType.ExecuteProposal,
         );
@@ -181,6 +183,7 @@ export default class ProposalService implements IProposalService {
         xdcPayV1EventHandler(
           FathomGovernor,
           resolve,
+          reject,
           this.emitter,
           TransactionType.QueueProposal,
         );
@@ -243,6 +246,7 @@ export default class ProposalService implements IProposalService {
         xdcPayV1EventHandler(
           FathomGovernor,
           resolve,
+          reject,
           this.emitter,
           TransactionType.CastVote,
         );

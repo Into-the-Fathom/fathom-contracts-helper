@@ -14,7 +14,7 @@ import { MAX_UINT256 } from '../utils/Constants';
 import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
-import {xdcPayV1EventHandler} from "../utils/xdcPayV1EventHandler";
+import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 
 const DAY_SECONDS = 24 * 60 * 60;
 
@@ -56,6 +56,7 @@ export default class StakingService implements IStakingService {
         xdcPayV1EventHandler(
           Staking,
           resolve,
+          reject,
           this.emitter,
           TransactionType.CreateLock,
         );
@@ -121,6 +122,7 @@ export default class StakingService implements IStakingService {
         xdcPayV1EventHandler(
           Staking,
           resolve,
+          reject,
           this.emitter,
           TransactionType.HandleUnlock,
         );
@@ -185,6 +187,7 @@ export default class StakingService implements IStakingService {
         xdcPayV1EventHandler(
           Staking,
           resolve,
+          reject,
           this.emitter,
           TransactionType.HandleEarlyWithdrawal,
         );
@@ -224,7 +227,10 @@ export default class StakingService implements IStakingService {
     });
   }
 
-  handleClaimRewards(account: string, streamId: number): Promise<number | Error> {
+  handleClaimRewards(
+    account: string,
+    streamId: number,
+  ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const Staking = Web3Utils.getContractInstance(
@@ -243,6 +249,7 @@ export default class StakingService implements IStakingService {
         xdcPayV1EventHandler(
           Staking,
           resolve,
+          reject,
           this.emitter,
           TransactionType.HandleClaimRewards,
         );
@@ -307,6 +314,7 @@ export default class StakingService implements IStakingService {
         xdcPayV1EventHandler(
           Staking,
           resolve,
+          reject,
           this.emitter,
           TransactionType.HandleWithdrawAll,
         );
@@ -372,6 +380,7 @@ export default class StakingService implements IStakingService {
         xdcPayV1EventHandler(
           FTHMToken,
           resolve,
+          reject,
           this.emitter,
           TransactionType.Approve,
         );

@@ -94,6 +94,7 @@ export default class PositionService implements IPositionService {
         xdcPayV1EventHandler(
           wallet,
           resolve,
+          reject,
           this.emitter,
           TransactionType.OpenPosition,
         );
@@ -198,6 +199,7 @@ export default class PositionService implements IPositionService {
         xdcPayV1EventHandler(
           wallet,
           resolve,
+          reject,
           this.emitter,
           TransactionType.TopUpPositionAndBorrow,
         );
@@ -297,6 +299,7 @@ export default class PositionService implements IPositionService {
         xdcPayV1EventHandler(
           wallet,
           resolve,
+          reject,
           this.emitter,
           TransactionType.TopUpPosition,
         );
@@ -397,6 +400,7 @@ export default class PositionService implements IPositionService {
         xdcPayV1EventHandler(
           wallet,
           resolve,
+          reject,
           this.emitter,
           TransactionType.RepayPosition,
         );
@@ -487,6 +491,7 @@ export default class PositionService implements IPositionService {
         xdcPayV1EventHandler(
           wallet,
           resolve,
+          reject,
           this.emitter,
           TransactionType.RepayPosition,
         );
@@ -552,6 +557,7 @@ export default class PositionService implements IPositionService {
         xdcPayV1EventHandler(
           ERC20,
           resolve,
+          reject,
           this.emitter,
           TransactionType.Approve,
         );
@@ -641,6 +647,7 @@ export default class PositionService implements IPositionService {
         xdcPayV1EventHandler(
           fathomStableCoin,
           resolve,
+          reject,
           this.emitter,
           TransactionType.Approve,
         );

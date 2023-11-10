@@ -8,5 +8,5 @@ import { TransactionType } from '../interfaces/models/ITransaction';
  * @param eventEmitter
  * @param type
  */
-export declare const xdcPayV1EventHandler: (contract: Contract, resolve: (value: number | Error | PromiseLike<number | Error>) => void, eventEmitter: EventEmitter, type: TransactionType) => void;
+export declare const xdcPayV1EventHandler: (contract: Contract, resolve: (value: number | Error | PromiseLike<number | Error>) => void, reject: (reason?: any) => void, eventEmitter: EventEmitter, type: TransactionType) => void;
 //# sourceMappingURL=xdcPayV1EventHandler.d.ts.map

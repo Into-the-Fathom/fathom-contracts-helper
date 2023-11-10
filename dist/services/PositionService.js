@@ -41,7 +41,7 @@ export default class PositionService {
                 };
                 const gas = await getEstimateGas(wallet, 'execute', [openPositionCall], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.OpenPosition);
+                xdcPayV1EventHandler(wallet, resolve, reject, this.emitter, TransactionType.OpenPosition);
                 wallet.methods
                     .execute(openPositionCall)
                     .send(options)
@@ -110,7 +110,7 @@ export default class PositionService {
                 };
                 const gas = await getEstimateGas(wallet, 'execute', [topUpPositionCall], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.TopUpPositionAndBorrow);
+                xdcPayV1EventHandler(wallet, resolve, reject, this.emitter, TransactionType.TopUpPositionAndBorrow);
                 wallet.methods
                     .execute(topUpPositionCall)
                     .send(options)
@@ -174,7 +174,7 @@ export default class PositionService {
                 };
                 const gas = await getEstimateGas(wallet, 'execute', [topUpPositionCall], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.TopUpPosition);
+                xdcPayV1EventHandler(wallet, resolve, reject, this.emitter, TransactionType.TopUpPosition);
                 wallet.methods
                     .execute(topUpPositionCall)
                     .send(options)
@@ -236,7 +236,7 @@ export default class PositionService {
                 const options = { from: address, gas: 0 };
                 const gas = await getEstimateGas(wallet, 'execute', [wipeAllAndUnlockTokenCall], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.RepayPosition);
+                xdcPayV1EventHandler(wallet, resolve, reject, this.emitter, TransactionType.RepayPosition);
                 wallet.methods
                     .execute(wipeAllAndUnlockTokenCall)
                     .send(options)
@@ -291,7 +291,7 @@ export default class PositionService {
                 const options = { from: address, gas: 0 };
                 const gas = await getEstimateGas(wallet, 'execute', [wipeAndUnlockTokenCall], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.RepayPosition);
+                xdcPayV1EventHandler(wallet, resolve, reject, this.emitter, TransactionType.RepayPosition);
                 wallet.methods
                     .execute(wipeAndUnlockTokenCall)
                     .send({ from: address })
@@ -338,7 +338,7 @@ export default class PositionService {
                 const options = { from: address, gas: 0 };
                 const gas = await getEstimateGas(ERC20, 'approve', [proxyWalletAddress, MAX_UINT256], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(ERC20, resolve, this.emitter, TransactionType.Approve);
+                xdcPayV1EventHandler(ERC20, resolve, reject, this.emitter, TransactionType.Approve);
                 ERC20.methods
                     .approve(proxyWalletAddress, MAX_UINT256)
                     .send(options)
@@ -396,7 +396,7 @@ export default class PositionService {
                 const options = { from: address, gas: 0 };
                 const gas = await getEstimateGas(fathomStableCoin, 'approve', [proxyWalletAddress, MAX_UINT256], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(fathomStableCoin, resolve, this.emitter, TransactionType.Approve);
+                xdcPayV1EventHandler(fathomStableCoin, resolve, reject, this.emitter, TransactionType.Approve);
                 fathomStableCoin.methods
                     .approve(proxyWalletAddress, MAX_UINT256)
                     .send(options)

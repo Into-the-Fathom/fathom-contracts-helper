@@ -18,7 +18,7 @@ export default class ProposalService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(FathomGovernor, 'propose', [targets, values, callData, description], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(FathomGovernor, resolve, this.emitter, TransactionType.CreateProposal);
+                xdcPayV1EventHandler(FathomGovernor, resolve, reject, this.emitter, TransactionType.CreateProposal);
                 FathomGovernor.methods
                     .propose(targets, values, callData, description)
                     .send(options)
@@ -61,7 +61,7 @@ export default class ProposalService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(FathomGovernor, 'execute', [targets, values, callData, keccak256(description)], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(FathomGovernor, resolve, this.emitter, TransactionType.ExecuteProposal);
+                xdcPayV1EventHandler(FathomGovernor, resolve, reject, this.emitter, TransactionType.ExecuteProposal);
                 return FathomGovernor.methods
                     .execute(targets, values, callData, keccak256(description))
                     .send(options)
@@ -104,7 +104,7 @@ export default class ProposalService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(FathomGovernor, 'queue', [targets, values, callData, keccak256(description)], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(FathomGovernor, resolve, this.emitter, TransactionType.QueueProposal);
+                xdcPayV1EventHandler(FathomGovernor, resolve, reject, this.emitter, TransactionType.QueueProposal);
                 FathomGovernor.methods
                     .queue(targets, values, callData, keccak256(description))
                     .send(options)
@@ -147,7 +147,7 @@ export default class ProposalService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(FathomGovernor, 'castVote', [proposalId, support], options);
                 options.gas = gas;
-                xdcPayV1EventHandler(FathomGovernor, resolve, this.emitter, TransactionType.CastVote);
+                xdcPayV1EventHandler(FathomGovernor, resolve, reject, this.emitter, TransactionType.CastVote);
                 return FathomGovernor.methods
                     .castVote(proposalId, support)
                     .send(options)
