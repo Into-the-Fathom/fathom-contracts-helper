@@ -6,6 +6,8 @@ export declare const WeiPerWad: BigNumber;
 export declare const WeiPerRad: BigNumber;
 export declare const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export declare const MAX_UINT256 = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
+export declare const NOT_SUPPORTED_NOTIFICATION_ERROR = -32000;
+export declare const SKIP_ERRORS: number[];
 export declare const CHECK_ON_BLOCK_EXPLORER = "Click on transaction to view on Block Explorer.";
 export declare const TRANSACTION_PENDING_MESSAGES: {
     OpenPosition: string;

@@ -5,6 +5,7 @@ import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
 import { TransactionStatus, TransactionType, } from '../interfaces/models/ITransaction';
+import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 export default class PositionService {
     constructor(provider, chainId) {
         this.provider = provider;
@@ -40,6 +41,7 @@ export default class PositionService {
                 };
                 const gas = await getEstimateGas(wallet, 'execute', [openPositionCall], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.OpenPosition);
                 wallet.methods
                     .execute(openPositionCall)
                     .send(options)
@@ -108,6 +110,7 @@ export default class PositionService {
                 };
                 const gas = await getEstimateGas(wallet, 'execute', [topUpPositionCall], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.TopUpPositionAndBorrow);
                 wallet.methods
                     .execute(topUpPositionCall)
                     .send(options)
@@ -171,6 +174,7 @@ export default class PositionService {
                 };
                 const gas = await getEstimateGas(wallet, 'execute', [topUpPositionCall], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.TopUpPosition);
                 wallet.methods
                     .execute(topUpPositionCall)
                     .send(options)
@@ -232,6 +236,7 @@ export default class PositionService {
                 const options = { from: address, gas: 0 };
                 const gas = await getEstimateGas(wallet, 'execute', [wipeAllAndUnlockTokenCall], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.RepayPosition);
                 wallet.methods
                     .execute(wipeAllAndUnlockTokenCall)
                     .send(options)
@@ -286,6 +291,7 @@ export default class PositionService {
                 const options = { from: address, gas: 0 };
                 const gas = await getEstimateGas(wallet, 'execute', [wipeAndUnlockTokenCall], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(wallet, resolve, this.emitter, TransactionType.RepayPosition);
                 wallet.methods
                     .execute(wipeAndUnlockTokenCall)
                     .send({ from: address })
@@ -328,11 +334,12 @@ export default class PositionService {
                 if (proxyWalletAddress === ZERO_ADDRESS) {
                     proxyWalletAddress = await this.createProxyWallet(address);
                 }
-                const BEP20 = Web3Utils.getContractInstance(SmartContractFactory.BEP20(tokenAddress), this.provider);
+                const ERC20 = Web3Utils.getContractInstance(SmartContractFactory.ERC20(tokenAddress), this.provider);
                 const options = { from: address, gas: 0 };
-                const gas = await getEstimateGas(BEP20, 'approve', [proxyWalletAddress, MAX_UINT256], options);
+                const gas = await getEstimateGas(ERC20, 'approve', [proxyWalletAddress, MAX_UINT256], options);
                 options.gas = gas;
-                BEP20.methods
+                xdcPayV1EventHandler(ERC20, resolve, this.emitter, TransactionType.Approve);
+                ERC20.methods
                     .approve(proxyWalletAddress, MAX_UINT256)
                     .send(options)
                     .on('transactionHash', (hash) => {
@@ -372,8 +379,8 @@ export default class PositionService {
         if (proxyWalletAddress === ZERO_ADDRESS) {
             return false;
         }
-        const BEP20 = Web3Utils.getContractInstance(SmartContractFactory.BEP20(tokenAddress), this.provider);
-        const allowance = await BEP20.methods
+        const ERC20 = Web3Utils.getContractInstance(SmartContractFactory.ERC20(tokenAddress), this.provider);
+        const allowance = await ERC20.methods
             .allowance(address, proxyWalletAddress)
             .call();
         return BigNumber(allowance).isGreaterThanOrEqualTo(WeiPerWad.multipliedBy(collateral));
@@ -389,6 +396,7 @@ export default class PositionService {
                 const options = { from: address, gas: 0 };
                 const gas = await getEstimateGas(fathomStableCoin, 'approve', [proxyWalletAddress, MAX_UINT256], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(fathomStableCoin, resolve, this.emitter, TransactionType.Approve);
                 fathomStableCoin.methods
                     .approve(proxyWalletAddress, MAX_UINT256)
                     .send(options)

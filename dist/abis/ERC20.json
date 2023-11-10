@@ -1,7 +1,7 @@
 {
     "_format": "hh-sol-artifact-1",
-    "contractName": "BEP20",
-    "sourceName": "contracts/6.12/mocks/BEP20.sol",
+    "contractName": "ERC20",
+    "sourceName": "contracts/6.12/mocks/ERC20.sol",
     "abi": [
         {
             "inputs": [

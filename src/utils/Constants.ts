@@ -11,6 +11,8 @@ export const WeiPerRad = new BigNumber('1e45');
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 export const MAX_UINT256 =
   '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
+export const NOT_SUPPORTED_NOTIFICATION_ERROR = -32000;
+export const SKIP_ERRORS = [NOT_SUPPORTED_NOTIFICATION_ERROR];
 
 export const CHECK_ON_BLOCK_EXPLORER =
   'Click on transaction to view on Block Explorer.';

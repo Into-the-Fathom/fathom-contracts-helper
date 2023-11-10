@@ -6,12 +6,12 @@ export default class PoolService {
         this.chainId = chainId;
     }
     getUserTokenBalance(address, forAddress) {
-        const BEP20 = Web3Utils.getContractInstance(SmartContractFactory.BEP20(forAddress), this.provider);
-        return BEP20.methods.balanceOf(address).call();
+        const ERC20 = Web3Utils.getContractInstance(SmartContractFactory.ERC20(forAddress), this.provider);
+        return ERC20.methods.balanceOf(address).call();
     }
     getTokenDecimals(forAddress) {
-        const BEP20 = Web3Utils.getContractInstance(SmartContractFactory.BEP20(forAddress), this.provider);
-        return BEP20.methods.decimals().call();
+        const ERC20 = Web3Utils.getContractInstance(SmartContractFactory.ERC20(forAddress), this.provider);
+        return ERC20.methods.decimals().call();
     }
     async getDexPrice(forAddress) {
         const USStable = SmartContractFactory.USDT(this.chainId).address;

@@ -5,6 +5,7 @@ import { MAX_UINT256 } from '../utils/Constants';
 import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
+import { xdcPayV1EventHandler } from "../utils/xdcPayV1EventHandler";
 const DAY_SECONDS = 24 * 60 * 60;
 export default class StakingService {
     constructor(provider, chainId) {
@@ -23,6 +24,7 @@ export default class StakingService {
                     endTime,
                 ], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(Staking, resolve, this.emitter, TransactionType.CreateLock);
                 Staking.methods
                     .createLock(this.provider.utils.toWei(stakePosition.toString(), 'ether'), endTime)
                     .send(options)
@@ -65,6 +67,7 @@ export default class StakingService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(Staking, 'unlockPartially', [lockId, this.provider.utils.toWei(amount.toString(), 'ether')], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(Staking, resolve, this.emitter, TransactionType.HandleUnlock);
                 Staking.methods
                     .unlockPartially(lockId, this.provider.utils.toWei(amount.toString(), 'ether'))
                     .send(options)
@@ -107,6 +110,7 @@ export default class StakingService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(Staking, 'earlyUnlock', [lockId], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(Staking, resolve, this.emitter, TransactionType.HandleEarlyWithdrawal);
                 return Staking.methods
                     .earlyUnlock(lockId)
                     .send(options)
@@ -149,6 +153,7 @@ export default class StakingService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(Staking, 'claimAllLockRewardsForStream', [streamId], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(Staking, resolve, this.emitter, TransactionType.HandleClaimRewards);
                 Staking.methods
                     .claimAllLockRewardsForStream(streamId)
                     .send(options)
@@ -194,6 +199,7 @@ export default class StakingService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(Staking, 'withdrawStream', [streamId], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(Staking, resolve, this.emitter, TransactionType.HandleWithdrawAll);
                 Staking.methods
                     .withdrawStream(streamId)
                     .send(options)
@@ -237,6 +243,7 @@ export default class StakingService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(FTHMToken, 'approve', [StakingAddress, MAX_UINT256], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(FTHMToken, resolve, this.emitter, TransactionType.Approve);
                 FTHMToken.methods
                     .approve(StakingAddress, MAX_UINT256)
                     .send(options)

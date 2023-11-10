@@ -5,6 +5,7 @@ import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
 import { TransactionStatus, TransactionType, } from '../interfaces/models/ITransaction';
+import { xdcPayV1EventHandler } from "../utils/xdcPayV1EventHandler";
 export default class StableSwapService {
     constructor(provider, chainId) {
         this.provider = provider;
@@ -21,6 +22,7 @@ export default class StableSwapService {
                     .integerValue(BigNumber.ROUND_DOWN);
                 const gas = await getEstimateGas(StableSwapModule, 'swapTokenToStablecoin', [account, formattedTokenAmount], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(StableSwapModule, resolve, this.emitter, TransactionType.SwapTokenToStableCoin);
                 return StableSwapModule.methods
                     .swapTokenToStablecoin(account, formattedTokenAmount)
                     .send(options)
@@ -68,6 +70,7 @@ export default class StableSwapService {
                 const formattedTokenAmount = this.provider.utils.toWei(tokenOut, 'ether');
                 const gas = await getEstimateGas(StableSwapModule, 'swapStablecoinToToken', [account, formattedTokenAmount], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(StableSwapModule, resolve, this.emitter, TransactionType.SwapStableCoinToToken);
                 return StableSwapModule.methods
                     .swapStablecoinToToken(account, formattedTokenAmount)
                     .send(options)
@@ -115,6 +118,7 @@ export default class StableSwapService {
                 const formattedTokenAmount = this.provider.utils.toWei(amount.toString(), 'ether');
                 const gas = await getEstimateGas(StableSwapModuleWrapper, 'depositTokens', [formattedTokenAmount], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(StableSwapModuleWrapper, resolve, this.emitter, TransactionType.AddLiquidity);
                 return StableSwapModuleWrapper.methods
                     .depositTokens(formattedTokenAmount)
                     .send(options)
@@ -158,6 +162,7 @@ export default class StableSwapService {
                 const formattedTokenAmount = this.provider.utils.toWei(amount.toString(), 'ether');
                 const gas = await getEstimateGas(StableSwapModuleWrapper, 'withdrawTokens', [formattedTokenAmount], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(StableSwapModuleWrapper, resolve, this.emitter, TransactionType.RemoveLiquidity);
                 return StableSwapModuleWrapper.methods
                     .withdrawTokens(formattedTokenAmount)
                     .send(options)
@@ -203,6 +208,7 @@ export default class StableSwapService {
                     : SmartContractFactory.StableSwapModule(this.chainId).address;
                 const gas = await getEstimateGas(FathomStableCoin, 'approve', [approvalAddress, MAX_UINT256], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(FathomStableCoin, resolve, this.emitter, TransactionType.Approve);
                 return FathomStableCoin.methods
                     .approve(approvalAddress, MAX_UINT256)
                     .send(options)
@@ -248,6 +254,7 @@ export default class StableSwapService {
                     : SmartContractFactory.StableSwapModule(this.chainId).address;
                 const gas = await getEstimateGas(USStable, 'approve', [approvalAddress, MAX_UINT256], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(USStable, resolve, this.emitter, TransactionType.Approve);
                 return USStable.methods
                     .approve(approvalAddress, MAX_UINT256)
                     .send(options)
@@ -290,6 +297,7 @@ export default class StableSwapService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(StableSwapModuleWrapper, 'claimFeesRewards', [], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(StableSwapModuleWrapper, resolve, this.emitter, TransactionType.ClaimFeesRewards);
                 return StableSwapModuleWrapper.methods
                     .claimFeesRewards()
                     .send(options)
@@ -332,6 +340,7 @@ export default class StableSwapService {
                 const options = { from: account, gas: 0 };
                 const gas = await getEstimateGas(StableSwapModuleWrapper, 'withdrawClaimedFees', [], options);
                 options.gas = gas;
+                xdcPayV1EventHandler(StableSwapModuleWrapper, resolve, this.emitter, TransactionType.WithdrawClaimedFees);
                 return StableSwapModuleWrapper.methods
                     .withdrawClaimedFees()
                     .send(options)

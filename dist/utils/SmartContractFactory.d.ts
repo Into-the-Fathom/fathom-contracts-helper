@@ -44,7 +44,7 @@ export declare class SmartContractFactory {
         abi: AbiItem[];
         address: string;
     };
-    static BEP20(_address: string): {
+    static ERC20(_address: string): {
         abi: AbiItem[];
         address: string;
     };

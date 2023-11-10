@@ -9,9 +9,9 @@ export default class StakingService implements IStakingService {
     createLock(account: string, stakePosition: number, unlockPeriod: number): Promise<number | Error>;
     handleUnlock(account: string, lockId: number, amount: number): Promise<number | Error>;
     handleEarlyWithdrawal(account: string, lockId: number): Promise<number | Error>;
-    handleClaimRewards(account: string, streamId: number): Promise<number>;
+    handleClaimRewards(account: string, streamId: number): Promise<number | Error>;
     handleWithdrawAll(account: string, streamId: number): Promise<number | Error>;
-    approveStakingFTHM(account: string, fthmTokenAddress: string): Promise<number>;
+    approveStakingFTHM(account: string, fthmTokenAddress: string): Promise<number | Error>;
     approvalStatusStakingFTHM(address: string, stakingPosition: number, fthmTokenAddress: string): Promise<boolean>;
     getStreamClaimableAmountPerLock(streamId: number, account: string, lockId: number): any;
     getStreamClaimableAmount(account: string): any;

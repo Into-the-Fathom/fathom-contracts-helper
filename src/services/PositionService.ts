@@ -20,6 +20,7 @@ import {
 } from '../interfaces/models/ITransaction';
 import ICollateralPool from '../interfaces/models/ICollateralPool';
 import IPositionService from '../interfaces/services/IPositionService';
+import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 
 export default class PositionService implements IPositionService {
   public provider: Xdc3;
@@ -90,6 +91,12 @@ export default class PositionService implements IPositionService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          wallet,
+          resolve,
+          this.emitter,
+          TransactionType.OpenPosition,
+        );
 
         wallet.methods
           .execute(openPositionCall)
@@ -188,6 +195,12 @@ export default class PositionService implements IPositionService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          wallet,
+          resolve,
+          this.emitter,
+          TransactionType.TopUpPositionAndBorrow,
+        );
 
         wallet.methods
           .execute(topUpPositionCall)
@@ -281,6 +294,12 @@ export default class PositionService implements IPositionService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          wallet,
+          resolve,
+          this.emitter,
+          TransactionType.TopUpPosition,
+        );
 
         wallet.methods
           .execute(topUpPositionCall)
@@ -375,6 +394,12 @@ export default class PositionService implements IPositionService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          wallet,
+          resolve,
+          this.emitter,
+          TransactionType.RepayPosition,
+        );
 
         wallet.methods
           .execute(wipeAllAndUnlockTokenCall)
@@ -459,6 +484,13 @@ export default class PositionService implements IPositionService {
         );
         options.gas = gas;
 
+        xdcPayV1EventHandler(
+          wallet,
+          resolve,
+          this.emitter,
+          TransactionType.RepayPosition,
+        );
+
         wallet.methods
           .execute(wipeAndUnlockTokenCall)
           .send({ from: address })
@@ -503,21 +535,28 @@ export default class PositionService implements IPositionService {
           proxyWalletAddress = await this.createProxyWallet(address);
         }
 
-        const BEP20 = Web3Utils.getContractInstance(
-          SmartContractFactory.BEP20(tokenAddress),
+        const ERC20 = Web3Utils.getContractInstance(
+          SmartContractFactory.ERC20(tokenAddress),
           this.provider,
         );
 
         const options = { from: address, gas: 0 };
         const gas = await getEstimateGas(
-          BEP20,
+          ERC20,
           'approve',
           [proxyWalletAddress, MAX_UINT256],
           options,
         );
         options.gas = gas;
 
-        BEP20.methods
+        xdcPayV1EventHandler(
+          ERC20,
+          resolve,
+          this.emitter,
+          TransactionType.Approve,
+        );
+
+        ERC20.methods
           .approve(proxyWalletAddress, MAX_UINT256)
           .send(options)
           .on('transactionHash', (hash: string) => {
@@ -563,12 +602,12 @@ export default class PositionService implements IPositionService {
       return false;
     }
 
-    const BEP20 = Web3Utils.getContractInstance(
-      SmartContractFactory.BEP20(tokenAddress),
+    const ERC20 = Web3Utils.getContractInstance(
+      SmartContractFactory.ERC20(tokenAddress),
       this.provider,
     );
 
-    const allowance = await BEP20.methods
+    const allowance = await ERC20.methods
       .allowance(address, proxyWalletAddress)
       .call();
 
@@ -599,6 +638,12 @@ export default class PositionService implements IPositionService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          fathomStableCoin,
+          resolve,
+          this.emitter,
+          TransactionType.Approve,
+        );
 
         fathomStableCoin.methods
           .approve(proxyWalletAddress, MAX_UINT256)
