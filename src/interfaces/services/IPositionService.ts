@@ -48,7 +48,7 @@ export default interface IPositionService {
   approveStableCoin(address: string): Promise<number | Error>;
 
   approvalStatusStableCoin(
-    maxPositionDebtValue: number,
+    amount: number,
     address: string,
   ): Promise<boolean>;
 

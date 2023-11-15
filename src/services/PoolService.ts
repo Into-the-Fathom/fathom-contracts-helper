@@ -12,6 +12,12 @@ export default class PoolService implements IPoolService {
     this.chainId = chainId;
   }
 
+  /**
+   * Return balance for wallet in ERC20 token.
+   * Use ERC20 Interface
+   * @param address - wallet address
+   * @param forAddress - ERC20 token address
+   */
   getUserTokenBalance(address: string, forAddress: string) {
     const ERC20 = Web3Utils.getContractInstance(
       SmartContractFactory.ERC20(forAddress),
@@ -21,6 +27,11 @@ export default class PoolService implements IPoolService {
     return ERC20.methods.balanceOf(address).call();
   }
 
+  /**
+   * Helper function for return decimals for provided ERC20 token address.
+   * Use ERC20 Interface.
+   * @param forAddress
+   */
   getTokenDecimals(forAddress: string) {
     const ERC20 = Web3Utils.getContractInstance(
       SmartContractFactory.ERC20(forAddress),
@@ -30,6 +41,11 @@ export default class PoolService implements IPoolService {
     return ERC20.methods.decimals().call();
   }
 
+  /**
+   * Return usdt price for provided ERC20 token address.
+   * Use DEX pair for it.
+   * @param forAddress
+   */
   async getDexPrice(forAddress: string) {
     const USStable = SmartContractFactory.USDT(this.chainId).address;
 
@@ -45,6 +61,10 @@ export default class PoolService implements IPoolService {
     return result[0];
   }
 
+  /**
+   * Return collateral token address for given ERC20 token address
+   * @param forAddress - ERC20 borrow token address.
+   */
   getCollateralTokenAddress(forAddress: string) {
     const abi = SmartContractFactory.CollateralTokenAdapterAbi();
 

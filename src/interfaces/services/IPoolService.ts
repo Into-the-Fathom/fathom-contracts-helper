@@ -7,8 +7,6 @@ export default interface IPoolService {
 
   getDexPrice(forAddress: string): Promise<number>;
 
-  getCollateralTokenAddress(forAddress: string): Promise<string>;
-
   setChainId(chainId: number): void;
 
   setProvider(provider: Xdc3): void;

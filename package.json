@@ -15,7 +15,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Into-the-Fathom/fathom-contracts-helper.git"
+    "url": "git://github.com/Into-the-Fathom/fathom-sdk.git"
   },
   "devDependencies": {
     "@types/cors": "^2.8.15",
