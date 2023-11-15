@@ -469,11 +469,17 @@ export default class StakingService implements IStakingService {
     );
     return DexPriceOracle.methods.getPrice(token0, token1).call();
   }
-
+  /**
+   * Set Xdc3 provider for service
+   * @param provider - Xdc3 provider
+   */
   setProvider(provider: Xdc3) {
     this.provider = provider;
   }
-
+  /**
+   * Set chainId
+   * @param chainId
+   */
   setChainId(chainId: number) {
     this.chainId = chainId;
   }

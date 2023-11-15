@@ -858,8 +858,8 @@ export default class PositionService implements IPositionService {
     return proxyWalletRegistry.methods.whitelisted(address).call();
   }
   /**
-   * Set chainId
-   * @param chainId
+   * Set Xdc3 provider for service
+   * @param provider - Xdc3 provider
    */
   setProvider(provider: Xdc3) {
     this.provider = provider;
