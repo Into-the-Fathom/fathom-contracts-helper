@@ -4,8 +4,8 @@ import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
 
 export default class PoolService implements IPoolService {
-  provider: Xdc3;
-  chainId: number;
+  public provider: Xdc3;
+  public chainId: number;
 
   constructor(provider: Xdc3, chainId: number) {
     this.provider = provider;
@@ -28,7 +28,7 @@ export default class PoolService implements IPoolService {
   }
 
   /**
-   * Helper function for return decimals for provided ERC20 token address.
+   * Helper function which return decimals for provided ERC20 token address.
    * Use ERC20 Interface.
    * @param forAddress
    */
@@ -60,7 +60,6 @@ export default class PoolService implements IPoolService {
 
     return result[0];
   }
-
   /**
    * Return collateral token address for given ERC20 token address
    * @param forAddress - ERC20 borrow token address.
@@ -78,11 +77,17 @@ export default class PoolService implements IPoolService {
 
     return collateralTokenAdapter.methods.collateralToken().call();
   }
-
+  /**
+   * Set Xdc3 provider for service
+   * @param provider - Xdc3 provider
+   */
   setProvider(provider: Xdc3) {
     this.provider = provider;
   }
-
+  /**
+   * Set chainId
+   * @param chainId
+   */
   setChainId(chainId: number) {
     this.chainId = chainId;
   }

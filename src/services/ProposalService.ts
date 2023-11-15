@@ -26,6 +26,14 @@ export default class ProposalService implements IProposalService {
     this.emitter = new EventEmitter<string | symbol, ITransaction>();
   }
 
+  /**
+   * Create actionable proposal on DAO.
+   * @param targets - array of contract addresses for execute proposal actions.
+   * @param values - array of value which will pass to each target transaction.
+   * @param callData - calldata for each target transaction.
+   * @param description - description of proposal.
+   * @param account - wallet address which create proposal.
+   */
   createProposal(
     targets: string[],
     values: number[],
@@ -91,6 +99,14 @@ export default class ProposalService implements IProposalService {
     });
   }
 
+  /**
+   * Execute proposal.
+   * @param targets - array of contract addresses for execute proposal actions.
+   * @param values - array of value which will pass to each target transaction.
+   * @param callData - calldata for each target transaction.
+   * @param description - description of proposal.
+   * @param account - wallet address which execute proposal.
+   */
   executeProposal(
     targets: string[],
     values: number[],
@@ -220,6 +236,12 @@ export default class ProposalService implements IProposalService {
     });
   }
 
+  /**
+   * Vote for proposal.
+   * @param proposalId - proposal id.
+   * @param account - wallet address which vote.
+   * @param support - 1 is For, 0 is Against, 2 is Abstain.
+   */
   castVote(
     proposalId: string,
     account: string,
@@ -282,6 +304,11 @@ export default class ProposalService implements IProposalService {
     });
   }
 
+  /**
+   * Check is wallet account already voted.
+   * @param proposalId - proposal id.
+   * @param account - wallet account.
+   */
   hasVoted(proposalId: string, account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.FathomGovernor(this.chainId),
@@ -290,6 +317,11 @@ export default class ProposalService implements IProposalService {
     return FathomGovernor.methods.hasVoted(proposalId, account).call();
   }
 
+  /**
+   * Return current state of proposal can be Pending | Open-to-Vote | Canceled | Defeated | Succeeded | Queued | Expired | Executed.
+   * @param proposalId - proposal id.
+   * @param account - wallet address.
+   */
   viewProposalState(proposalId: string, account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.FathomGovernor(this.chainId),
@@ -298,6 +330,10 @@ export default class ProposalService implements IProposalService {
     return FathomGovernor.methods.state(proposalId).call({ from: account });
   }
 
+  /**
+   * Return timestamp when account can create new proposal.
+   * @param account - wallet address.
+   */
   nextAcceptableProposalTimestamp(account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.FathomGovernor(this.chainId),
@@ -309,6 +345,10 @@ export default class ProposalService implements IProposalService {
       .call();
   }
 
+  /**
+   * Return Voting token balance (vFTHM).
+   * @param account - wallet address.
+   */
   getVBalance(account: string) {
     const VeFathom = Web3Utils.getContractInstance(
       SmartContractFactory.vFathom(this.chainId),
@@ -318,6 +358,10 @@ export default class ProposalService implements IProposalService {
     return VeFathom.methods.balanceOf(account).call();
   }
 
+  /**
+   * Voting quorum which should be reached. Otherwise, proposal will be Defeated.
+   * @param blockNumber. - block number on which proposal was created.
+   */
   quorum(blockNumber: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.MainFathomGovernor(this.chainId),
@@ -327,6 +371,10 @@ export default class ProposalService implements IProposalService {
     return FathomGovernor.methods.quorum(blockNumber).call();
   }
 
+  /**
+   * Return amount of votes. againstVotes, forVotes, abstainVotes.
+   * @param proposalId - proposal id.
+   */
   proposalVotes(proposalId: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.MainFathomGovernor(this.chainId),
@@ -336,6 +384,9 @@ export default class ProposalService implements IProposalService {
     return FathomGovernor.methods.proposalVotes(proposalId).call();
   }
 
+  /**
+   * Return minimum vFTHM token balance required for create proposal.
+   */
   proposalThreshold() {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.MainFathomGovernor(this.chainId),
@@ -344,11 +395,17 @@ export default class ProposalService implements IProposalService {
 
     return FathomGovernor.methods.proposalThreshold().call();
   }
-
+  /**
+   * Set Xdc3 provider for service
+   * @param provider - Xdc3 provider
+   */
   setProvider(provider: Xdc3) {
     this.provider = provider;
   }
-
+  /**
+   * Set chainId
+   * @param chainId
+   */
   setChainId(chainId: number) {
     this.chainId = chainId;
   }

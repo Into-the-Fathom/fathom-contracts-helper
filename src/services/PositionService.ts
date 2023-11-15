@@ -832,6 +832,10 @@ export default class PositionService implements IPositionService {
       .toString();
   }
 
+  /**
+   * Is Decentralized mode enabled
+   * @return boolean;
+   */
   isDecentralizedMode() {
     const proxyWalletRegistry = Web3Utils.getContractInstance(
       SmartContractFactory.ProxyWalletRegistry(this.chainId),
@@ -853,11 +857,17 @@ export default class PositionService implements IPositionService {
 
     return proxyWalletRegistry.methods.whitelisted(address).call();
   }
-
+  /**
+   * Set chainId
+   * @param chainId
+   */
   setProvider(provider: Xdc3) {
     this.provider = provider;
   }
-
+  /**
+   * Set chainId
+   * @param chainId
+   */
   setChainId(chainId: number) {
     this.chainId = chainId;
   }
