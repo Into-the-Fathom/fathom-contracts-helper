@@ -15,7 +15,7 @@ import {
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import IStableSwapService from '../interfaces/services/IStableSwapService';
-import {xdcPayV1EventHandler} from "../utils/xdcPayV1EventHandler";
+import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 
 export default class StableSwapService implements IStableSwapService {
   public provider: Xdc3;
@@ -56,6 +56,7 @@ export default class StableSwapService implements IStableSwapService {
         xdcPayV1EventHandler(
           StableSwapModule,
           resolve,
+          reject,
           this.emitter,
           TransactionType.SwapTokenToStableCoin,
         );
@@ -128,6 +129,7 @@ export default class StableSwapService implements IStableSwapService {
         xdcPayV1EventHandler(
           StableSwapModule,
           resolve,
+          reject,
           this.emitter,
           TransactionType.SwapStableCoinToToken,
         );
@@ -195,6 +197,7 @@ export default class StableSwapService implements IStableSwapService {
         xdcPayV1EventHandler(
           StableSwapModuleWrapper,
           resolve,
+          reject,
           this.emitter,
           TransactionType.AddLiquidity,
         );
@@ -259,6 +262,7 @@ export default class StableSwapService implements IStableSwapService {
         xdcPayV1EventHandler(
           StableSwapModuleWrapper,
           resolve,
+          reject,
           this.emitter,
           TransactionType.RemoveLiquidity,
         );
@@ -324,6 +328,7 @@ export default class StableSwapService implements IStableSwapService {
         xdcPayV1EventHandler(
           FathomStableCoin,
           resolve,
+          reject,
           this.emitter,
           TransactionType.Approve,
         );
@@ -389,6 +394,7 @@ export default class StableSwapService implements IStableSwapService {
         xdcPayV1EventHandler(
           USStable,
           resolve,
+          reject,
           this.emitter,
           TransactionType.Approve,
         );
@@ -447,10 +453,10 @@ export default class StableSwapService implements IStableSwapService {
         xdcPayV1EventHandler(
           StableSwapModuleWrapper,
           resolve,
+          reject,
           this.emitter,
           TransactionType.ClaimFeesRewards,
         );
-
 
         return StableSwapModuleWrapper.methods
           .claimFeesRewards()
@@ -506,6 +512,7 @@ export default class StableSwapService implements IStableSwapService {
         xdcPayV1EventHandler(
           StableSwapModuleWrapper,
           resolve,
+          reject,
           this.emitter,
           TransactionType.WithdrawClaimedFees,
         );

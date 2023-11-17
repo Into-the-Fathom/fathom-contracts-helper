@@ -1,9 +1,6 @@
-import { Contract } from 'xdc3-eth-contract';
+import { Contract, EventData } from 'xdc3-eth-contract';
 import EventEmitter from 'eventemitter3';
-import { TransactionReceipt } from 'xdc3-eth';
-import { SKIP_ERRORS } from './Constants';
 import { TransactionType } from '../interfaces/models/ITransaction';
-import { debounce } from './debounce';
 
 /**
  * Xdc pay v1 is not resolve after send transaction. We need to catch
@@ -15,22 +12,25 @@ import { debounce } from './debounce';
 export const xdcPayV1EventHandler = (
   contract: Contract,
   resolve: (value: number | Error | PromiseLike<number | Error>) => void,
+  reject: (reason?: any) => void,
   eventEmitter: EventEmitter,
   type: TransactionType,
 ) => {
   /**
    * Block for XDC Pay.
    */
-  contract.events.allEvents(
-    debounce((eventData: any, receipt: TransactionReceipt) => {
-      if (SKIP_ERRORS.includes(eventData?.code)) {
-        return;
-      }
-      eventEmitter.emit('successTransaction', {
-        type: type,
-        receipt,
+  contract.once('allEvents', (error: Error, event: EventData) => {
+    if (error) {
+      eventEmitter.emit('errorTransaction', {
+        type,
+        error,
       });
-      resolve(receipt.blockNumber);
-    }, 500),
-  );
+      return reject(error);
+    }
+    eventEmitter.emit('successTransaction', {
+      type,
+      event,
+    });
+    resolve(event.blockNumber);
+  });
 };
