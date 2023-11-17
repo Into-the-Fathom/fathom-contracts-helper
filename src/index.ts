@@ -26,6 +26,7 @@ import IProposalService from './interfaces/services/IProposalService';
 import IStableSwapService from './interfaces/services/IStableSwapService';
 import IStakingService from './interfaces/services/IStakingService';
 import { getEstimateGas } from './utils/getEstimateGas';
+import { ZERO_ADDRESS } from './utils/Constants';
 
 export {
   PoolService,
@@ -53,4 +54,5 @@ export {
   IStableSwapService,
   IStakingService,
   getEstimateGas,
+  ZERO_ADDRESS,
 };

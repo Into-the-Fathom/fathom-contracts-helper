@@ -15,12 +15,12 @@ import { getEstimateGas } from '../utils/getEstimateGas';
 
 import {
   ITransaction,
-  TransactionStatus,
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import ICollateralPool from '../interfaces/models/ICollateralPool';
 import IPositionService from '../interfaces/services/IPositionService';
 import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
+import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 
 export default class PositionService implements IPositionService {
   public provider: Xdc3;
@@ -47,7 +47,7 @@ export default class PositionService implements IPositionService {
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
-        let proxyWalletAddress = await this.proxyWalletExist(address);
+        let proxyWalletAddress = await this.getProxyWallet(address);
 
         if (proxyWalletAddress === ZERO_ADDRESS) {
           proxyWalletAddress = await this.createProxyWallet(address);
@@ -108,14 +108,13 @@ export default class PositionService implements IPositionService {
         wallet.methods
           .execute(openPositionCall)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.OpenPosition,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.OpenPosition,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.OpenPosition,
@@ -156,7 +155,7 @@ export default class PositionService implements IPositionService {
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
-        let proxyWalletAddress = await this.proxyWalletExist(address);
+        let proxyWalletAddress = await this.getProxyWallet(address);
 
         if (proxyWalletAddress === ZERO_ADDRESS) {
           proxyWalletAddress = await this.createProxyWallet(address);
@@ -220,14 +219,13 @@ export default class PositionService implements IPositionService {
         wallet.methods
           .execute(topUpPositionCall)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.TopUpPositionAndBorrow,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.TopUpPositionAndBorrow,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.TopUpPositionAndBorrow,
@@ -266,7 +264,7 @@ export default class PositionService implements IPositionService {
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
-        let proxyWalletAddress = await this.proxyWalletExist(address);
+        let proxyWalletAddress = await this.getProxyWallet(address);
 
         if (proxyWalletAddress === ZERO_ADDRESS) {
           proxyWalletAddress = await this.createProxyWallet(address);
@@ -326,14 +324,13 @@ export default class PositionService implements IPositionService {
         wallet.methods
           .execute(topUpPositionCall)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.TopUpPosition,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.TopUpPosition,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.TopUpPosition,
@@ -367,7 +364,22 @@ export default class PositionService implements IPositionService {
       this.provider,
     );
 
-    await proxyWalletRegistry.methods.build(address).send({ from: address });
+    await proxyWalletRegistry.methods
+      .build(address)
+      .send({ from: address })
+      .on('transactionHash', (hash: string) =>
+        emitPendingTransaction(
+          this.emitter,
+          hash,
+          TransactionType.CreateProxyWallet,
+        ),
+      )
+      .then((receipt: TransactionReceipt) => {
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.CreateProxyWallet,
+          receipt,
+        });
+      });
 
     const proxyWallet = await proxyWalletRegistry.methods
       .proxies(address)
@@ -391,7 +403,7 @@ export default class PositionService implements IPositionService {
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
-        const proxyWalletAddress = await this.proxyWalletExist(address);
+        const proxyWalletAddress = await this.getProxyWallet(address);
 
         const wallet = Web3Utils.getContractInstanceFrom(
           SmartContractFactory.proxyWallet.abi,
@@ -437,14 +449,13 @@ export default class PositionService implements IPositionService {
         wallet.methods
           .execute(wipeAllAndUnlockTokenCall)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.RepayPosition,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.RepayPosition,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.RepayPosition,
@@ -485,7 +496,7 @@ export default class PositionService implements IPositionService {
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
-        const proxyWalletAddress = await this.proxyWalletExist(address);
+        const proxyWalletAddress = await this.getProxyWallet(address);
 
         const wallet = Web3Utils.getContractInstanceFrom(
           SmartContractFactory.proxyWallet.abi,
@@ -535,14 +546,13 @@ export default class PositionService implements IPositionService {
         wallet.methods
           .execute(wipeAndUnlockTokenCall)
           .send({ from: address })
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.RepayPosition,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.RepayPosition,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.RepayPosition,
@@ -575,7 +585,7 @@ export default class PositionService implements IPositionService {
   approve(address: string, tokenAddress: string): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
-        let proxyWalletAddress = await this.proxyWalletExist(address);
+        let proxyWalletAddress = await this.getProxyWallet(address);
 
         if (proxyWalletAddress === ZERO_ADDRESS) {
           proxyWalletAddress = await this.createProxyWallet(address);
@@ -606,14 +616,9 @@ export default class PositionService implements IPositionService {
         ERC20.methods
           .approve(proxyWalletAddress, MAX_UINT256)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.Approve,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(this.emitter, hash, TransactionType.Approve),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.Approve,
@@ -649,7 +654,7 @@ export default class PositionService implements IPositionService {
     tokenAddress: string,
     collateral: string,
   ) {
-    const proxyWalletAddress = await this.proxyWalletExist(address);
+    const proxyWalletAddress = await this.getProxyWallet(address);
 
     if (proxyWalletAddress === ZERO_ADDRESS) {
       return false;
@@ -676,7 +681,7 @@ export default class PositionService implements IPositionService {
   approveStableCoin(address: string): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
-        let proxyWalletAddress = await this.proxyWalletExist(address);
+        let proxyWalletAddress = await this.getProxyWallet(address);
 
         if (proxyWalletAddress === ZERO_ADDRESS) {
           proxyWalletAddress = await this.createProxyWallet(address);
@@ -706,14 +711,9 @@ export default class PositionService implements IPositionService {
         fathomStableCoin.methods
           .approve(proxyWalletAddress, MAX_UINT256)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.Approve,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(this.emitter, hash, TransactionType.Approve),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.Approve,
@@ -739,10 +739,10 @@ export default class PositionService implements IPositionService {
   }
 
   /**
-   * Check is proxy wallet exists for provided wallet address.
+   * Return proxy wallet for provided wallet address.
    * @param address - wallet address
    */
-  proxyWalletExist(address: string) {
+  getProxyWallet(address: string) {
     const proxyWalletRegistry = Web3Utils.getContractInstance(
       SmartContractFactory.ProxyWalletRegistry(this.chainId),
       this.provider,
@@ -769,11 +769,8 @@ export default class PositionService implements IPositionService {
    * @param amount - amount which should be approved
    * @param address - wallet address
    */
-  async approvalStatusStableCoin(
-    amount: number,
-    address: string,
-  ) {
-    const proxyWalletAddress = await this.proxyWalletExist(address);
+  async approvalStatusStableCoin(amount: number, address: string) {
+    const proxyWalletAddress = await this.getProxyWallet(address);
 
     if (proxyWalletAddress === ZERO_ADDRESS) {
       return false;

@@ -1,7 +1,12 @@
 import Xdc3 from 'xdc3';
 import { ProposalVotes } from '../models/IProposal';
+import EventEmitter from 'eventemitter3';
 
 export default interface IProposalService {
+  emitter: EventEmitter;
+  provider: Xdc3;
+  chainId: number;
+
   createProposal(
     targets: string[],
     values: number[],
