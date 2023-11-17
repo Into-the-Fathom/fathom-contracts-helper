@@ -32,7 +32,13 @@ export default class PositionService implements IPositionService {
     this.chainId = chainId;
     this.emitter = new EventEmitter<string | symbol, ITransaction>();
   }
-
+  /**
+   * Create new position, lock collateral in contract and mint FXD stable coin.
+   * @param address - wallet address. Create or get proxy wallet for provided address.
+   * @param pool - collateral pool model.
+   * @param collateral - amount of collateral
+   * @param fathomToken - amount for mint FXD stable coin.
+   */
   openPosition(
     address: string,
     pool: ICollateralPool,
@@ -133,7 +139,14 @@ export default class PositionService implements IPositionService {
       }
     });
   }
-
+  /**
+   * Add extra collateral to existing position or/and mint more FXD stable coin.
+   * @param address - wallet address. Create or get proxy wallet for provided address.
+   * @param pool - collateral pool model.
+   * @param collateral - add extra collateral for existing position.
+   * @param fathomToken - mint additional FXD stable coin.
+   * @param positionId - existing position id.
+   */
   topUpPositionAndBorrow(
     address: string,
     pool: ICollateralPool,
@@ -238,7 +251,13 @@ export default class PositionService implements IPositionService {
       }
     });
   }
-
+  /**
+   * Add extra collateral to existing position.
+   * @param address - wallet address. Create or get proxy wallet for provided address.
+   * @param pool - collateral pool model.
+   * @param collateral - add extra collateral for existing position without extra mint FXD stable coin.
+   * @param positionId - existing position id.
+   */
   topUpPosition(
     address: string,
     pool: ICollateralPool,
@@ -338,7 +357,10 @@ export default class PositionService implements IPositionService {
       }
     });
   }
-
+  /**
+   * Create proxy wallet for provided wallet address.
+   * @param address - wallet address.
+   */
   async createProxyWallet(address: string) {
     const proxyWalletRegistry = Web3Utils.getContractInstance(
       SmartContractFactory.ProxyWalletRegistry(this.chainId),
@@ -354,6 +376,13 @@ export default class PositionService implements IPositionService {
     return proxyWallet;
   }
 
+  /**
+   * Repay full position and unlock all collateral, burn FXD stable coin.
+   * @param positionId - existing position id.
+   * @param pool - collateral pool model.
+   * @param address - wallet address.
+   * @param collateral - amount of collateral which will unlock after repay.
+   */
   closePosition(
     positionId: string,
     pool: ICollateralPool,
@@ -439,7 +468,14 @@ export default class PositionService implements IPositionService {
       }
     });
   }
-
+  /**
+   * Partly repay position and unlock collateral, burn FXD stable coin.
+   * @param positionId - existing position id.
+   * @param pool - collateral pool model.
+   * @param address - wallet address.
+   * @param stableCoin - amount of FXD stable coin for repay.
+   * @param collateral - amount of collateral which will unlock after repay.
+   */
   partiallyClosePosition(
     positionId: string,
     pool: ICollateralPool,
@@ -531,6 +567,11 @@ export default class PositionService implements IPositionService {
     });
   }
 
+  /**
+   * Approve ERC20 token.
+   * @param address - wallet address
+   * @param tokenAddress - ERC20 token to approve.
+   */
   approve(address: string, tokenAddress: string): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -597,6 +638,12 @@ export default class PositionService implements IPositionService {
     });
   }
 
+  /**
+   * Check approved collateral token.
+   * @param address - wallet address.
+   * @param tokenAddress - ERC20 token address.
+   * @param collateral - amount of collateral for check.
+   */
   async approvalStatus(
     address: string,
     tokenAddress: string,
@@ -622,6 +669,10 @@ export default class PositionService implements IPositionService {
     );
   }
 
+  /**
+   * Check approved FXD stable coin for wallet address.
+   * @param address - wallet address.
+   */
   approveStableCoin(address: string): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -687,6 +738,10 @@ export default class PositionService implements IPositionService {
     });
   }
 
+  /**
+   * Check is proxy wallet exists for provided wallet address.
+   * @param address - wallet address
+   */
   proxyWalletExist(address: string) {
     const proxyWalletRegistry = Web3Utils.getContractInstance(
       SmartContractFactory.ProxyWalletRegistry(this.chainId),
@@ -696,6 +751,10 @@ export default class PositionService implements IPositionService {
     return proxyWalletRegistry.methods.proxies(address).call();
   }
 
+  /**
+   * Return balance of FXD stable coin for provided wallet address.
+   * @param address - wallet address.
+   */
   balanceStableCoin(address: string) {
     const fathomStableCoin = Web3Utils.getContractInstance(
       SmartContractFactory.FathomStableCoin(this.chainId),
@@ -705,8 +764,13 @@ export default class PositionService implements IPositionService {
     return fathomStableCoin.methods.balanceOf(address).call();
   }
 
+  /**
+   * Check is approved stable coin is equal or greater than amount
+   * @param amount - amount which should be approved
+   * @param address - wallet address
+   */
   async approvalStatusStableCoin(
-    maxPositionDebtValue: number,
+    amount: number,
     address: string,
   ) {
     const proxyWalletAddress = await this.proxyWalletExist(address);
@@ -727,9 +791,14 @@ export default class PositionService implements IPositionService {
 
     return BigNumber(allowance)
       .dividedBy(10 ** decimals)
-      .isGreaterThan(maxPositionDebtValue);
+      .isGreaterThanOrEqualTo(amount);
   }
 
+  /**
+   * Get debtValue = debtShare * debtAccumulatedRate.
+   * @param debtShare - debt share amount.
+   * @param poolId - protocol pool id.
+   */
   async getDebtValue(debtShare: number, poolId: string) {
     const poolConfigContract = Web3Utils.getContractInstance(
       SmartContractFactory.PoolConfig(this.chainId),
@@ -750,6 +819,10 @@ export default class PositionService implements IPositionService {
     return debtValue.dividedBy(WeiPerRad).decimalPlaces(18).toString();
   }
 
+  /**
+   * Return max borrow amount available for pool.
+   * @param poolId - protocol pool id.
+   */
   async getPositionDebtCeiling(poolId: string) {
     const poolConfigContract = Web3Utils.getContractInstance(
       SmartContractFactory.PoolConfig(this.chainId),
@@ -766,6 +839,10 @@ export default class PositionService implements IPositionService {
       .toString();
   }
 
+  /**
+   * Is Decentralized mode enabled
+   * @return boolean;
+   */
   isDecentralizedMode() {
     const proxyWalletRegistry = Web3Utils.getContractInstance(
       SmartContractFactory.ProxyWalletRegistry(this.chainId),
@@ -775,6 +852,10 @@ export default class PositionService implements IPositionService {
     return proxyWalletRegistry.methods.isDecentralizedMode().call();
   }
 
+  /**
+   * Check is wallet address whitelisted.
+   * @param address - wallet address.
+   */
   isWhitelisted(address: string) {
     const proxyWalletRegistry = Web3Utils.getContractInstance(
       SmartContractFactory.ProxyWalletRegistry(this.chainId),
@@ -783,11 +864,17 @@ export default class PositionService implements IPositionService {
 
     return proxyWalletRegistry.methods.whitelisted(address).call();
   }
-
+  /**
+   * Set Xdc3 provider for service
+   * @param provider - Xdc3 provider
+   */
   setProvider(provider: Xdc3) {
     this.provider = provider;
   }
-
+  /**
+   * Set chainId
+   * @param chainId
+   */
   setChainId(chainId: number) {
     this.chainId = chainId;
   }

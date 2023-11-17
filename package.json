@@ -1,6 +1,6 @@
 {
   "name": "fathom-sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
   "type": "module",
   "scripts": {
@@ -15,7 +15,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Into-the-Fathom/fathom-contracts-helper.git"
+    "url": "git://github.com/Into-the-Fathom/fathom-sdk.git"
   },
   "devDependencies": {
     "@types/cors": "^2.8.15",

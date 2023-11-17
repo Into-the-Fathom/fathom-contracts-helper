@@ -736,11 +736,17 @@ export default class StableSwapService implements IStableSwapService {
       .claimedTokenFeeRewards(account)
       .call();
   }
-
+  /**
+   * Set Xdc3 provider for service
+   * @param provider - Xdc3 provider
+   */
   setProvider(provider: Xdc3) {
     this.provider = provider;
   }
-
+  /**
+   * Set chainId
+   * @param chainId
+   */
   setChainId(chainId: number) {
     this.chainId = chainId;
   }
