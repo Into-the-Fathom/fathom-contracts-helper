@@ -14,6 +14,7 @@ import { MAX_UINT256 } from '../utils/Constants';
 import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
+import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 
 const DAY_SECONDS = 24 * 60 * 60;
 
@@ -52,6 +53,13 @@ export default class StakingService implements IStakingService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          Staking,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.CreateLock,
+        );
 
         Staking.methods
           .createLock(
@@ -111,6 +119,13 @@ export default class StakingService implements IStakingService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          Staking,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.HandleUnlock,
+        );
 
         Staking.methods
           .unlockPartially(
@@ -169,6 +184,13 @@ export default class StakingService implements IStakingService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          Staking,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.HandleEarlyWithdrawal,
+        );
 
         return Staking.methods
           .earlyUnlock(lockId)
@@ -205,7 +227,10 @@ export default class StakingService implements IStakingService {
     });
   }
 
-  handleClaimRewards(account: string, streamId: number): Promise<number> {
+  handleClaimRewards(
+    account: string,
+    streamId: number,
+  ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const Staking = Web3Utils.getContractInstance(
@@ -221,6 +246,13 @@ export default class StakingService implements IStakingService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          Staking,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.HandleClaimRewards,
+        );
 
         Staking.methods
           .claimAllLockRewardsForStream(streamId)
@@ -279,6 +311,13 @@ export default class StakingService implements IStakingService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          Staking,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.HandleWithdrawAll,
+        );
 
         Staking.methods
           .withdrawStream(streamId)
@@ -318,7 +357,7 @@ export default class StakingService implements IStakingService {
   approveStakingFTHM(
     account: string,
     fthmTokenAddress: string,
-  ): Promise<number> {
+  ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const FTHMToken = Web3Utils.getContractInstance(
@@ -338,6 +377,13 @@ export default class StakingService implements IStakingService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          FTHMToken,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.Approve,
+        );
 
         FTHMToken.methods
           .approve(StakingAddress, MAX_UINT256)

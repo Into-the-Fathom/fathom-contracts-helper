@@ -15,6 +15,7 @@ import {
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import IStableSwapService from '../interfaces/services/IStableSwapService';
+import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 
 export default class StableSwapService implements IStableSwapService {
   public provider: Xdc3;
@@ -52,6 +53,13 @@ export default class StableSwapService implements IStableSwapService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          StableSwapModule,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.SwapTokenToStableCoin,
+        );
 
         return StableSwapModule.methods
           .swapTokenToStablecoin(account, formattedTokenAmount)
@@ -118,6 +126,13 @@ export default class StableSwapService implements IStableSwapService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          StableSwapModule,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.SwapStableCoinToToken,
+        );
 
         return StableSwapModule.methods
           .swapStablecoinToToken(account, formattedTokenAmount)
@@ -179,6 +194,13 @@ export default class StableSwapService implements IStableSwapService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          StableSwapModuleWrapper,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.AddLiquidity,
+        );
 
         return StableSwapModuleWrapper.methods
           .depositTokens(formattedTokenAmount)
@@ -237,6 +259,13 @@ export default class StableSwapService implements IStableSwapService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          StableSwapModuleWrapper,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.RemoveLiquidity,
+        );
 
         return StableSwapModuleWrapper.methods
           .withdrawTokens(formattedTokenAmount)
@@ -296,6 +325,13 @@ export default class StableSwapService implements IStableSwapService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          FathomStableCoin,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.Approve,
+        );
 
         return FathomStableCoin.methods
           .approve(approvalAddress, MAX_UINT256)
@@ -355,6 +391,13 @@ export default class StableSwapService implements IStableSwapService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          USStable,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.Approve,
+        );
 
         return USStable.methods
           .approve(approvalAddress, MAX_UINT256)
@@ -407,6 +450,13 @@ export default class StableSwapService implements IStableSwapService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          StableSwapModuleWrapper,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.ClaimFeesRewards,
+        );
 
         return StableSwapModuleWrapper.methods
           .claimFeesRewards()
@@ -459,6 +509,13 @@ export default class StableSwapService implements IStableSwapService {
           options,
         );
         options.gas = gas;
+        xdcPayV1EventHandler(
+          StableSwapModuleWrapper,
+          resolve,
+          reject,
+          this.emitter,
+          TransactionType.WithdrawClaimedFees,
+        );
 
         return StableSwapModuleWrapper.methods
           .withdrawClaimedFees()

@@ -1,5 +1,5 @@
 import { AbiItem } from 'xdc3-utils';
-import BEP20Abi from '../abis/BEP20.json';
+import ERC20Abi from '../abis/ERC20.json';
 import CollateralPoolConfigAbi from '../abis/CollateralPoolConfig.json';
 import CollateralTokenAdapterAbi from '../abis/CollateralTokenAdapter.json';
 import DexPriceOracle from '../abis/DexPriceOracle.json';
@@ -60,28 +60,28 @@ export class SmartContractFactory {
 
   public static WXDC(chainId: number) {
     return {
-      abi: BEP20Abi.abi as AbiItem[],
+      abi: ERC20Abi.abi as AbiItem[],
       address: SmartContractFactory.Addresses(chainId).WXDC,
     };
   }
 
   public static USDT(chainId: number) {
     return {
-      abi: BEP20Abi.abi as AbiItem[],
+      abi: ERC20Abi.abi as AbiItem[],
       address: SmartContractFactory.Addresses(chainId).xUSDT,
     };
   }
 
-  public static BEP20(_address: string) {
+  public static ERC20(_address: string) {
     return {
-      abi: BEP20Abi.abi as AbiItem[],
+      abi: ERC20Abi.abi as AbiItem[],
       address: _address,
     };
   }
 
   public static FathomStableCoin(chainId: number) {
     return {
-      abi: BEP20Abi.abi as AbiItem[],
+      abi: ERC20Abi.abi as AbiItem[],
       address: SmartContractFactory.Addresses(chainId).FXD,
     };
   }

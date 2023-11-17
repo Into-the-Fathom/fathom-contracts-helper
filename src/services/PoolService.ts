@@ -13,21 +13,21 @@ export default class PoolService implements IPoolService {
   }
 
   getUserTokenBalance(address: string, forAddress: string) {
-    const BEP20 = Web3Utils.getContractInstance(
-      SmartContractFactory.BEP20(forAddress),
+    const ERC20 = Web3Utils.getContractInstance(
+      SmartContractFactory.ERC20(forAddress),
       this.provider,
     );
 
-    return BEP20.methods.balanceOf(address).call();
+    return ERC20.methods.balanceOf(address).call();
   }
 
   getTokenDecimals(forAddress: string) {
-    const BEP20 = Web3Utils.getContractInstance(
-      SmartContractFactory.BEP20(forAddress),
+    const ERC20 = Web3Utils.getContractInstance(
+      SmartContractFactory.ERC20(forAddress),
       this.provider,
     );
 
-    return BEP20.methods.decimals().call();
+    return ERC20.methods.decimals().call();
   }
 
   async getDexPrice(forAddress: string) {
