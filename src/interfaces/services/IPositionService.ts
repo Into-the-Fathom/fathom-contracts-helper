@@ -1,7 +1,12 @@
 import Xdc3 from 'xdc3';
 import ICollateralPool from '../models/ICollateralPool';
+import EventEmitter from 'eventemitter3';
 
 export default interface IPositionService {
+  emitter: EventEmitter;
+  provider: Xdc3;
+  chainId: number;
+
   openPosition(
     address: string,
     pool: ICollateralPool,
@@ -26,7 +31,7 @@ export default interface IPositionService {
 
   createProxyWallet(address: string): Promise<string>;
 
-  proxyWalletExist(address: string): Promise<string>;
+  getProxyWallet(address: string): Promise<string>;
 
   closePosition(
     positionId: string,
@@ -47,10 +52,7 @@ export default interface IPositionService {
 
   approveStableCoin(address: string): Promise<number | Error>;
 
-  approvalStatusStableCoin(
-    amount: number,
-    address: string,
-  ): Promise<boolean>;
+  approvalStatusStableCoin(amount: number, address: string): Promise<boolean>;
 
   partiallyClosePosition(
     positionId: string,

@@ -11,11 +11,11 @@ import { getEstimateGas } from '../utils/getEstimateGas';
 
 import {
   ITransaction,
-  TransactionStatus,
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import IStableSwapService from '../interfaces/services/IStableSwapService';
 import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
+import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 
 export default class StableSwapService implements IStableSwapService {
   public provider: Xdc3;
@@ -64,15 +64,14 @@ export default class StableSwapService implements IStableSwapService {
         return StableSwapModule.methods
           .swapTokenToStablecoin(account, formattedTokenAmount)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.SwapTokenToStableCoin,
-              active: false,
-              status: TransactionStatus.None,
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.SwapTokenToStableCoin,
               tokenName,
-            });
-          })
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.SwapTokenToStableCoin,
@@ -137,15 +136,14 @@ export default class StableSwapService implements IStableSwapService {
         return StableSwapModule.methods
           .swapStablecoinToToken(account, formattedTokenAmount)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.SwapStableCoinToToken,
-              active: false,
-              status: TransactionStatus.None,
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.SwapStableCoinToToken,
               tokenName,
-            });
-          })
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.SwapStableCoinToToken,
@@ -205,14 +203,13 @@ export default class StableSwapService implements IStableSwapService {
         return StableSwapModuleWrapper.methods
           .depositTokens(formattedTokenAmount)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.AddLiquidity,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.AddLiquidity,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.AddLiquidity,
@@ -270,14 +267,13 @@ export default class StableSwapService implements IStableSwapService {
         return StableSwapModuleWrapper.methods
           .withdrawTokens(formattedTokenAmount)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.RemoveLiquidity,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.RemoveLiquidity,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.RemoveLiquidity,
@@ -336,14 +332,9 @@ export default class StableSwapService implements IStableSwapService {
         return FathomStableCoin.methods
           .approve(approvalAddress, MAX_UINT256)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.Approve,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(this.emitter, hash, TransactionType.Approve),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.Approve,
@@ -402,14 +393,9 @@ export default class StableSwapService implements IStableSwapService {
         return USStable.methods
           .approve(approvalAddress, MAX_UINT256)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.Approve,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(this.emitter, hash, TransactionType.Approve),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.Approve,
@@ -461,14 +447,13 @@ export default class StableSwapService implements IStableSwapService {
         return StableSwapModuleWrapper.methods
           .claimFeesRewards()
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.ClaimFeesRewards,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.ClaimFeesRewards,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.ClaimFeesRewards,
@@ -520,14 +505,13 @@ export default class StableSwapService implements IStableSwapService {
         return StableSwapModuleWrapper.methods
           .withdrawClaimedFees()
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.WithdrawClaimedFees,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.WithdrawClaimedFees,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.WithdrawClaimedFees,

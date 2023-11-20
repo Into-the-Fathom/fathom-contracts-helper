@@ -9,11 +9,11 @@ import { getEstimateGas } from '../utils/getEstimateGas';
 
 import {
   ITransaction,
-  TransactionStatus,
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import IProposalService from '../interfaces/services/IProposalService';
 import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
+import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 
 export default class ProposalService implements IProposalService {
   public provider: Xdc3;
@@ -68,14 +68,13 @@ export default class ProposalService implements IProposalService {
         FathomGovernor.methods
           .propose(targets, values, callData, description)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.CreateProposal,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.CreateProposal,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.CreateProposal,
@@ -142,14 +141,13 @@ export default class ProposalService implements IProposalService {
         return FathomGovernor.methods
           .execute(targets, values, callData, keccak256(description))
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.ExecuteProposal,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.ExecuteProposal,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.ExecuteProposal,
@@ -207,14 +205,13 @@ export default class ProposalService implements IProposalService {
         FathomGovernor.methods
           .queue(targets, values, callData, keccak256(description))
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.QueueProposal,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.QueueProposal,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.QueueProposal,
@@ -276,14 +273,13 @@ export default class ProposalService implements IProposalService {
         return FathomGovernor.methods
           .castVote(proposalId, support)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.CastVote,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.CastVote,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.CastVote,

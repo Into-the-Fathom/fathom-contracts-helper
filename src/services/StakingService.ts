@@ -6,7 +6,6 @@ import BigNumber from 'bignumber.js';
 import IStakingService from '../interfaces/services/IStakingService';
 import {
   ITransaction,
-  TransactionStatus,
   TransactionType,
 } from '../interfaces/models/ITransaction';
 
@@ -15,6 +14,7 @@ import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
 import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
+import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 
 const DAY_SECONDS = 24 * 60 * 60;
 
@@ -67,14 +67,13 @@ export default class StakingService implements IStakingService {
             endTime,
           )
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.CreateLock,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.CreateLock,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.CreateLock,
@@ -133,14 +132,13 @@ export default class StakingService implements IStakingService {
             this.provider.utils.toWei(amount.toString(), 'ether'),
           )
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.HandleUnlock,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.HandleUnlock,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.HandleUnlock,
@@ -195,14 +193,13 @@ export default class StakingService implements IStakingService {
         return Staking.methods
           .earlyUnlock(lockId)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.HandleEarlyWithdrawal,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.HandleEarlyWithdrawal,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.HandleEarlyWithdrawal,
@@ -257,14 +254,13 @@ export default class StakingService implements IStakingService {
         Staking.methods
           .claimAllLockRewardsForStream(streamId)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.HandleClaimRewards,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.HandleClaimRewards,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.HandleClaimRewards,
@@ -322,14 +318,13 @@ export default class StakingService implements IStakingService {
         Staking.methods
           .withdrawStream(streamId)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.HandleWithdrawAll,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(
+              this.emitter,
+              hash,
+              TransactionType.HandleWithdrawAll,
+            ),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.HandleWithdrawAll,
@@ -388,14 +383,9 @@ export default class StakingService implements IStakingService {
         FTHMToken.methods
           .approve(StakingAddress, MAX_UINT256)
           .send(options)
-          .on('transactionHash', (hash: string) => {
-            this.emitter.emit('pendingTransaction', {
-              hash: hash,
-              type: TransactionType.Approve,
-              active: false,
-              status: TransactionStatus.None,
-            });
-          })
+          .on('transactionHash', (hash: string) =>
+            emitPendingTransaction(this.emitter, hash, TransactionType.Approve),
+          )
           .then((receipt: TransactionReceipt) => {
             this.emitter.emit('successTransaction', {
               type: TransactionType.Approve,
