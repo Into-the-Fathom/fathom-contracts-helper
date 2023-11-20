@@ -1,20 +1,10 @@
 {
   "name": "fathom-sdk",
-<<<<<<< Updated upstream
-  "version": "0.1.2",
   "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
-  "type": "module",
-  "scripts": {
-    "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
-=======
   "version": "0.1.6",
-  "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
   "type": "module",
   "scripts": {
     "build": "rm -r dist && npx tsc",
->>>>>>> Stashed changes
     "lint": "eslint src/**/*.ts",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier --write .",
