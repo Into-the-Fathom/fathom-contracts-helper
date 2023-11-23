@@ -1,19 +1,29 @@
 {
   "name": "fathom-sdk",
-  "version": "0.1.4",
   "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
+  "version": "0.1.6",
   "type": "module",
   "scripts": {
-    "build": "npx tsc",
+    "build": "rm -r dist && npx tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "npm run lint -- --fix",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write .",
+    "prepublishOnly": "npm run build"
   },
   "author": "Fathom.fi",
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git://github.com/Into-the-Fathom/fathom-sdk.git"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "package-lock.json",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@types/cors": "^2.8.15",
