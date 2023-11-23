@@ -4,6 +4,7 @@ export enum TransactionType {
   TopUpPositionAndBorrow = 'TopUpPositionAndBorrow',
   RepayPosition = 'RepayPosition',
   Approve = 'Approve',
+  CreateProxyWallet = 'CreateProxyWallet',
 
   CreateProposal = 'CreateProposal',
   ExecuteProposal = 'ExecuteProposal',
