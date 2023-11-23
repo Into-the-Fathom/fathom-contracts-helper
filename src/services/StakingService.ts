@@ -384,8 +384,8 @@ export default class StakingService implements IStakingService {
     return DexPriceOracle.getPrice(token0, token1);
   }
   /**
-   * Set Xdc3 provider for service
-   * @param provider - Xdc3 provider
+   * Set JsonRpcProvider provider for service
+   * @param provider - JsonRpcProvider provider
    */
   setProvider(provider: DefaultProvider) {
     this.provider = provider;

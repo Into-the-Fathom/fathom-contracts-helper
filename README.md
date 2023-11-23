@@ -20,13 +20,12 @@ yarn add fathom-sdk
 ### Compatibility
 
 This library has a peer dependency of
-[xdc3.js](https://github.com/XinFinOrg/XDC3) fork of
-[web3.js](https://web3js.readthedocs.io/en/v1.10.0/index.html)
+[ethers.js](https://docs.ethers.org/v5/) JsonRpcProvider.
 
 To install the correct version, run:
 
 ```sh
-npm install xdc3
+npm install ethers@5.7.2
 ```
 
 <br />
@@ -126,7 +125,7 @@ import {
   IStableSwapService,
   IStakingService,
 } from 'fathom-sdk';
-import Xdc3 from 'xdc3';
+import { JsonRpcProvider } from "@ethersproject/providers";
 /**
  * Cache for contract instances.
  */
@@ -139,7 +138,7 @@ const DEFAULT_CHAIN_ID = 51;
  * Read-only mode.
  * Use public RPC for read on-chain data.
  */
-const getDefaultProvider = () => new Xdc3('https://erpc.apothem.network/');
+const getDefaultProvider = () => new JsonRpcProvider('https://erpc.apothem.network/');
 
 export class RootService {
   /*
@@ -153,7 +152,7 @@ export class RootService {
 
   chainId = DEFAULT_CHAIN_ID;
 
-  provider: Xdc3;
+  provider: JsonRpcProvider;
 
   serviceList = [
     'poolService',
@@ -188,10 +187,10 @@ export class RootService {
   }
 
   /**
-   * Provider is Xdc3 provider instance it can be HttpProvider or WebsocketProvider or ExternalProvider
+   * Provider is jsonRpcProvider provider instance it can be HttpProvider or WebsocketProvider or ExternalProvider
    * @param provider
    */
-  setProvider(provider: Xdc3) {
+  setProvider(provider: JsonRpcProvider) {
     this.provider = provider;
     /**
      * When change provider need to reset contracts cache.
