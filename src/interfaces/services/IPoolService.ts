@@ -1,7 +1,7 @@
-import Xdc3 from 'xdc3';
+import { DefaultProvider } from '../../types';
 
 export default interface IPoolService {
-  provider: Xdc3;
+  provider: DefaultProvider;
   chainId: number;
 
   getUserTokenBalance(address: string, forAddress: string): Promise<number>;
@@ -14,5 +14,5 @@ export default interface IPoolService {
 
   setChainId(chainId: number): void;
 
-  setProvider(provider: Xdc3): void;
+  setProvider(provider: DefaultProvider): void;
 }

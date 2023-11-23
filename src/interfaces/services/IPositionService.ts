@@ -1,10 +1,10 @@
-import Xdc3 from 'xdc3';
 import ICollateralPool from '../models/ICollateralPool';
 import EventEmitter from 'eventemitter3';
+import { DefaultProvider } from '../../types';
 
 export default interface IPositionService {
   emitter: EventEmitter;
-  provider: Xdc3;
+  provider: DefaultProvider;
   chainId: number;
 
   openPosition(
@@ -72,5 +72,5 @@ export default interface IPositionService {
 
   setChainId(chainId: number): void;
 
-  setProvider(provider: Xdc3): void;
+  setProvider(provider: DefaultProvider): void;
 }

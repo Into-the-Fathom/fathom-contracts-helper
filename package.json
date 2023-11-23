@@ -4,7 +4,7 @@
   "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
   "type": "module",
   "scripts": {
-    "build": "npx tsc",
+    "build": "rm -r dist && npx tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier --write ."
@@ -34,6 +34,7 @@
   "dependencies": {
     "bignumber.js": "^9.1.2",
     "eventemitter3": "^5.0.1",
-    "xdc3": "^1.3.13416"
+    "xdc3": "^1.3.13416",
+    "ethers": "5.7.2"
   }
 }

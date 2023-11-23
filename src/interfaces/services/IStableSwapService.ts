@@ -1,9 +1,9 @@
-import Xdc3 from 'xdc3';
 import EventEmitter from 'eventemitter3';
+import { DefaultProvider } from '../../types';
 
 export default interface IStableSwapService {
   emitter: EventEmitter;
-  provider: Xdc3;
+  provider: DefaultProvider;
   chainId: number;
 
   swapTokenToStableCoin(
@@ -83,5 +83,5 @@ export default interface IStableSwapService {
 
   setChainId(chainId: number): void;
 
-  setProvider(provider: Xdc3): void;
+  setProvider(provider: DefaultProvider): void;
 }

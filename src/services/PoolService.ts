@@ -1,14 +1,14 @@
-import Xdc3 from 'xdc3';
 import IPoolService from '../interfaces/services/IPoolService';
 import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
+import { DefaultProvider } from '../types';
 
 export default class PoolService implements IPoolService {
-  public provider: Xdc3;
+  public provider: DefaultProvider;
   public chainId: number;
 
-  constructor(provider: Xdc3, chainId: number) {
-    this.provider = provider;
+  constructor(DefaultProvider: DefaultProvider, chainId: number) {
+    this.provider = DefaultProvider;
     this.chainId = chainId;
   }
 
@@ -24,7 +24,7 @@ export default class PoolService implements IPoolService {
       this.provider,
     );
 
-    return ERC20.methods.balanceOf(address).call();
+    return ERC20.balanceOf(address);
   }
 
   /**
@@ -38,7 +38,7 @@ export default class PoolService implements IPoolService {
       this.provider,
     );
 
-    return ERC20.methods.decimals().call();
+    return ERC20.decimals();
   }
 
   /**
@@ -54,9 +54,7 @@ export default class PoolService implements IPoolService {
       this.provider,
     );
 
-    const result = await dexPriceOracle.methods
-      .getPrice(USStable, forAddress)
-      .call();
+    const result = await dexPriceOracle.getPrice(USStable, forAddress);
 
     return result[0];
   }
@@ -75,13 +73,13 @@ export default class PoolService implements IPoolService {
       this.provider,
     );
 
-    return collateralTokenAdapter.methods.collateralToken().call();
+    return collateralTokenAdapter.collateralToken();
   }
   /**
-   * Set Xdc3 provider for service
-   * @param provider - Xdc3 provider
+   * Set JsonRpcProvider DefaultProvider for service
+   * @param provider - JsonRpcProvider DefaultProvider
    */
-  setProvider(provider: Xdc3) {
+  setProvider(provider: DefaultProvider) {
     this.provider = provider;
   }
   /**

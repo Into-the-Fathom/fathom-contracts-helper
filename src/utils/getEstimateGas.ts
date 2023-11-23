@@ -1,5 +1,5 @@
 import { ESTIMATE_GAS_MULTIPLIER } from './Constants';
-import { Contract } from 'xdc3-eth-contract';
+import { Contract } from 'ethers';
 
 export const getEstimateGas = async (
   contract: Contract,
@@ -7,6 +7,6 @@ export const getEstimateGas = async (
   args: any[],
   options: any,
 ): Promise<number> => {
-  const gas = await contract.methods[methodName](...args).estimateGas(options);
-  return Math.ceil(gas * ESTIMATE_GAS_MULTIPLIER);
+  const gas = await contract['estimateGas'][methodName](...args, options);
+  return Math.ceil(gas.toNumber() * ESTIMATE_GAS_MULTIPLIER);
 };
