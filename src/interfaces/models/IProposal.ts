@@ -1,3 +1,5 @@
+import { BigNumber } from 'ethers';
+
 export default interface IProposal {
   id: string;
   proposalId: string;
@@ -17,7 +19,7 @@ export default interface IProposal {
 }
 
 export interface ProposalVotes {
-  againstVotes: number;
-  forVotes: number;
-  abstainVotes: number;
+  againstVotes: BigNumber;
+  forVotes: BigNumber;
+  abstainVotes: BigNumber;
 }

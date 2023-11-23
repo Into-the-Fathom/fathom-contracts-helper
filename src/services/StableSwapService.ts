@@ -30,7 +30,7 @@ export default class StableSwapService implements IStableSwapService {
   swapTokenToStableCoin(
     account: string,
     tokenIn: string,
-    tokenInDecimals: number,
+    tokenInDecimals: string,
     tokenName: string,
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
@@ -43,7 +43,7 @@ export default class StableSwapService implements IStableSwapService {
         const options = { from: account, gasLimit: 0 };
 
         const formattedTokenAmount = BigNumber(tokenIn)
-          .multipliedBy(10 ** tokenInDecimals)
+          .multipliedBy(BigNumber(10).exponentiatedBy(tokenInDecimals))
           .integerValue(BigNumber.ROUND_DOWN);
 
         const gasLimit = await getEstimateGas(
@@ -442,7 +442,7 @@ export default class StableSwapService implements IStableSwapService {
   async approvalStatusStableCoin(
     account: string,
     tokenIn: string,
-    tokenInDecimal: number,
+    tokenInDecimal: string,
     isStableSwapWrapper = false,
   ) {
     const FathomStableCoin = Web3Utils.getContractInstance(
@@ -457,14 +457,14 @@ export default class StableSwapService implements IStableSwapService {
         : SmartContractFactory.StableSwapModule(this.chainId).address,
     );
     return BigNumber(allowance).isGreaterThanOrEqualTo(
-      BigNumber(10 ** tokenInDecimal).multipliedBy(tokenIn),
+      BigNumber(10).exponentiatedBy(tokenInDecimal).multipliedBy(tokenIn),
     );
   }
 
   async approvalStatusUsdt(
     account: string,
     tokenIn: string,
-    tokenInDecimal: number,
+    tokenInDecimal: string,
     isStableSwapWrapper = false,
   ) {
     const USStable = Web3Utils.getContractInstance(
@@ -480,7 +480,7 @@ export default class StableSwapService implements IStableSwapService {
     );
 
     return BigNumber(allowance).isGreaterThanOrEqualTo(
-      BigNumber(10 ** tokenInDecimal).multipliedBy(tokenIn),
+      BigNumber(10).exponentiatedBy(tokenInDecimal).multipliedBy(tokenIn),
     );
   }
 

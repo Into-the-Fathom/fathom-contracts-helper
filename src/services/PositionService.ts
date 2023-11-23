@@ -662,7 +662,7 @@ export default class PositionService implements IPositionService {
    * @param amount - amount which should be approved
    * @param address - wallet address
    */
-  async approvalStatusStableCoin(amount: number, address: string) {
+  async approvalStatusStableCoin(amount: string, address: string) {
     const proxyWalletAddress = await this.getProxyWallet(address);
 
     if (proxyWalletAddress === ZERO_ADDRESS) {
@@ -679,8 +679,8 @@ export default class PositionService implements IPositionService {
       fathomStableCoin.decimals(),
     ]);
 
-    return BigNumber(allowance)
-      .dividedBy(10 ** decimals)
+    return BigNumber(allowance.toString())
+      .dividedBy(BigNumber(10).exponentiatedBy(decimals.toString()))
       .isGreaterThanOrEqualTo(amount);
   }
 

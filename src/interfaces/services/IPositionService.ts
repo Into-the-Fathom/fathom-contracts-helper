@@ -1,6 +1,7 @@
 import ICollateralPool from '../models/ICollateralPool';
 import EventEmitter from 'eventemitter3';
 import { DefaultProvider } from '../../types';
+import { BigNumber } from 'ethers';
 
 export default interface IPositionService {
   emitter: EventEmitter;
@@ -48,11 +49,11 @@ export default interface IPositionService {
     collateral: string,
   ): Promise<boolean>;
 
-  balanceStableCoin(address: string): Promise<string>;
+  balanceStableCoin(address: string): Promise<BigNumber>;
 
   approveStableCoin(address: string): Promise<number | Error>;
 
-  approvalStatusStableCoin(amount: number, address: string): Promise<boolean>;
+  approvalStatusStableCoin(amount: string, address: string): Promise<boolean>;
 
   partiallyClosePosition(
     positionId: string,

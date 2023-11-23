@@ -1,14 +1,15 @@
 import { DefaultProvider } from '../../types';
+import { BigNumber } from 'ethers';
 
 export default interface IPoolService {
   provider: DefaultProvider;
   chainId: number;
 
-  getUserTokenBalance(address: string, forAddress: string): Promise<number>;
+  getUserTokenBalance(address: string, forAddress: string): Promise<BigNumber>;
 
-  getTokenDecimals(forAddress: string): Promise<number>;
+  getTokenDecimals(forAddress: string): Promise<BigNumber>;
 
-  getDexPrice(forAddress: string): Promise<number>;
+  getDexPrice(forAddress: string): Promise<BigNumber>;
 
   getCollateralTokenAddress(forAddress: string): Promise<string>;
 
