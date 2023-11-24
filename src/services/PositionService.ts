@@ -569,7 +569,7 @@ export default class PositionService implements IPositionService {
 
     const allowance = await ERC20.allowance(address, proxyWalletAddress);
 
-    return BigNumber(allowance).isGreaterThanOrEqualTo(
+    return BigNumber(allowance.toString()).isGreaterThanOrEqualTo(
       WeiPerWad.multipliedBy(collateral),
     );
   }
