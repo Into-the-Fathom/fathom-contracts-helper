@@ -267,18 +267,18 @@ export default class PositionService implements IPositionService {
 
         const options = {
           from: address,
-          gas: 0,
+          gasLimit: 0,
           value: collateral ? utils.parseEther(collateral.toString()) : '0',
         };
 
-        const gas = await getEstimateGas(
+        const gasLimit = await getEstimateGas(
           wallet,
           'execute',
           [topUpPositionCall],
           options,
         );
 
-        options.gas = gas;
+        options.gasLimit = gasLimit;
 
         const transaction = await wallet.execute(topUpPositionCall, options);
 
