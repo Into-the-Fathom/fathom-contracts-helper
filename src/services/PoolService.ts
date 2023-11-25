@@ -7,8 +7,8 @@ export default class PoolService implements IPoolService {
   public provider: DefaultProvider;
   public chainId: number;
 
-  constructor(DefaultProvider: DefaultProvider, chainId: number) {
-    this.provider = DefaultProvider;
+  constructor(provider: DefaultProvider, chainId: number) {
+    this.provider = provider;
     this.chainId = chainId;
   }
 
@@ -76,8 +76,8 @@ export default class PoolService implements IPoolService {
     return collateralTokenAdapter.collateralToken();
   }
   /**
-   * Set JsonRpcProvider DefaultProvider for service
-   * @param provider - JsonRpcProvider DefaultProvider
+   * Set JsonRpcProvider provider for service
+   * @param provider - JsonRpcProvider provider
    */
   setProvider(provider: DefaultProvider) {
     this.provider = provider;

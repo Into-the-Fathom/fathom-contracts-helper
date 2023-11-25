@@ -187,7 +187,8 @@ export class RootService {
   }
 
   /**
-   * Provider is jsonRpcProvider provider instance it can be HttpProvider or WebsocketProvider or ExternalProvider
+   * Provider is JsonRpcProvider provider instance
+   * It can be JsonRpcProvider or WebSocketProvider or Web3Provider
    * @param provider
    */
   setProvider(provider: JsonRpcProvider) {
