@@ -1,44 +1,48 @@
-import Xdc3 from 'xdc3';
-import { Contract } from 'xdc3-eth-contract';
-import { AbiItem } from 'xdc3-utils';
-export interface XdcContractMetaData {
+import { SignerOrProvider } from '../types';
+import { Contract, ContractInterface } from 'ethers';
+
+export interface ContractMetaData {
   address: string;
-  abi: AbiItem[];
+  abi: ContractInterface;
 }
 
 export class Web3Utils {
   static contracts = new Map<string, Contract>();
   public static getContractInstance(
-    contractMetaData: XdcContractMetaData,
-    provider: Xdc3,
+    contractMetaData: ContractMetaData,
+    provider: SignerOrProvider,
+    type = 'provider',
   ): Contract {
-    if (Web3Utils.contracts.has(contractMetaData.address)) {
-      return Web3Utils.contracts.get(contractMetaData.address) as Contract;
+    const key = type + contractMetaData.address;
+
+    if (Web3Utils.contracts.has(key)) {
+      return Web3Utils.contracts.get(key) as Contract;
     }
 
-    const contract = new provider.eth.Contract(
-      contractMetaData.abi as XdcContractMetaData['abi'],
+    const contract = new Contract(
       contractMetaData.address,
+      contractMetaData.abi,
+      provider,
     );
 
-    Web3Utils.contracts.set(contractMetaData.address, contract);
-
+    Web3Utils.contracts.set(key, contract);
     return contract;
   }
 
   public static getContractInstanceFrom(
-    abi: AbiItem[],
+    abi: ContractInterface,
     address: string,
-    provider: Xdc3,
+    provider: SignerOrProvider,
+    type = 'provider',
   ): Contract {
-    if (Web3Utils.contracts.has(address)) {
-      return Web3Utils.contracts.get(address) as Contract;
+    const key = type + address;
+
+    if (Web3Utils.contracts.has(key)) {
+      return Web3Utils.contracts.get(key) as Contract;
     }
+    const contract = new Contract(address, abi, provider);
 
-    const contract = new provider.eth.Contract(abi as AbiItem[], address);
-
-    Web3Utils.contracts.set(address, contract);
-
+    Web3Utils.contracts.set(key, contract);
     return contract;
   }
 

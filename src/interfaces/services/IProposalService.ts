@@ -1,10 +1,11 @@
-import Xdc3 from 'xdc3';
 import { ProposalVotes } from '../models/IProposal';
 import EventEmitter from 'eventemitter3';
+import { DefaultProvider } from '../../types';
+import { BigNumber } from 'ethers';
 
 export default interface IProposalService {
   emitter: EventEmitter;
-  provider: Xdc3;
+  provider: DefaultProvider;
   chainId: number;
 
   createProposal(
@@ -39,19 +40,19 @@ export default interface IProposalService {
 
   viewProposalState(proposalId: string, account: string): Promise<string>;
 
-  nextAcceptableProposalTimestamp(account: string): Promise<number>;
+  nextAcceptableProposalTimestamp(account: string): Promise<BigNumber>;
 
-  getVBalance(account: string): Promise<number>;
+  getVBalance(account: string): Promise<BigNumber>;
 
   hasVoted(proposalId: string, account: string): Promise<boolean>;
 
-  quorum(blockNumber: string): Promise<number>;
+  quorum(blockNumber: string): Promise<BigNumber>;
 
   proposalVotes(proposalId: string): Promise<ProposalVotes>;
 
-  proposalThreshold(): Promise<number>;
+  proposalThreshold(): Promise<BigNumber>;
 
   setChainId(chainId: number): void;
 
-  setProvider(provider: Xdc3): void;
+  setProvider(provider: DefaultProvider): void;
 }

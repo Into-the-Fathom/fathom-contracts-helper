@@ -1,4 +1,3 @@
-import { AbiItem } from 'xdc3-utils';
 import ERC20Abi from '../abis/ERC20.json';
 import CollateralPoolConfigAbi from '../abis/CollateralPoolConfig.json';
 import CollateralTokenAdapterAbi from '../abis/CollateralTokenAdapter.json';
@@ -18,6 +17,7 @@ import VeFathomAbi from '../abis/vFathom.json';
 import { APOTHEM_ADDRESSES, XDC_ADDRESSES } from '../addresses';
 
 import { ChainId } from '../types';
+import { ContractInterface } from 'ethers';
 
 export class SmartContractFactory {
   public static Addresses(chainId: ChainId) {
@@ -33,25 +33,25 @@ export class SmartContractFactory {
 
   public static PoolConfig(chainId: number) {
     return {
-      abi: CollateralPoolConfigAbi.abi as AbiItem[],
+      abi: CollateralPoolConfigAbi.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).COLLATERAL_POOL_CONFIG,
     };
   }
 
   public static ProxyWalletRegistry(chainId: number) {
     return {
-      abi: ProxyWalletRegistryAbi.abi as AbiItem[],
+      abi: ProxyWalletRegistryAbi.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).PROXY_WALLET_REGISTRY,
     };
   }
 
   public static proxyWallet = {
-    abi: ProxyWalletAbi.abi as AbiItem[],
+    abi: ProxyWalletAbi.abi as ContractInterface,
   };
 
   public static FathomStablecoinProxyAction(chainId: number) {
     return {
-      abi: FathomStableCoinProxyActionAbi.abi as AbiItem[],
+      abi: FathomStableCoinProxyActionAbi.abi as ContractInterface,
       address:
         SmartContractFactory.Addresses(chainId)
           .FATHOM_STABLE_COIN_PROXY_ACTIONS,
@@ -60,28 +60,28 @@ export class SmartContractFactory {
 
   public static WXDC(chainId: number) {
     return {
-      abi: ERC20Abi.abi as AbiItem[],
+      abi: ERC20Abi.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).WXDC,
     };
   }
 
   public static USDT(chainId: number) {
     return {
-      abi: ERC20Abi.abi as AbiItem[],
+      abi: ERC20Abi.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).xUSDT,
     };
   }
 
   public static ERC20(_address: string) {
     return {
-      abi: ERC20Abi.abi as AbiItem[],
+      abi: ERC20Abi.abi as ContractInterface,
       address: _address,
     };
   }
 
   public static FathomStableCoin(chainId: number) {
     return {
-      abi: ERC20Abi.abi as AbiItem[],
+      abi: ERC20Abi.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).FXD,
     };
   }
@@ -117,14 +117,14 @@ export class SmartContractFactory {
 
   public static StableSwapModule(chainId: number) {
     return {
-      abi: StableSwapModule.abi as AbiItem[],
+      abi: StableSwapModule.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).STABLE_SWAP_MODULE,
     };
   }
 
   public static StableSwapModuleWrapper(chainId: number) {
     return {
-      abi: StableSwapModuleWrapper.abi as AbiItem[],
+      abi: StableSwapModuleWrapper.abi as ContractInterface,
       address:
         SmartContractFactory.Addresses(chainId).STABLE_SWAP_MODULE_WRAPPER,
     };
@@ -132,62 +132,62 @@ export class SmartContractFactory {
 
   public static FathomGovernor(chainId: number) {
     return {
-      abi: Governor.abi as AbiItem[],
+      abi: Governor.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).FTHM_GOVERNOR,
     };
   }
 
   public static MainFathomGovernor(chainId: number) {
     return {
-      abi: MainTokenGovernor.abi as AbiItem[],
+      abi: MainTokenGovernor.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).FTHM_GOVERNOR,
     };
   }
 
   public static Staking(chainId: number) {
     return {
-      abi: Staking.abi as AbiItem[],
+      abi: Staking.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).STAKING,
     };
   }
 
   public static MainToken(fthmTokenAddress: string) {
     return {
-      abi: MainToken.abi as AbiItem[],
+      abi: MainToken.abi as ContractInterface,
       address: fthmTokenAddress,
     };
   }
 
   public static FthmToken(chainId: number) {
     return {
-      abi: MainToken.abi as AbiItem[],
+      abi: MainToken.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).FTHM_TOKEN,
     };
   }
 
   public static StakingGetter(chainId: number) {
     return {
-      abi: StakingGetter.abi as AbiItem[],
+      abi: StakingGetter.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).STAKING_GETTER,
     };
   }
 
   public static vFathom(chainId: number) {
     return {
-      abi: VeFathomAbi.abi as AbiItem[],
+      abi: VeFathomAbi.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).vFTHM,
     };
   }
 
   public static DexPriceOracle(chainId: number) {
     return {
-      abi: DexPriceOracle.abi as AbiItem[],
+      abi: DexPriceOracle.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).DEX_PRICE_ORACLE,
     };
   }
 
   public static CollateralTokenAdapterAbi() {
-    return CollateralTokenAdapterAbi.abi as AbiItem[];
+    return CollateralTokenAdapterAbi.abi as ContractInterface;
   }
 
   public static getAddressByContractName(chainId: number, name: string) {

@@ -1,5 +1,3 @@
-import Xdc3 from 'xdc3';
-import { TransactionReceipt } from 'xdc3-eth';
 import EventEmitter from 'eventemitter3';
 import BigNumber from 'bignumber.js';
 
@@ -13,17 +11,18 @@ import { MAX_UINT256 } from '../utils/Constants';
 import { SmartContractFactory } from '../utils/SmartContractFactory';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
-import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
+import { DefaultProvider } from '../types';
+import { utils } from 'ethers';
 
 const DAY_SECONDS = 24 * 60 * 60;
 
 export default class StakingService implements IStakingService {
-  public provider: Xdc3;
+  public provider: DefaultProvider;
   public chainId: number;
   public emitter: EventEmitter;
 
-  constructor(provider: Xdc3, chainId: number) {
+  constructor(provider: DefaultProvider, chainId: number) {
     this.provider = provider;
     this.chainId = chainId;
     this.emitter = new EventEmitter<string | symbol, ITransaction>();
@@ -38,56 +37,40 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
+
         const endTime = unlockPeriod * DAY_SECONDS;
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           Staking,
           'createLock',
-          [
-            this.provider.utils.toWei(stakePosition.toString(), 'ether'),
-            endTime,
-          ],
+          [utils.parseEther(stakePosition.toString()), endTime],
           options,
         );
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          Staking,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await Staking.createLock(
+          utils.parseEther(stakePosition.toString()),
+          endTime,
+          options,
+        );
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.CreateLock,
         );
 
-        Staking.methods
-          .createLock(
-            this.provider.utils.toWei(stakePosition.toString(), 'ether'),
-            endTime,
-          )
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.CreateLock,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.CreateLock,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.CreateLock,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.CreateLock,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.CreateLock,
@@ -107,52 +90,38 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           Staking,
           'unlockPartially',
-          [lockId, this.provider.utils.toWei(amount.toString(), 'ether')],
+          [lockId, utils.parseEther(amount.toString())],
           options,
         );
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          Staking,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await Staking.unlockPartially(
+          lockId,
+          utils.parseEther(amount.toString()),
+          options,
+        );
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.HandleUnlock,
         );
 
-        Staking.methods
-          .unlockPartially(
-            lockId,
-            this.provider.utils.toWei(amount.toString(), 'ether'),
-          )
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.HandleUnlock,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.HandleUnlock,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.HandleUnlock,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.HandleUnlock,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.HandleUnlock,
@@ -171,49 +140,34 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           Staking,
           'earlyUnlock',
           [lockId],
           options,
         );
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          Staking,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await Staking.earlyUnlock(lockId, options);
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.HandleEarlyWithdrawal,
         );
 
-        return Staking.methods
-          .earlyUnlock(lockId)
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.HandleEarlyWithdrawal,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.HandleEarlyWithdrawal,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.HandleEarlyWithdrawal,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.HandleEarlyWithdrawal,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.HandleEarlyWithdrawal,
@@ -232,49 +186,37 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           Staking,
           'claimAllLockRewardsForStream',
           [streamId],
           options,
         );
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          Staking,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await Staking.claimAllLockRewardsForStream(
+          streamId,
+          options,
+        );
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.HandleClaimRewards,
         );
 
-        Staking.methods
-          .claimAllLockRewardsForStream(streamId)
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.HandleClaimRewards,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.HandleClaimRewards,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.HandleClaimRewards,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.HandleClaimRewards,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.HandleClaimRewards,
@@ -293,52 +235,37 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
         /**
          * For FTHM stream is 0
          */
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           Staking,
           'withdrawStream',
           [streamId],
           options,
         );
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          Staking,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await Staking.withdrawStream(streamId, options);
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.HandleWithdrawAll,
         );
 
-        Staking.methods
-          .withdrawStream(streamId)
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.HandleWithdrawAll,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.HandleWithdrawAll,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.HandleWithdrawAll,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.HandleWithdrawAll,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.HandleWithdrawAll,
@@ -357,49 +284,42 @@ export default class StakingService implements IStakingService {
       try {
         const FTHMToken = Web3Utils.getContractInstance(
           SmartContractFactory.MainToken(fthmTokenAddress),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
         const StakingAddress = SmartContractFactory.Staking(
           this.chainId,
         ).address;
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           FTHMToken,
           'approve',
           [StakingAddress, MAX_UINT256],
           options,
         );
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          FTHMToken,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await FTHMToken.approve(
+          StakingAddress,
+          MAX_UINT256,
+          options,
+        );
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.Approve,
         );
 
-        FTHMToken.methods
-          .approve(StakingAddress, MAX_UINT256)
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(this.emitter, hash, TransactionType.Approve),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.Approve,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.Approve,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.Approve,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.Approve,
@@ -412,7 +332,7 @@ export default class StakingService implements IStakingService {
 
   async approvalStatusStakingFTHM(
     address: string,
-    stakingPosition: number,
+    stakingPosition: string,
     fthmTokenAddress: string,
   ) {
     const FTHMToken = Web3Utils.getContractInstance(
@@ -422,12 +342,10 @@ export default class StakingService implements IStakingService {
 
     const StakingAddress = SmartContractFactory.Staking(this.chainId).address;
 
-    const allowance = await FTHMToken.methods
-      .allowance(address, StakingAddress)
-      .call();
+    const allowance = await FTHMToken.allowance(address, StakingAddress);
 
-    return BigNumber(allowance).isGreaterThanOrEqualTo(
-      this.provider.utils.toWei(stakingPosition.toString(), 'ether'),
+    return BigNumber(allowance.toString()).isGreaterThanOrEqualTo(
+      utils.parseEther(stakingPosition).toString(),
     );
   }
 
@@ -440,9 +358,7 @@ export default class StakingService implements IStakingService {
       SmartContractFactory.Staking(this.chainId),
       this.provider,
     );
-    return Staking.methods
-      .getStreamClaimableAmountPerLock(streamId, account, lockId)
-      .call();
+    return Staking.getStreamClaimableAmountPerLock(streamId, account, lockId);
   }
 
   getStreamClaimableAmount(account: string) {
@@ -450,7 +366,7 @@ export default class StakingService implements IStakingService {
       SmartContractFactory.StakingGetter(this.chainId),
       this.provider,
     );
-    return StakingGetter.methods.getStreamClaimableAmount(0, account).call();
+    return StakingGetter.getStreamClaimableAmount(0, account);
   }
 
   getMinLockPeriod() {
@@ -458,7 +374,7 @@ export default class StakingService implements IStakingService {
       SmartContractFactory.Staking(this.chainId),
       this.provider,
     );
-    return Staking.methods.minLockPeriod().call();
+    return Staking.minLockPeriod();
   }
 
   getPairPrice(token0: string, token1: string) {
@@ -466,13 +382,13 @@ export default class StakingService implements IStakingService {
       SmartContractFactory.DexPriceOracle(this.chainId),
       this.provider,
     );
-    return DexPriceOracle.methods.getPrice(token0, token1).call();
+    return DexPriceOracle.getPrice(token0, token1);
   }
   /**
-   * Set Xdc3 provider for service
-   * @param provider - Xdc3 provider
+   * Set JsonRpcProvider provider for service
+   * @param provider - JsonRpcProvider provider
    */
-  setProvider(provider: Xdc3) {
+  setProvider(provider: DefaultProvider) {
     this.provider = provider;
   }
   /**

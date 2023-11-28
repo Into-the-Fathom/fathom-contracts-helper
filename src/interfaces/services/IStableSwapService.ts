@@ -1,15 +1,16 @@
-import Xdc3 from 'xdc3';
 import EventEmitter from 'eventemitter3';
+import { DefaultProvider } from '../../types';
+import { BigNumber } from 'ethers';
 
 export default interface IStableSwapService {
   emitter: EventEmitter;
-  provider: Xdc3;
+  provider: DefaultProvider;
   chainId: number;
 
   swapTokenToStableCoin(
     address: string,
     tokenIn: string,
-    tokenInDecimals: number,
+    tokenInDecimals: string,
     tokenName: string,
   ): Promise<number | Error>;
 
@@ -40,40 +41,42 @@ export default interface IStableSwapService {
   approvalStatusStableCoin(
     address: string,
     tokenIn: string,
-    inputDecimal: number,
+    inputDecimal: string,
     isStableSwapWrapper?: boolean,
   ): Promise<boolean>;
 
   approvalStatusUsdt(
     address: string,
     tokenIn: string,
-    inputDecimal: number,
+    inputDecimal: string,
     isStableSwapWrapper?: boolean,
   ): Promise<boolean>;
 
-  getFeeIn(): Promise<string>;
+  getFeeIn(): Promise<BigNumber>;
 
-  getFeeOut(): Promise<string>;
+  getFeeOut(): Promise<BigNumber>;
 
-  getLastUpdate(): Promise<string>;
+  getLastUpdate(): Promise<BigNumber>;
 
-  getDailySwapLimit(): Promise<number>;
+  getDailySwapLimit(): Promise<BigNumber>;
 
-  getPoolBalance(tokenAddress: string): Promise<number>;
+  getPoolBalance(tokenAddress: string): Promise<BigNumber>;
 
-  getAmounts(amount: string, account: string): Promise<number[]>;
+  getAmounts(amount: string, account: string): Promise<BigNumber[]>;
 
-  getTotalValueLocked(): Promise<number>;
+  getTotalValueLocked(): Promise<BigNumber>;
 
-  getActualLiquidityAvailablePerUser(account: string): Promise<number>;
+  getActualLiquidityAvailablePerUser(account: string): Promise<BigNumber>;
 
-  getDepositTracker(account: string): Promise<number>;
+  getDepositTracker(account: string): Promise<BigNumber>;
 
-  getClaimableFeesPerUser(account: string): Promise<{ 0: number; 1: number }>;
+  getClaimableFeesPerUser(
+    account: string,
+  ): Promise<{ 0: BigNumber; 1: BigNumber }>;
 
-  getClaimedFXDFeeRewards(account: string): Promise<number>;
+  getClaimedFXDFeeRewards(account: string): Promise<BigNumber>;
 
-  getClaimedTokenFeeRewards(account: string): Promise<number>;
+  getClaimedTokenFeeRewards(account: string): Promise<BigNumber>;
 
   isDecentralizedState(): Promise<boolean>;
 
@@ -83,5 +86,5 @@ export default interface IStableSwapService {
 
   setChainId(chainId: number): void;
 
-  setProvider(provider: Xdc3): void;
+  setProvider(provider: DefaultProvider): void;
 }

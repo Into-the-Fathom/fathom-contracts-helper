@@ -1,6 +1,3 @@
-import Xdc3 from 'xdc3';
-import { TransactionReceipt } from 'xdc3-eth';
-import { keccak256 } from 'xdc3-utils';
 import EventEmitter from 'eventemitter3';
 
 import { SmartContractFactory } from '../utils/SmartContractFactory';
@@ -12,15 +9,16 @@ import {
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import IProposalService from '../interfaces/services/IProposalService';
-import { xdcPayV1EventHandler } from '../utils/xdcPayV1EventHandler';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
+import { DefaultProvider } from '../types';
+import { utils } from 'ethers';
 
 export default class ProposalService implements IProposalService {
-  public provider: Xdc3;
+  public provider: DefaultProvider;
   public chainId: number;
   public emitter: EventEmitter;
 
-  constructor(provider: Xdc3, chainId: number) {
+  constructor(provider: DefaultProvider, chainId: number) {
     this.provider = provider;
     this.chainId = chainId;
     this.emitter = new EventEmitter<string | symbol, ITransaction>();
@@ -45,50 +43,41 @@ export default class ProposalService implements IProposalService {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.FathomGovernor(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           FathomGovernor,
           'propose',
           [targets, values, callData, description],
           options,
         );
 
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          FathomGovernor,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await FathomGovernor.propose(
+          targets,
+          values,
+          callData,
+          description,
+          options,
+        );
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.CreateProposal,
         );
 
-        FathomGovernor.methods
-          .propose(targets, values, callData, description)
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.CreateProposal,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.CreateProposal,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.CreateProposal,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.CreateProposal,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.CreateLock,
@@ -118,50 +107,41 @@ export default class ProposalService implements IProposalService {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.FathomGovernor(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           FathomGovernor,
           'execute',
-          [targets, values, callData, keccak256(description)],
+          [targets, values, callData, utils.keccak256(description)],
           options,
         );
 
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          FathomGovernor,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await FathomGovernor.execute(
+          targets,
+          values,
+          callData,
+          utils.keccak256(description),
+          options,
+        );
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.ExecuteProposal,
         );
 
-        return FathomGovernor.methods
-          .execute(targets, values, callData, keccak256(description))
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.ExecuteProposal,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.ExecuteProposal,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.ExecuteProposal,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.ExecuteProposal,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.ExecuteProposal,
@@ -183,49 +163,41 @@ export default class ProposalService implements IProposalService {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.FathomGovernor(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+
+        const gasLimit = await getEstimateGas(
           FathomGovernor,
           'queue',
-          [targets, values, callData, keccak256(description)],
+          [targets, values, callData, utils.keccak256(description)],
           options,
         );
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          FathomGovernor,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await FathomGovernor.methods.queue(
+          targets,
+          values,
+          callData,
+          utils.keccak256(description),
+          options,
+        );
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.QueueProposal,
         );
 
-        FathomGovernor.methods
-          .queue(targets, values, callData, keccak256(description))
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.QueueProposal,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.QueueProposal,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.QueueProposal,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.QueueProposal,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.QueueProposal,
@@ -251,49 +223,38 @@ export default class ProposalService implements IProposalService {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.FathomGovernor(this.chainId),
-          this.provider,
+          this.provider.getSigner(),
+          'signer',
         );
 
-        const options = { from: account, gas: 0 };
-        const gas = await getEstimateGas(
+        const options = { from: account, gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
           FathomGovernor,
           'castVote',
           [proposalId, support],
           options,
         );
-        options.gas = gas;
-        xdcPayV1EventHandler(
-          FathomGovernor,
-          resolve,
-          reject,
+        options.gasLimit = gasLimit;
+
+        const transaction = await FathomGovernor.methods.castVote(
+          proposalId,
+          support,
+          options,
+        );
+
+        emitPendingTransaction(
           this.emitter,
+          transaction.hash,
           TransactionType.CastVote,
         );
 
-        return FathomGovernor.methods
-          .castVote(proposalId, support)
-          .send(options)
-          .on('transactionHash', (hash: string) =>
-            emitPendingTransaction(
-              this.emitter,
-              hash,
-              TransactionType.CastVote,
-            ),
-          )
-          .then((receipt: TransactionReceipt) => {
-            this.emitter.emit('successTransaction', {
-              type: TransactionType.CastVote,
-              receipt,
-            });
-            resolve(receipt.blockNumber);
-          })
-          .catch((error: Error) => {
-            this.emitter.emit('errorTransaction', {
-              type: TransactionType.CastVote,
-              error,
-            });
-            reject(error);
-          });
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.CastVote,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
           type: TransactionType.CastVote,
@@ -314,7 +275,7 @@ export default class ProposalService implements IProposalService {
       SmartContractFactory.FathomGovernor(this.chainId),
       this.provider,
     );
-    return FathomGovernor.methods.hasVoted(proposalId, account).call();
+    return FathomGovernor.hasVoted(proposalId, account);
   }
 
   /**
@@ -327,7 +288,7 @@ export default class ProposalService implements IProposalService {
       SmartContractFactory.FathomGovernor(this.chainId),
       this.provider,
     );
-    return FathomGovernor.methods.state(proposalId).call({ from: account });
+    return FathomGovernor.state(proposalId, { from: account });
   }
 
   /**
@@ -340,9 +301,7 @@ export default class ProposalService implements IProposalService {
       this.provider,
     );
 
-    return FathomGovernor.methods
-      .nextAcceptableProposalTimestamp(account)
-      .call();
+    return FathomGovernor.nextAcceptableProposalTimestamp(account);
   }
 
   /**
@@ -355,7 +314,7 @@ export default class ProposalService implements IProposalService {
       this.provider,
     );
 
-    return VeFathom.methods.balanceOf(account).call();
+    return VeFathom.balanceOf(account);
   }
 
   /**
@@ -368,7 +327,7 @@ export default class ProposalService implements IProposalService {
       this.provider,
     );
 
-    return FathomGovernor.methods.quorum(blockNumber).call();
+    return FathomGovernor.quorum(blockNumber);
   }
 
   /**
@@ -381,7 +340,7 @@ export default class ProposalService implements IProposalService {
       this.provider,
     );
 
-    return FathomGovernor.methods.proposalVotes(proposalId).call();
+    return FathomGovernor.proposalVotes(proposalId);
   }
 
   /**
@@ -393,13 +352,13 @@ export default class ProposalService implements IProposalService {
       this.provider,
     );
 
-    return FathomGovernor.methods.proposalThreshold().call();
+    return FathomGovernor.proposalThreshold();
   }
   /**
-   * Set Xdc3 provider for service
-   * @param provider - Xdc3 provider
+   * Set JsonRpcProvider provider for service
+   * @param provider - JsonRpcProvider provider
    */
-  setProvider(provider: Xdc3) {
+  setProvider(provider: DefaultProvider) {
     this.provider = provider;
   }
   /**

@@ -1,9 +1,10 @@
-import Xdc3 from 'xdc3';
 import EventEmitter from 'eventemitter3';
+import { DefaultProvider } from '../../types';
+import { BigNumber } from 'ethers';
 
 export default interface IStakingService {
   emitter: EventEmitter;
-  provider: Xdc3;
+  provider: DefaultProvider;
   chainId: number;
 
   createLock(
@@ -37,7 +38,7 @@ export default interface IStakingService {
 
   approvalStatusStakingFTHM(
     address: string,
-    stakingPosition: number,
+    stakingPosition: string,
     fthmTokenAddress: string,
   ): Promise<boolean>;
 
@@ -45,15 +46,15 @@ export default interface IStakingService {
     streamId: number,
     account: string,
     lockId: number,
-  ): Promise<number>;
+  ): Promise<BigNumber>;
 
-  getPairPrice(token0: string, token1: string): Promise<number>;
+  getPairPrice(token0: string, token1: string): Promise<BigNumber[]>;
 
-  getStreamClaimableAmount(account: string): Promise<number>;
+  getStreamClaimableAmount(account: string): Promise<BigNumber>;
 
-  getMinLockPeriod(): Promise<number>;
+  getMinLockPeriod(): Promise<BigNumber>;
 
   setChainId(chainId: number): void;
 
-  setProvider(provider: Xdc3): void;
+  setProvider(provider: DefaultProvider): void;
 }
