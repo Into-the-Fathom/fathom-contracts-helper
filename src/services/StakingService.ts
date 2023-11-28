@@ -332,7 +332,7 @@ export default class StakingService implements IStakingService {
 
   async approvalStatusStakingFTHM(
     address: string,
-    stakingPosition: number,
+    stakingPosition: string,
     fthmTokenAddress: string,
   ) {
     const FTHMToken = Web3Utils.getContractInstance(
@@ -343,8 +343,9 @@ export default class StakingService implements IStakingService {
     const StakingAddress = SmartContractFactory.Staking(this.chainId).address;
 
     const allowance = await FTHMToken.allowance(address, StakingAddress);
-    return BigNumber(allowance).isGreaterThanOrEqualTo(
-      utils.parseEther(stakingPosition.toString()).toString(),
+
+    return BigNumber(allowance.toString()).isGreaterThanOrEqualTo(
+      utils.parseEther(stakingPosition).toString(),
     );
   }
 
