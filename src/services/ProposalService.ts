@@ -177,7 +177,7 @@ export default class ProposalService implements IProposalService {
         );
         options.gasLimit = gasLimit;
 
-        const transaction = await FathomGovernor.methods.queue(
+        const transaction = await FathomGovernor.queue(
           targets,
           values,
           callData,
@@ -236,7 +236,7 @@ export default class ProposalService implements IProposalService {
         );
         options.gasLimit = gasLimit;
 
-        const transaction = await FathomGovernor.methods.castVote(
+        const transaction = await FathomGovernor.castVote(
           proposalId,
           support,
           options,
