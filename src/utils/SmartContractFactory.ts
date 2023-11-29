@@ -13,6 +13,7 @@ import StableSwapModuleWrapper from '../abis/StableSwapModuleWrapper.json';
 import Staking from '../abis/Staking.json';
 import StakingGetter from '../abis/StakingGetter.json';
 import VeFathomAbi from '../abis/vFathom.json';
+import FathomVault from '../abis/FathomVault.json';
 
 import { APOTHEM_ADDRESSES, XDC_ADDRESSES } from '../addresses';
 
@@ -176,6 +177,13 @@ export class SmartContractFactory {
     return {
       abi: VeFathomAbi.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).vFTHM,
+    };
+  }
+
+  public static FathomVault(chainId: number) {
+    return {
+      abi: FathomVault.abi as ContractInterface,
+      address: SmartContractFactory.Addresses(chainId).VAULT,
     };
   }
 

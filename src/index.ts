@@ -3,6 +3,7 @@ import PositionService from './services/PositionService';
 import ProposalService from './services/ProposalService';
 import StableSwapService from './services/StableSwapService';
 import StakingService from './services/StakingService';
+import VaultService from './services/VaultService';
 import {
   TRANSACTION_PENDING_MESSAGES,
   TRANSACTION_SUCCESS_MESSAGES,
@@ -25,6 +26,8 @@ import IPositionService from './interfaces/services/IPositionService';
 import IProposalService from './interfaces/services/IProposalService';
 import IStableSwapService from './interfaces/services/IStableSwapService';
 import IStakingService from './interfaces/services/IStakingService';
+import IVaultService from './interfaces/services/IVaultService';
+import IVault from './interfaces/models/IVault';
 import { getEstimateGas } from './utils/getEstimateGas';
 import { ZERO_ADDRESS } from './utils/Constants';
 
@@ -34,6 +37,7 @@ export {
   ProposalService,
   StableSwapService,
   StakingService,
+  VaultService,
   TRANSACTION_PENDING_MESSAGES,
   TRANSACTION_SUCCESS_MESSAGES,
   CHECK_ON_BLOCK_EXPLORER,
@@ -53,6 +57,8 @@ export {
   IProposalService,
   IStableSwapService,
   IStakingService,
+  IVault,
+  IVaultService,
   getEstimateGas,
   ZERO_ADDRESS,
 };

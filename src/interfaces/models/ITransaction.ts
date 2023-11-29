@@ -23,6 +23,8 @@ export enum TransactionType {
   HandleEarlyWithdrawal = 'HandleEarlyWithdrawal',
   HandleClaimRewards = 'HandleClaimRewards',
   HandleWithdrawAll = 'HandleWithdrawAll',
+
+  OpenVaultDeposit = 'OpenVaultDeposit',
 }
 
 export enum TransactionStatus {
