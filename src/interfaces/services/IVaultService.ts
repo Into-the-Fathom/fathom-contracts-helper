@@ -6,17 +6,22 @@ export default interface IVaultService {
   provider: DefaultProvider;
   chainId: number;
 
-  deposit(amount: string, account: string): Promise<number | Error>;
+  deposit(
+    amount: string,
+    account: string,
+    vaultAddress: string,
+  ): Promise<number | Error>;
 
-  getProxyWallet(address: string): Promise<string>;
-
-  createProxyWallet(address: string): Promise<string>;
-
-  approve(address: string, tokenAddress: string): Promise<number | Error>;
+  approve(
+    address: string,
+    tokenAddress: string,
+    vaultAddress: string,
+  ): Promise<number | Error>;
 
   approvalStatus(
     address: string,
     tokenAddress: string,
+    vaultAddress: string,
     collateral: string,
   ): Promise<boolean>;
 

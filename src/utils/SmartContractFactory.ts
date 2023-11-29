@@ -180,10 +180,10 @@ export class SmartContractFactory {
     };
   }
 
-  public static FathomVault(chainId: number) {
+  public static FathomVault(vaultAddress: string) {
     return {
       abi: FathomVault.abi as ContractInterface,
-      address: SmartContractFactory.Addresses(chainId).VAULT,
+      address: vaultAddress,
     };
   }
 

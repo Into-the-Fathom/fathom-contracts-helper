@@ -16,4 +16,5 @@ export default interface IVault {
   balanceTokens: string;
   balanceTokensIdle: string;
   totalDebtAmount: string;
+  depositLimit: string;
 }

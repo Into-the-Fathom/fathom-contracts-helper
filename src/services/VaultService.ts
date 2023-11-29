@@ -10,7 +10,7 @@ import {
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import { DefaultProvider } from '../types';
-import { MAX_UINT256, WeiPerWad, ZERO_ADDRESS } from '../utils/Constants';
+import { MAX_UINT256 } from '../utils/Constants';
 import BigNumber from 'bignumber.js';
 
 export default class VaultService implements IVaultService {
@@ -28,40 +28,40 @@ export default class VaultService implements IVaultService {
    * Create deposit on Vault.
    * @param amount - The amount of asset to deposit.
    * @param account - The address to receive the assets.
+   * @param vaultAddress - ERC20 token address.
    */
-  deposit(amount: string, account: string): Promise<number | Error> {
+  deposit(
+    amount: string,
+    account: string,
+    vaultAddress: string,
+  ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomVault = Web3Utils.getContractInstance(
-          SmartContractFactory.FathomVault(this.chainId),
+          SmartContractFactory.FathomVault(vaultAddress),
           this.provider.getSigner(),
           'signer',
         );
 
-        console.log('Contract: ', FathomVault);
-
-        const receiver = FathomVault.address;
-        const assets = utils.parseEther(amount);
-        console.log('Address: ', receiver, assets);
+        const parsedAmount = utils.parseEther(amount);
 
         const options = {
           from: account,
           gasLimit: 0,
         };
+
         const gasLimit = await getEstimateGas(
           FathomVault,
           'deposit',
-          [assets, receiver],
+          [parsedAmount, account],
           options,
         );
 
         options.gasLimit = gasLimit;
 
-        console.log('gasLimit: ', gasLimit);
-
         const transaction = await FathomVault.deposit(
-          assets,
-          receiver,
+          parsedAmount,
+          account,
           options,
         );
 
@@ -87,63 +87,19 @@ export default class VaultService implements IVaultService {
       }
     });
   }
-
-  /**
-   * Return proxy wallet for provided wallet address.
-   * @param address - wallet address
-   */
-  getProxyWallet(address: string) {
-    const proxyWalletRegistry = Web3Utils.getContractInstance(
-      SmartContractFactory.ProxyWalletRegistry(this.chainId),
-      this.provider,
-    );
-
-    return proxyWalletRegistry.proxies(address);
-  }
-
-  /**
-   * Create proxy wallet for provided wallet address.
-   * @param address - wallet address.
-   */
-  async createProxyWallet(address: string) {
-    const proxyWalletRegistry = Web3Utils.getContractInstance(
-      SmartContractFactory.ProxyWalletRegistry(this.chainId),
-      this.provider.getSigner(),
-      'signer',
-    );
-
-    const transaction = await proxyWalletRegistry.build(address);
-
-    emitPendingTransaction(
-      this.emitter,
-      transaction.hash,
-      TransactionType.CreateProxyWallet,
-    );
-
-    const receipt = await transaction.wait();
-
-    this.emitter.emit('successTransaction', {
-      type: TransactionType.CreateProxyWallet,
-      receipt,
-    });
-
-    return proxyWalletRegistry.proxies(address);
-  }
-
   /**
    * Approve ERC20 token.
-   * @param address - wallet address
-   * @param tokenAddress - ERC20 token to approve.
+   * @param address - wallet address.
+   * @param tokenAddress - ERC20 token for deposit.
+   * @param vaultAddress - vault address to approve.
    */
-  approve(address: string, tokenAddress: string): Promise<number | Error> {
+  approve(
+    address: string,
+    tokenAddress: string,
+    vaultAddress: string,
+  ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
-        let proxyWalletAddress = await this.getProxyWallet(address);
-
-        if (proxyWalletAddress === ZERO_ADDRESS) {
-          proxyWalletAddress = await this.createProxyWallet(address);
-        }
-
         const ERC20 = Web3Utils.getContractInstance(
           SmartContractFactory.ERC20(tokenAddress),
           this.provider.getSigner(),
@@ -154,13 +110,13 @@ export default class VaultService implements IVaultService {
         const gasLimit = await getEstimateGas(
           ERC20,
           'approve',
-          [proxyWalletAddress, MAX_UINT256],
+          [vaultAddress, MAX_UINT256],
           options,
         );
         options.gasLimit = gasLimit;
 
         const transaction = await ERC20.approve(
-          proxyWalletAddress,
+          vaultAddress,
           MAX_UINT256,
           options,
         );
@@ -191,34 +147,25 @@ export default class VaultService implements IVaultService {
   /**
    * Check approved deposit token.
    * @param address - wallet address.
-   * @param tokenAddress - ERC20 token address.
+   * @param tokenAddress - ERC20 token addres.
+   * @param vaultAddress - ERC20 token address.
    * @param deposit - amount of deposit for check.
    */
-  async approvalStatus(address: string, tokenAddress: string, deposit: string) {
-    const proxyWalletAddress = await this.getProxyWallet(address);
-
-    if (proxyWalletAddress === ZERO_ADDRESS) {
-      return false;
-    }
-
+  async approvalStatus(
+    address: string,
+    tokenAddress: string,
+    vaultAddress: string,
+    deposit: string,
+  ) {
     const ERC20 = Web3Utils.getContractInstance(
       SmartContractFactory.ERC20(tokenAddress),
       this.provider,
     );
 
-    const allowance = await ERC20.allowance(address, proxyWalletAddress);
-
-    console.log(1, BigNumber(allowance.toString()));
-    console.log(2, WeiPerWad.multipliedBy(deposit));
-    console.log(
-      'Allow: ',
-      BigNumber(allowance.toString()).isGreaterThanOrEqualTo(
-        WeiPerWad.multipliedBy(deposit),
-      ),
-    );
+    const allowance = await ERC20.allowance(address, vaultAddress);
 
     return BigNumber(allowance.toString()).isGreaterThanOrEqualTo(
-      WeiPerWad.multipliedBy(deposit),
+      utils.parseEther(deposit).toString(),
     );
   }
 
