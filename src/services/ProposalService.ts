@@ -42,7 +42,7 @@ export default class ProposalService implements IProposalService {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
-          SmartContractFactory.FathomGovernor(this.chainId),
+          SmartContractFactory.MainFathomGovernor(this.chainId),
           this.provider.getSigner(),
           'signer',
         );
@@ -106,7 +106,7 @@ export default class ProposalService implements IProposalService {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
-          SmartContractFactory.FathomGovernor(this.chainId),
+          SmartContractFactory.MainFathomGovernor(this.chainId),
           this.provider.getSigner(),
           'signer',
         );
@@ -162,7 +162,7 @@ export default class ProposalService implements IProposalService {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
-          SmartContractFactory.FathomGovernor(this.chainId),
+          SmartContractFactory.MainFathomGovernor(this.chainId),
           this.provider.getSigner(),
           'signer',
         );
@@ -177,7 +177,7 @@ export default class ProposalService implements IProposalService {
         );
         options.gasLimit = gasLimit;
 
-        const transaction = await FathomGovernor.methods.queue(
+        const transaction = await FathomGovernor.queue(
           targets,
           values,
           callData,
@@ -222,7 +222,7 @@ export default class ProposalService implements IProposalService {
     return new Promise(async (resolve, reject) => {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
-          SmartContractFactory.FathomGovernor(this.chainId),
+          SmartContractFactory.MainFathomGovernor(this.chainId),
           this.provider.getSigner(),
           'signer',
         );
@@ -236,7 +236,7 @@ export default class ProposalService implements IProposalService {
         );
         options.gasLimit = gasLimit;
 
-        const transaction = await FathomGovernor.methods.castVote(
+        const transaction = await FathomGovernor.castVote(
           proposalId,
           support,
           options,
@@ -272,7 +272,7 @@ export default class ProposalService implements IProposalService {
    */
   hasVoted(proposalId: string, account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
-      SmartContractFactory.FathomGovernor(this.chainId),
+      SmartContractFactory.MainFathomGovernor(this.chainId),
       this.provider,
     );
     return FathomGovernor.hasVoted(proposalId, account);
@@ -285,7 +285,7 @@ export default class ProposalService implements IProposalService {
    */
   viewProposalState(proposalId: string, account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
-      SmartContractFactory.FathomGovernor(this.chainId),
+      SmartContractFactory.MainFathomGovernor(this.chainId),
       this.provider,
     );
     return FathomGovernor.state(proposalId, { from: account });
@@ -297,7 +297,7 @@ export default class ProposalService implements IProposalService {
    */
   nextAcceptableProposalTimestamp(account: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
-      SmartContractFactory.FathomGovernor(this.chainId),
+      SmartContractFactory.MainFathomGovernor(this.chainId),
       this.provider,
     );
 
