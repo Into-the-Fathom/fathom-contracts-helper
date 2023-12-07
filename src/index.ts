@@ -8,6 +8,7 @@ import {
   TRANSACTION_SUCCESS_MESSAGES,
   CHECK_ON_BLOCK_EXPLORER,
 } from './utils/Constants';
+import { XDC_ADDRESSES, APOTHEM_ADDRESSES } from './addresses';
 import { Web3Utils } from './utils/Web3Utils';
 import { SmartContractFactory } from './utils/SmartContractFactory';
 import {
@@ -55,4 +56,6 @@ export {
   IStakingService,
   getEstimateGas,
   ZERO_ADDRESS,
+  XDC_ADDRESSES,
+  APOTHEM_ADDRESSES,
 };
