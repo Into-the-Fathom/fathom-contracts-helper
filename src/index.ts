@@ -30,6 +30,7 @@ import IVaultService from './interfaces/services/IVaultService';
 import IVault from './interfaces/models/IVault';
 import { getEstimateGas } from './utils/getEstimateGas';
 import { ZERO_ADDRESS } from './utils/Constants';
+import { XDC_ADDRESSES, APOTHEM_ADDRESSES } from './addresses';
 
 export {
   PoolService,
@@ -61,4 +62,6 @@ export {
   IVaultService,
   getEstimateGas,
   ZERO_ADDRESS,
+  XDC_ADDRESSES,
+  APOTHEM_ADDRESSES,
 };
