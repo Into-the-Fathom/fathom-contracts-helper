@@ -9,6 +9,7 @@ import {
   TRANSACTION_SUCCESS_MESSAGES,
   CHECK_ON_BLOCK_EXPLORER,
 } from './utils/Constants';
+import { XDC_ADDRESSES, APOTHEM_ADDRESSES } from './addresses';
 import { Web3Utils } from './utils/Web3Utils';
 import { SmartContractFactory } from './utils/SmartContractFactory';
 import {
@@ -27,7 +28,6 @@ import IProposalService from './interfaces/services/IProposalService';
 import IStableSwapService from './interfaces/services/IStableSwapService';
 import IStakingService from './interfaces/services/IStakingService';
 import IVaultService from './interfaces/services/IVaultService';
-import IVault from './interfaces/models/IVault';
 import { getEstimateGas } from './utils/getEstimateGas';
 import { ZERO_ADDRESS } from './utils/Constants';
 import { XDC_ADDRESSES, APOTHEM_ADDRESSES } from './addresses';
@@ -58,7 +58,6 @@ export {
   IProposalService,
   IStableSwapService,
   IStakingService,
-  IVault,
   IVaultService,
   getEstimateGas,
   ZERO_ADDRESS,

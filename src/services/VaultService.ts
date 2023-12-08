@@ -1,6 +1,5 @@
 import EventEmitter from 'eventemitter3';
 import { utils } from 'ethers';
-import BigNumber from 'bignumber.js';
 import IVaultService from '../interfaces/services/IVaultService';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
@@ -12,6 +11,7 @@ import {
 } from '../interfaces/models/ITransaction';
 import { DefaultProvider } from '../types';
 import { MAX_UINT256 } from '../utils/Constants';
+import BigNumber from 'bignumber.js';
 
 export default class VaultService implements IVaultService {
   public provider: DefaultProvider;

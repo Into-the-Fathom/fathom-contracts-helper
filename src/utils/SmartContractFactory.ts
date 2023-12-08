@@ -3,9 +3,8 @@ import CollateralPoolConfigAbi from '../abis/CollateralPoolConfig.json';
 import CollateralTokenAdapterAbi from '../abis/CollateralTokenAdapter.json';
 import DexPriceOracle from '../abis/DexPriceOracle.json';
 import FathomStableCoinProxyActionAbi from '../abis/FathomStablecoinProxyActions.json';
-import Governor from '../abis/Governor.json';
 import MainToken from '../abis/MainToken.json';
-import MainTokenGovernor from '../abis/MainTokenGovernor.json';
+import MainFathomGovernor from '../abis/MainFathomGovernor.json';
 import ProxyWalletAbi from '../abis/ProxyWallet.json';
 import ProxyWalletRegistryAbi from '../abis/ProxyWalletRegistry.json';
 import StableSwapModule from '../abis/StableSwapModule.json';
@@ -131,16 +130,9 @@ export class SmartContractFactory {
     };
   }
 
-  public static FathomGovernor(chainId: number) {
-    return {
-      abi: Governor.abi as ContractInterface,
-      address: SmartContractFactory.Addresses(chainId).FTHM_GOVERNOR,
-    };
-  }
-
   public static MainFathomGovernor(chainId: number) {
     return {
-      abi: MainTokenGovernor.abi as ContractInterface,
+      abi: MainFathomGovernor.abi as ContractInterface,
       address: SmartContractFactory.Addresses(chainId).FTHM_GOVERNOR,
     };
   }

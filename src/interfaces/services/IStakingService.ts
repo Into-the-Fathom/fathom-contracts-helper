@@ -38,7 +38,7 @@ export default interface IStakingService {
 
   approvalStatusStakingFTHM(
     address: string,
-    stakingPosition: number,
+    stakingPosition: string,
     fthmTokenAddress: string,
   ): Promise<boolean>;
 
