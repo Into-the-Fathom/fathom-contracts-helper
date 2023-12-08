@@ -12,6 +12,13 @@ export default interface IVaultService {
     vaultAddress: string,
   ): Promise<number | Error>;
 
+  withdraw(
+    amount: string,
+    receiver: string,
+    owner: string,
+    vaultAddress: string,
+  ): Promise<number | Error>;
+
   approve(
     address: string,
     tokenAddress: string,
@@ -24,6 +31,10 @@ export default interface IVaultService {
     vaultAddress: string,
     collateral: string,
   ): Promise<boolean>;
+
+  previewDeposit(amount: string, vaultAddress: string): Promise<string>;
+  previewWithdraw(amount: string, vaultAddress: string): Promise<string>;
+  previewRedeem(shareAmount: string, vaultAddress: string): Promise<string>;
 
   setChainId(chainId: number): void;
 
