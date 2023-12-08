@@ -27,7 +27,6 @@ import IProposalService from './interfaces/services/IProposalService';
 import IStableSwapService from './interfaces/services/IStableSwapService';
 import IStakingService from './interfaces/services/IStakingService';
 import IVaultService from './interfaces/services/IVaultService';
-import IVault from './interfaces/models/IVault';
 import { getEstimateGas } from './utils/getEstimateGas';
 import { ZERO_ADDRESS } from './utils/Constants';
 
@@ -57,7 +56,6 @@ export {
   IProposalService,
   IStableSwapService,
   IStakingService,
-  IVault,
   IVaultService,
   getEstimateGas,
   ZERO_ADDRESS,

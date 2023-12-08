@@ -25,6 +25,7 @@ export enum TransactionType {
   HandleWithdrawAll = 'HandleWithdrawAll',
 
   OpenVaultDeposit = 'OpenVaultDeposit',
+  WithdrawVaultDeposit = 'WithdrawVaultDeposit',
 }
 
 export enum TransactionStatus {
