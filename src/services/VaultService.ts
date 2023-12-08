@@ -1,6 +1,5 @@
 import EventEmitter from 'eventemitter3';
 import { utils } from 'ethers';
-import BigNumber from 'bignumber.js';
 import IVaultService from '../interfaces/services/IVaultService';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
@@ -12,6 +11,7 @@ import {
 } from '../interfaces/models/ITransaction';
 import { DefaultProvider } from '../types';
 import { MAX_UINT256 } from '../utils/Constants';
+import BigNumber from 'bignumber.js';
 
 export default class VaultService implements IVaultService {
   public provider: DefaultProvider;
@@ -92,10 +92,8 @@ export default class VaultService implements IVaultService {
    * Withdraw from Vault.
    * @param amount - The amount of asset to withdraw.
    * @param receiver - The address to receive the assets.
-   * @param owner - The address who's shares are being burnt.
+   * @param owner - The address who`s shares are being burnt.
    * @param vaultAddress - ERC20 token address.
-   * @param max_loss - Amount of acceptable loss in Basis Points. Optional parameter
-   * @param strategies - Array of strategies to withdraw from. If none is passed, it will just use defaultQueue array of strategies. Optional parameter
    */
   withdraw(
     amount: string,
@@ -129,6 +127,76 @@ export default class VaultService implements IVaultService {
         options.gasLimit = gasLimit;
 
         const transaction = await FathomVault.withdraw(
+          parsedAmount,
+          receiver,
+          owner.toLowerCase(),
+          maxLoss,
+          [],
+          options,
+        );
+
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.WithdrawVaultDeposit,
+        );
+
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.WithdrawVaultDeposit,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.CreateLock,
+          error,
+        });
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Withdraw from Vault.
+   * @param shareAmount - The amount of share Token to withdraw.
+   * @param receiver - The address to receive the assets.
+   * @param owner - The address who`s shares are being burnt.
+   * @param vaultAddress - ERC20 token address.
+   */
+  redeem(
+    shareAmount: string,
+    receiver: string,
+    owner: string,
+    vaultAddress: string,
+  ): Promise<number | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const FathomVault = Web3Utils.getContractInstance(
+          SmartContractFactory.FathomVault(vaultAddress),
+          this.provider.getSigner(),
+          'signer',
+        );
+
+        const parsedAmount = utils.parseEther(shareAmount);
+        const maxLoss = utils.parseEther('0');
+
+        const options = {
+          from: owner,
+          gasLimit: 0,
+        };
+
+        const gasLimit = await getEstimateGas(
+          FathomVault,
+          'redeem',
+          [parsedAmount, receiver, owner.toLowerCase(), maxLoss, []],
+          options,
+        );
+
+        options.gasLimit = gasLimit;
+
+        const transaction = await FathomVault.redeem(
           parsedAmount,
           receiver,
           owner.toLowerCase(),
@@ -220,7 +288,7 @@ export default class VaultService implements IVaultService {
   /**
    * Check approved deposit token.
    * @param address - wallet address.
-   * @param tokenAddress - ERC20 token addres.
+   * @param tokenAddress - ERC20 token address.
    * @param vaultAddress - ERC20 token address.
    * @param deposit - amount of deposit for check.
    */
@@ -245,7 +313,7 @@ export default class VaultService implements IVaultService {
   /**
    * Get amount share token by amount of asset to deposit.
    * @param amount - The amount of asset to deposit.
-   * @param vaultAddress - Vault contract adress.
+   * @param vaultAddress - Vault contract address.
    */
   async previewDeposit(amount: string, vaultAddress: string) {
     const FathomVault = Web3Utils.getContractInstance(
@@ -256,6 +324,24 @@ export default class VaultService implements IVaultService {
     const parsedAmount = utils.parseEther(amount);
 
     const previewAmountShare = await FathomVault.previewDeposit(parsedAmount);
+
+    return previewAmountShare.toString();
+  }
+
+  /**
+   * Get amount tokens by amount of share token in position.
+   * @param shareAmount - The amount of share token.
+   * @param vaultAddress - Vault contract address.
+   */
+  async previewRedeem(shareAmount: string, vaultAddress: string) {
+    const FathomVault = Web3Utils.getContractInstance(
+      SmartContractFactory.FathomVault(vaultAddress),
+      this.provider,
+    );
+
+    const parsedAmount = utils.parseEther(shareAmount);
+
+    const previewAmountShare = await FathomVault.previewRedeem(parsedAmount);
 
     return previewAmountShare.toString();
   }
