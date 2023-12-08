@@ -19,6 +19,13 @@ export default interface IVaultService {
     vaultAddress: string,
   ): Promise<number | Error>;
 
+  redeem(
+    shareAmount: string,
+    receiver: string,
+    owner: string,
+    vaultAddress: string,
+  ): Promise<number | Error>;
+
   approve(
     address: string,
     tokenAddress: string,

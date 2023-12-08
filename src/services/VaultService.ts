@@ -159,6 +159,76 @@ export default class VaultService implements IVaultService {
   }
 
   /**
+   * Withdraw from Vault.
+   * @param shareAmount - The amount of share Token to withdraw.
+   * @param receiver - The address to receive the assets.
+   * @param owner - The address who`s shares are being burnt.
+   * @param vaultAddress - ERC20 token address.
+   */
+  redeem(
+    shareAmount: string,
+    receiver: string,
+    owner: string,
+    vaultAddress: string,
+  ): Promise<number | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const FathomVault = Web3Utils.getContractInstance(
+          SmartContractFactory.FathomVault(vaultAddress),
+          this.provider.getSigner(),
+          'signer',
+        );
+
+        const parsedAmount = utils.parseEther(shareAmount);
+        const maxLoss = utils.parseEther('0');
+
+        const options = {
+          from: owner,
+          gasLimit: 0,
+        };
+
+        const gasLimit = await getEstimateGas(
+          FathomVault,
+          'redeem',
+          [parsedAmount, receiver, owner.toLowerCase(), maxLoss, []],
+          options,
+        );
+
+        options.gasLimit = gasLimit;
+
+        const transaction = await FathomVault.redeem(
+          parsedAmount,
+          receiver,
+          owner.toLowerCase(),
+          maxLoss,
+          [],
+          options,
+        );
+
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.WithdrawVaultDeposit,
+        );
+
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.WithdrawVaultDeposit,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.CreateLock,
+          error,
+        });
+        reject(error);
+      }
+    });
+  }
+
+  /**
    * Approve ERC20 token.
    * @param address - wallet address.
    * @param tokenAddress - ERC20 token for deposit.
