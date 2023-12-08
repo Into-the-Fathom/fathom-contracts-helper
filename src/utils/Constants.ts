@@ -37,6 +37,8 @@ export const TRANSACTION_PENDING_MESSAGES = {
   [TransactionType.HandleEarlyWithdrawal]: 'Handling Early Unlock Pending',
   [TransactionType.HandleClaimRewards]: 'Handling Claim Rewards Pending',
   [TransactionType.HandleWithdrawAll]: 'Handling Withdraw Rewards Pending',
+  [TransactionType.OpenVaultDeposit]: 'Handling New Deposit Pending',
+  [TransactionType.WithdrawVaultDeposit]: 'Handling Withdraw Rewards Pending',
 };
 
 export const TRANSACTION_SUCCESS_MESSAGES = {
@@ -67,4 +69,6 @@ export const TRANSACTION_SUCCESS_MESSAGES = {
     'Handling Early Unlock was successful!',
   [TransactionType.HandleClaimRewards]: 'Claim Rewards was successful!',
   [TransactionType.HandleWithdrawAll]: 'Withdraw all was successful!',
+  [TransactionType.OpenVaultDeposit]: 'Deposit was successful!',
+  [TransactionType.WithdrawVaultDeposit]: 'Withdraw was successful!',
 };
