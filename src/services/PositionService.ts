@@ -70,8 +70,6 @@ export default class PositionService implements IPositionService {
       try {
         let proxyWalletAddress = await this.getProxyWallet(address);
 
-        console.log({ proxyWalletAddress });
-
         if (proxyWalletAddress === ZERO_ADDRESS) {
           proxyWalletAddress = await this.createProxyWallet(address);
         }
@@ -86,7 +84,9 @@ export default class PositionService implements IPositionService {
         );
 
         const encodedResult = this._abiCoder.encode(['address'], [address]);
-        const roundedValue = BigNumber(fathomToken).precision(18).toString();
+        const roundedValue = BigNumber(fathomToken)
+          .precision(18, BigNumber.ROUND_DOWN)
+          .toString();
 
         const openPositionCall =
           this._stableCoinProxyActionInterface.encodeFunctionData(
