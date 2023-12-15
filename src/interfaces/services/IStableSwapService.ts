@@ -20,9 +20,9 @@ export default interface IStableSwapService {
     tokenName: string,
   ): Promise<number | Error>;
 
-  addLiquidity(amount: number, account: string): Promise<number | Error>;
+  addLiquidity(amount: string, account: string): Promise<number | Error>;
 
-  removeLiquidity(amount: number, account: string): Promise<number | Error>;
+  removeLiquidity(amount: string, account: string): Promise<number | Error>;
 
   approveStableCoin(
     address: string,

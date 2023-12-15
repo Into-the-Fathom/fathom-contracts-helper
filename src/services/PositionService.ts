@@ -79,11 +79,14 @@ export default class PositionService implements IPositionService {
         const wallet = Web3Utils.getContractInstanceFrom(
           SmartContractFactory.proxyWallet.abi,
           proxyWalletAddress,
-          this.provider.getSigner(),
+          this.provider.getSigner(address),
           'signer',
         );
 
         const encodedResult = this._abiCoder.encode(['address'], [address]);
+        const roundedValue = BigNumber(fathomToken)
+          .precision(18, BigNumber.ROUND_DOWN)
+          .toString();
 
         const openPositionCall =
           this._stableCoinProxyActionInterface.encodeFunctionData(
@@ -94,13 +97,12 @@ export default class PositionService implements IPositionService {
               pool.tokenAdapterAddress,
               SmartContractFactory.StablecoinAdapter(this.chainId).address,
               pool.id,
-              utils.parseEther(fathomToken.toString()),
+              utils.parseEther(roundedValue),
               encodedResult,
             ],
           );
 
         const options = {
-          from: address,
           gasLimit: 0,
           value: utils.parseEther(collateral),
         };
@@ -167,7 +169,7 @@ export default class PositionService implements IPositionService {
         const wallet = Web3Utils.getContractInstanceFrom(
           SmartContractFactory.proxyWallet.abi,
           proxyWalletAddress,
-          this.provider.getSigner(),
+          this.provider.getSigner(address),
           'signer',
         );
 
@@ -188,7 +190,6 @@ export default class PositionService implements IPositionService {
           );
 
         const options = {
-          from: address,
           gasLimit: 0,
           value: collateral ? utils.parseEther(collateral) : 0,
         };
@@ -251,7 +252,7 @@ export default class PositionService implements IPositionService {
         const wallet = Web3Utils.getContractInstanceFrom(
           SmartContractFactory.proxyWallet.abi,
           proxyWalletAddress,
-          this.provider.getSigner(),
+          this.provider.getSigner(address),
           'signer',
         );
 
@@ -266,7 +267,6 @@ export default class PositionService implements IPositionService {
           ]);
 
         const options = {
-          from: address,
           gasLimit: 0,
           value: collateral ? utils.parseEther(collateral.toString()) : '0',
         };
@@ -311,7 +311,7 @@ export default class PositionService implements IPositionService {
   async createProxyWallet(address: string) {
     const proxyWalletRegistry = Web3Utils.getContractInstance(
       SmartContractFactory.ProxyWalletRegistry(this.chainId),
-      this.provider.getSigner(),
+      this.provider.getSigner(address),
       'signer',
     );
 
@@ -353,7 +353,7 @@ export default class PositionService implements IPositionService {
         const wallet = Web3Utils.getContractInstanceFrom(
           SmartContractFactory.proxyWallet.abi,
           proxyWalletAddress,
-          this.provider.getSigner(),
+          this.provider.getSigner(address),
           'signer',
         );
 
@@ -372,7 +372,7 @@ export default class PositionService implements IPositionService {
             ],
           );
 
-        const options = { from: address, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           wallet,
           'execute',
@@ -430,7 +430,7 @@ export default class PositionService implements IPositionService {
         const wallet = Web3Utils.getContractInstanceFrom(
           SmartContractFactory.proxyWallet.abi,
           proxyWalletAddress,
-          this.provider.getSigner(),
+          this.provider.getSigner(address),
           'signer',
         );
 
@@ -450,7 +450,7 @@ export default class PositionService implements IPositionService {
             ],
           );
 
-        const options = { from: address, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           wallet,
           'execute',
@@ -503,11 +503,11 @@ export default class PositionService implements IPositionService {
 
         const ERC20 = Web3Utils.getContractInstance(
           SmartContractFactory.ERC20(tokenAddress),
-          this.provider.getSigner(),
+          this.provider.getSigner(address),
           'signer',
         );
 
-        const options = { from: address, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           ERC20,
           'approve',
@@ -589,11 +589,11 @@ export default class PositionService implements IPositionService {
 
         const fathomStableCoin = Web3Utils.getContractInstance(
           SmartContractFactory.FathomStableCoin(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(address),
           'signer',
         );
 
-        const options = { from: address, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           fathomStableCoin,
           'approve',

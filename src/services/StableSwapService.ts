@@ -1,5 +1,6 @@
 import EventEmitter from 'eventemitter3';
 import BigNumber from 'bignumber.js';
+import { BigNumber as eBigNumber } from 'ethers';
 
 import { MAX_UINT256 } from '../utils/Constants';
 import { SmartContractFactory } from '../utils/SmartContractFactory';
@@ -37,26 +38,29 @@ export default class StableSwapService implements IStableSwapService {
       try {
         const StableSwapModule = Web3Utils.getContractInstance(
           SmartContractFactory.StableSwapModule(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
 
         const formattedTokenAmount = BigNumber(tokenIn)
           .multipliedBy(BigNumber(10).exponentiatedBy(tokenInDecimals))
-          .integerValue(BigNumber.ROUND_DOWN);
+          .integerValue()
+          .precision(18, BigNumber.ROUND_DOWN);
+
+        const roundedValue = eBigNumber.from(formattedTokenAmount.toString());
 
         const gasLimit = await getEstimateGas(
           StableSwapModule,
           'swapTokenToStablecoin',
-          [account, formattedTokenAmount],
+          [account, roundedValue],
           options,
         );
         options.gasLimit = gasLimit;
 
         const transaction = await StableSwapModule.swapTokenToStablecoin(
           account,
-          formattedTokenAmount,
+          roundedValue,
           options,
         );
 
@@ -95,13 +99,15 @@ export default class StableSwapService implements IStableSwapService {
       try {
         const StableSwapModule = Web3Utils.getContractInstance(
           SmartContractFactory.StableSwapModule(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
-
-        const formattedTokenAmount = utils.parseEther(tokenOut);
+        const options = { gasLimit: 0 };
+        const roundedTokenAmount = BigNumber(tokenOut)
+          .precision(18, BigNumber.ROUND_DOWN)
+          .toString();
+        const formattedTokenAmount = utils.parseEther(roundedTokenAmount);
 
         const gasLimit = await getEstimateGas(
           StableSwapModule,
@@ -143,17 +149,17 @@ export default class StableSwapService implements IStableSwapService {
     });
   }
 
-  addLiquidity(amount: number, account: string): Promise<number | Error> {
+  addLiquidity(amount: string, account: string): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const StableSwapModuleWrapper = Web3Utils.getContractInstance(
           SmartContractFactory.StableSwapModuleWrapper(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
 
-        const formattedTokenAmount = utils.parseEther(amount.toString());
+        const formattedTokenAmount = utils.parseEther(amount);
 
         const gasLimit = await getEstimateGas(
           StableSwapModuleWrapper,
@@ -191,18 +197,18 @@ export default class StableSwapService implements IStableSwapService {
     });
   }
 
-  removeLiquidity(amount: number, account: string): Promise<number | Error> {
+  removeLiquidity(amount: string, account: string): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
         const StableSwapModuleWrapper = Web3Utils.getContractInstance(
           SmartContractFactory.StableSwapModuleWrapper(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
 
-        const formattedTokenAmount = utils.parseEther(amount.toString());
+        const formattedTokenAmount = utils.parseEther(amount);
 
         const gasLimit = await getEstimateGas(
           StableSwapModuleWrapper,
@@ -248,11 +254,11 @@ export default class StableSwapService implements IStableSwapService {
       try {
         const FathomStableCoin = Web3Utils.getContractInstance(
           SmartContractFactory.FathomStableCoin(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const approvalAddress = isStableSwapWrapper
           ? SmartContractFactory.StableSwapModuleWrapper(this.chainId).address
           : SmartContractFactory.StableSwapModule(this.chainId).address;
@@ -302,11 +308,11 @@ export default class StableSwapService implements IStableSwapService {
       try {
         const USStable = Web3Utils.getContractInstance(
           SmartContractFactory.USDT(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const approvalAddress = isStableSwapWrapper
           ? SmartContractFactory.StableSwapModuleWrapper(this.chainId).address
           : SmartContractFactory.StableSwapModule(this.chainId).address;
@@ -353,11 +359,11 @@ export default class StableSwapService implements IStableSwapService {
       try {
         const StableSwapModuleWrapper = Web3Utils.getContractInstance(
           SmartContractFactory.StableSwapModuleWrapper(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
 
         const gasLimit = await getEstimateGas(
           StableSwapModuleWrapper,
@@ -400,10 +406,10 @@ export default class StableSwapService implements IStableSwapService {
       try {
         const StableSwapModuleWrapper = Web3Utils.getContractInstance(
           SmartContractFactory.StableSwapModuleWrapper(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
 
         const gasLimit = await getEstimateGas(
           StableSwapModuleWrapper,
@@ -456,7 +462,7 @@ export default class StableSwapService implements IStableSwapService {
         ? SmartContractFactory.StableSwapModuleWrapper(this.chainId).address
         : SmartContractFactory.StableSwapModule(this.chainId).address,
     );
-    return BigNumber(allowance).isGreaterThanOrEqualTo(
+    return BigNumber(allowance.toString()).isGreaterThanOrEqualTo(
       BigNumber(10).exponentiatedBy(tokenInDecimal).multipliedBy(tokenIn),
     );
   }
@@ -479,7 +485,7 @@ export default class StableSwapService implements IStableSwapService {
         : SmartContractFactory.StableSwapModule(this.chainId).address,
     );
 
-    return BigNumber(allowance).isGreaterThanOrEqualTo(
+    return BigNumber(allowance.toString()).isGreaterThanOrEqualTo(
       BigNumber(10).exponentiatedBy(tokenInDecimal).multipliedBy(tokenIn),
     );
   }
@@ -556,7 +562,8 @@ export default class StableSwapService implements IStableSwapService {
       this.provider,
     );
 
-    const formattedTokenAmount = utils.parseEther(amount.toString());
+    const roundedAmount = BigNumber(amount).precision(18).toString();
+    const formattedTokenAmount = utils.parseEther(roundedAmount);
 
     return StableSwapModuleWrapper.getAmounts(formattedTokenAmount, {
       from: account,

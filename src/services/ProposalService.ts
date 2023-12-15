@@ -43,11 +43,11 @@ export default class ProposalService implements IProposalService {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.MainFathomGovernor(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           FathomGovernor,
           'propose',
@@ -107,11 +107,11 @@ export default class ProposalService implements IProposalService {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.MainFathomGovernor(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           FathomGovernor,
           'execute',
@@ -163,11 +163,11 @@ export default class ProposalService implements IProposalService {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.MainFathomGovernor(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
 
         const gasLimit = await getEstimateGas(
           FathomGovernor,
@@ -223,11 +223,11 @@ export default class ProposalService implements IProposalService {
       try {
         const FathomGovernor = Web3Utils.getContractInstance(
           SmartContractFactory.MainFathomGovernor(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           FathomGovernor,
           'castVote',

@@ -39,14 +39,13 @@ export default class VaultService implements IVaultService {
       try {
         const FathomVault = Web3Utils.getContractInstance(
           SmartContractFactory.FathomVault(vaultAddress),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
         const parsedAmount = utils.parseEther(amount);
 
         const options = {
-          from: account,
           gasLimit: 0,
         };
 
@@ -105,7 +104,7 @@ export default class VaultService implements IVaultService {
       try {
         const FathomVault = Web3Utils.getContractInstance(
           SmartContractFactory.FathomVault(vaultAddress),
-          this.provider.getSigner(),
+          this.provider.getSigner(owner),
           'signer',
         );
 
@@ -113,7 +112,6 @@ export default class VaultService implements IVaultService {
         const maxLoss = utils.parseEther('0');
 
         const options = {
-          from: owner,
           gasLimit: 0,
         };
 
@@ -175,7 +173,7 @@ export default class VaultService implements IVaultService {
       try {
         const FathomVault = Web3Utils.getContractInstance(
           SmartContractFactory.FathomVault(vaultAddress),
-          this.provider.getSigner(),
+          this.provider.getSigner(owner),
           'signer',
         );
 
@@ -183,7 +181,6 @@ export default class VaultService implements IVaultService {
         const maxLoss = utils.parseEther('0');
 
         const options = {
-          from: owner,
           gasLimit: 0,
         };
 
@@ -230,12 +227,12 @@ export default class VaultService implements IVaultService {
 
   /**
    * Approve ERC20 token.
-   * @param address - wallet address.
+   * @param account - wallet address.
    * @param tokenAddress - ERC20 token for deposit.
    * @param vaultAddress - vault address to approve.
    */
   approve(
-    address: string,
+    account: string,
     tokenAddress: string,
     vaultAddress: string,
   ): Promise<number | Error> {
@@ -243,11 +240,11 @@ export default class VaultService implements IVaultService {
       try {
         const ERC20 = Web3Utils.getContractInstance(
           SmartContractFactory.ERC20(tokenAddress),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: address, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           ERC20,
           'approve',
