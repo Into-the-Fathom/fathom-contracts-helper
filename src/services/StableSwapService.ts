@@ -45,8 +45,8 @@ export default class StableSwapService implements IStableSwapService {
 
         const formattedTokenAmount = BigNumber(tokenIn)
           .multipliedBy(BigNumber(10).exponentiatedBy(tokenInDecimals))
-          .integerValue()
-          .precision(18, BigNumber.ROUND_DOWN);
+          .integerValue(BigNumber.ROUND_DOWN)
+          .precision(18);
 
         const roundedValue = eBigNumber.from(formattedTokenAmount.toString());
 
