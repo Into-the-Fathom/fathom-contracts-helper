@@ -37,13 +37,13 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
         const endTime = unlockPeriod * DAY_SECONDS;
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           Staking,
           'createLock',
@@ -90,11 +90,11 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           Staking,
           'unlockPartially',
@@ -140,11 +140,11 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           Staking,
           'earlyUnlock',
@@ -186,11 +186,11 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           Staking,
           'claimAllLockRewardsForStream',
@@ -235,14 +235,14 @@ export default class StakingService implements IStakingService {
       try {
         const Staking = Web3Utils.getContractInstance(
           SmartContractFactory.Staking(this.chainId),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
         /**
          * For FTHM stream is 0
          */
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           Staking,
           'withdrawStream',
@@ -284,7 +284,7 @@ export default class StakingService implements IStakingService {
       try {
         const FTHMToken = Web3Utils.getContractInstance(
           SmartContractFactory.MainToken(fthmTokenAddress),
-          this.provider.getSigner(),
+          this.provider.getSigner(account),
           'signer',
         );
 
@@ -292,7 +292,7 @@ export default class StakingService implements IStakingService {
           this.chainId,
         ).address;
 
-        const options = { from: account, gasLimit: 0 };
+        const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           FTHMToken,
           'approve',
