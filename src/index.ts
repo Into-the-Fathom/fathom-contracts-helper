@@ -21,7 +21,12 @@ import ILockPosition from './interfaces/models/ILockPosition';
 import IOpenPosition from './interfaces/models/IOpenPosition';
 import IProposal, { ProposalVotes } from './interfaces/models/IProposal';
 import ITimeObject from './interfaces/models/ITimeObject';
-import { IVault, IVaultPosition } from './interfaces/models/IVault';
+import {
+  IVault,
+  IVaultPosition,
+  IVaultStrategy,
+  IVaultStrategyReport,
+} from './interfaces/models/IVault';
 import IPoolService from './interfaces/services/IPoolService';
 import IPositionService from './interfaces/services/IPositionService';
 import IProposalService from './interfaces/services/IProposalService';
@@ -55,6 +60,8 @@ export {
   ITimeObject,
   IVault,
   IVaultPosition,
+  IVaultStrategy,
+  IVaultStrategyReport,
   IPoolService,
   IPositionService,
   IProposalService,
