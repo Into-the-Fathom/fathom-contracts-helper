@@ -679,15 +679,6 @@ export default class PositionService implements IPositionService {
       fathomStableCoin.decimals(),
     ]);
 
-    console.log(
-      BigNumber(allowance.toString())
-        .dividedBy(10 ** 18)
-        .toString(),
-      amount,
-      allowance.toString(),
-      decimals.toString(),
-    );
-
     return BigNumber(allowance.toString())
       .dividedBy(BigNumber(10).exponentiatedBy(decimals.toString()))
       .isGreaterThanOrEqualTo(amount);
