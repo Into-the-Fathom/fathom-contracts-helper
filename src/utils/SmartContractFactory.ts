@@ -17,7 +17,7 @@ import FathomVault from '../abis/FathomVault.json';
 import { APOTHEM_ADDRESSES, XDC_ADDRESSES } from '../addresses';
 
 import { ChainId } from '../types';
-import { ContractInterface } from 'ethers';
+import { ContractInterface } from 'fathom-ethers';
 
 export class SmartContractFactory {
   public static Addresses(chainId: ChainId) {

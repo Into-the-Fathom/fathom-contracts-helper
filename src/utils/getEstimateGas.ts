@@ -1,5 +1,5 @@
 import { ESTIMATE_GAS_MULTIPLIER } from './Constants';
-import { Contract } from 'ethers';
+import { Contract } from 'fathom-ethers';
 
 export const getEstimateGas = async (
   contract: Contract,

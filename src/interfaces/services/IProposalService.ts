@@ -1,7 +1,7 @@
 import { ProposalVotes } from '../models/IProposal';
 import EventEmitter from 'eventemitter3';
 import { DefaultProvider } from '../../types';
-import { BigNumber } from 'ethers';
+import { BigNumber } from 'fathom-ethers';
 
 export default interface IProposalService {
   emitter: EventEmitter;

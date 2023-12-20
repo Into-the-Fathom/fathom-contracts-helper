@@ -1,6 +1,6 @@
 import EventEmitter from 'eventemitter3';
 import BigNumber from 'bignumber.js';
-import { BigNumber as eBigNumber } from 'ethers';
+import { BigNumber as eBigNumber } from 'fathom-ethers';
 
 import { MAX_UINT256 } from '../utils/Constants';
 import { SmartContractFactory } from '../utils/SmartContractFactory';
@@ -15,7 +15,7 @@ import {
 import IStableSwapService from '../interfaces/services/IStableSwapService';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
-import { utils } from 'ethers';
+import { utils } from 'fathom-ethers';
 
 export default class StableSwapService implements IStableSwapService {
   public provider: DefaultProvider;

@@ -1,6 +1,6 @@
 {
   "name": "fathom-sdk",
-  "version": "0.1.30",
+  "version": "0.1.33",
   "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
   "type": "module",
   "scripts": {
@@ -43,7 +43,7 @@
   "types": "./dist/index.d.ts",
   "dependencies": {
     "bignumber.js": "^9.1.2",
-    "ethers": "^5.7.2",
+    "fathom-ethers": "^1.1.0",
     "eventemitter3": "^5.0.1"
   }
 }

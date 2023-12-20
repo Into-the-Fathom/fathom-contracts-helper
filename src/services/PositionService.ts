@@ -19,7 +19,7 @@ import ICollateralPool from '../interfaces/models/ICollateralPool';
 import IPositionService from '../interfaces/services/IPositionService';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
-import { utils } from 'ethers';
+import { utils } from 'fathom-ethers';
 
 export default class PositionService implements IPositionService {
   public provider: DefaultProvider;
@@ -73,6 +73,7 @@ export default class PositionService implements IPositionService {
         if (proxyWalletAddress === ZERO_ADDRESS) {
           proxyWalletAddress = await this.createProxyWallet(address);
         }
+
         /**
          * Get Proxy Wallet
          */
