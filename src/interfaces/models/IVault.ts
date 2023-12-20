@@ -58,5 +58,8 @@ export interface IVault {
   balanceTokensIdle: string;
   totalDebtAmount: string;
   depositLimit: string;
+  totalFees: string;
+  protocolFees: string;
+  protocolFeeRecipient: string;
   strategies: IVaultStrategy[];
 }
