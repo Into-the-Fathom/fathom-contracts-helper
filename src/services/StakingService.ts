@@ -13,7 +13,7 @@ import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
-import { utils } from 'ethers';
+import { utils } from 'fathom-ethers';
 
 const DAY_SECONDS = 24 * 60 * 60;
 

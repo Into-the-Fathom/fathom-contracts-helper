@@ -1,5 +1,5 @@
 import EventEmitter from 'eventemitter3';
-import { utils } from 'ethers';
+import { utils } from 'fathom-ethers';
 import IVaultService from '../interfaces/services/IVaultService';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';

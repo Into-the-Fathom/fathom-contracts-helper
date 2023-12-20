@@ -19,7 +19,7 @@ import ICollateralPool from '../interfaces/models/ICollateralPool';
 import IPositionService from '../interfaces/services/IPositionService';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
-import { utils } from 'ethers';
+import { utils } from 'fathom-ethers';
 
 export default class PositionService implements IPositionService {
   public provider: DefaultProvider;
@@ -73,6 +73,7 @@ export default class PositionService implements IPositionService {
         if (proxyWalletAddress === ZERO_ADDRESS) {
           proxyWalletAddress = await this.createProxyWallet(address);
         }
+        console.log('Check one');
         /**
          * Get Proxy Wallet
          */
@@ -107,6 +108,8 @@ export default class PositionService implements IPositionService {
           value: utils.parseEther(collateral),
         };
 
+        console.log('control 1');
+
         const gasLimit = await getEstimateGas(
           wallet,
           'execute',
@@ -114,8 +117,12 @@ export default class PositionService implements IPositionService {
           options,
         );
 
+        console.log('control 2');
+
         options.gasLimit = gasLimit;
         const transaction = await wallet.execute(openPositionCall, options);
+
+        console.log('control 3');
 
         emitPendingTransaction(
           this.emitter,
@@ -124,6 +131,8 @@ export default class PositionService implements IPositionService {
         );
 
         const receipt = await transaction.wait();
+
+        console.log('control 4');
 
         this.emitter.emit('successTransaction', {
           type: TransactionType.OpenPosition,

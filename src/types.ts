@@ -1,5 +1,5 @@
-import { JsonRpcProvider, Provider } from '@ethersproject/providers';
-import { Signer } from 'ethers';
+import { JsonRpcProvider, Provider } from '@into-the-fathom/providers';
+import { Signer } from 'fathom-ethers';
 
 export declare enum ChainId {
   XDC = 50,

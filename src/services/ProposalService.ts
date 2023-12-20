@@ -11,7 +11,7 @@ import {
 import IProposalService from '../interfaces/services/IProposalService';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
-import { utils } from 'ethers';
+import { utils } from 'fathom-ethers';
 
 export default class ProposalService implements IProposalService {
   public provider: DefaultProvider;

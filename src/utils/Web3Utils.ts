@@ -1,5 +1,5 @@
 import { SignerOrProvider } from '../types';
-import { Contract, ContractInterface } from 'ethers';
+import { Contract, ContractInterface } from 'fathom-ethers';
 
 export interface ContractMetaData {
   address: string;

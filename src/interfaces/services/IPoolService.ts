@@ -1,5 +1,5 @@
 import { DefaultProvider } from '../../types';
-import { BigNumber } from 'ethers';
+import { BigNumber } from 'fathom-ethers';
 
 export default interface IPoolService {
   provider: DefaultProvider;
