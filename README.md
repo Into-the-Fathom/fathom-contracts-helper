@@ -99,6 +99,15 @@ npm install ethers@5.7.2
   - [getStreamClaimableAmount](#getStreamClaimableAmount)
   - [getMinLockPeriod](#getMinLockPeriod)
   - [getPairPrice](#getPairPrice)
+- f.[VaultService](#vault-service)
+  - [deposit](#deposit)
+  - [withdraw](#withdraw)
+  - [redeem](#redeem)
+  - [approve](#approve)
+  - [approvalStatus](#approvalStatus)
+  - [previewDeposit](#previewDeposit)
+  - [previewWithdraw](#previewWithdraw)
+  - [previewRedeem](#previewRedeem)
 
 <br />
 
@@ -218,3 +227,4 @@ Services List:
   also get vFTHM token which allow to create proposal and increase voting power.
 - StableSwapService - Swap methods for FXD/xUSDT pair. Available only for
   whitelisted wallets.
+- VaultService - Vault methods for deposit assets and withdrawal.
