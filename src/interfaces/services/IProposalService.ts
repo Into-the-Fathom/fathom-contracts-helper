@@ -38,7 +38,7 @@ export default interface IProposalService {
     account: string,
   ): Promise<number | Error>;
 
-  viewProposalState(proposalId: string, account: string): Promise<number>;
+  viewProposalState(proposalId: string): Promise<number>;
 
   nextAcceptableProposalTimestamp(account: string): Promise<BigNumber>;
 
