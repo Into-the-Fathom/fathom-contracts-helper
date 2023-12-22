@@ -99,6 +99,15 @@ npm install ethers@5.7.2
   - [getStreamClaimableAmount](#getStreamClaimableAmount)
   - [getMinLockPeriod](#getMinLockPeriod)
   - [getPairPrice](#getPairPrice)
+- f. [VaultService](#vault-service)
+  - [deposit](#deposit)
+  - [withdraw](#withdraw)
+  - [redeem](#redeem)
+  - [approve](#approve)
+  - [approvalStatus](#approvalStatus)
+  - [previewDeposit](#previewDeposit)
+  - [previewWithdraw](#previewWithdraw)
+  - [previewRedeem](#previewRedeem)
 
 <br />
 
@@ -118,12 +127,14 @@ import {
   ProposalService,
   StableSwapService,
   StakingService,
+  VaultService,
   // Interfaces
   IPoolService,
   IPositionService,
   IProposalService,
   IStableSwapService,
   IStakingService,
+  IVaultService,
 } from 'fathom-sdk';
 import { JsonRpcProvider } from "@ethersproject/providers";
 /**
@@ -149,6 +160,7 @@ export class RootService {
   stableSwapService: IStableSwapService;
   proposalService: IProposalService;
   stakingService: IStakingService;
+  vaultService: IVaultService;
 
   chainId = DEFAULT_CHAIN_ID;
 
@@ -160,6 +172,7 @@ export class RootService {
     'proposalService',
     'stableSwapService',
     'stakingService',
+    'vaultService',
   ];
 
   constructor() {
@@ -170,6 +183,7 @@ export class RootService {
     this.proposalService = new ProposalService(this.provider, this.chainId);
     this.stakingService = new StakingService(this.provider, this.chainId);
     this.stableSwapService = new StableSwapService(this.provider, this.chainId);
+    this.vaultService = new VaultService(this.provider, this.chainId);
   }
 
   /**
@@ -218,3 +232,4 @@ Services List:
   also get vFTHM token which allow to create proposal and increase voting power.
 - StableSwapService - Swap methods for FXD/xUSDT pair. Available only for
   whitelisted wallets.
+- VaultService - Vault service for deposit assets and withdrawal.
