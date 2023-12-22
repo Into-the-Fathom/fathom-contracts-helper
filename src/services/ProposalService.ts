@@ -283,12 +283,12 @@ export default class ProposalService implements IProposalService {
    * @param proposalId - proposal id.
    * @param account - wallet address.
    */
-  viewProposalState(proposalId: string, account: string) {
+  viewProposalState(proposalId: string) {
     const FathomGovernor = Web3Utils.getContractInstance(
       SmartContractFactory.MainFathomGovernor(this.chainId),
       this.provider,
     );
-    return FathomGovernor.state(proposalId, { from: account });
+    return FathomGovernor.state(proposalId);
   }
 
   /**
