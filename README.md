@@ -127,12 +127,14 @@ import {
   ProposalService,
   StableSwapService,
   StakingService,
+  VaultService,
   // Interfaces
   IPoolService,
   IPositionService,
   IProposalService,
   IStableSwapService,
   IStakingService,
+  IVaultService,
 } from 'fathom-sdk';
 import { JsonRpcProvider } from "@ethersproject/providers";
 /**
@@ -158,6 +160,7 @@ export class RootService {
   stableSwapService: IStableSwapService;
   proposalService: IProposalService;
   stakingService: IStakingService;
+  vaultService: IVaultService;
 
   chainId = DEFAULT_CHAIN_ID;
 
@@ -169,6 +172,7 @@ export class RootService {
     'proposalService',
     'stableSwapService',
     'stakingService',
+    'vaultService',
   ];
 
   constructor() {
@@ -179,6 +183,7 @@ export class RootService {
     this.proposalService = new ProposalService(this.provider, this.chainId);
     this.stakingService = new StakingService(this.provider, this.chainId);
     this.stableSwapService = new StableSwapService(this.provider, this.chainId);
+    this.vaultService = new VaultService(this.provider, this.chainId);
   }
 
   /**
