@@ -4,6 +4,7 @@ import ProposalService from './services/ProposalService';
 import StableSwapService from './services/StableSwapService';
 import StakingService from './services/StakingService';
 import VaultService from './services/VaultService';
+import OracleService from './services/OracleService';
 import {
   TRANSACTION_PENDING_MESSAGES,
   TRANSACTION_SUCCESS_MESSAGES,
@@ -33,6 +34,7 @@ import IProposalService from './interfaces/services/IProposalService';
 import IStableSwapService from './interfaces/services/IStableSwapService';
 import IStakingService from './interfaces/services/IStakingService';
 import IVaultService from './interfaces/services/IVaultService';
+import IOracleService from './interfaces/services/IOracleService';
 import { getEstimateGas } from './utils/getEstimateGas';
 import { ZERO_ADDRESS } from './utils/Constants';
 import { XDC_ADDRESSES, APOTHEM_ADDRESSES } from './addresses';
@@ -44,6 +46,7 @@ export {
   StableSwapService,
   StakingService,
   VaultService,
+  OracleService,
   TRANSACTION_PENDING_MESSAGES,
   TRANSACTION_SUCCESS_MESSAGES,
   CHECK_ON_BLOCK_EXPLORER,
@@ -68,6 +71,7 @@ export {
   IStableSwapService,
   IStakingService,
   IVaultService,
+  IOracleService,
   getEstimateGas,
   ZERO_ADDRESS,
   XDC_ADDRESSES,
