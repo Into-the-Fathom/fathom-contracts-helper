@@ -13,6 +13,7 @@ import Staking from '../abis/Staking.json';
 import StakingGetter from '../abis/StakingGetter.json';
 import VeFathomAbi from '../abis/vFathom.json';
 import FathomVault from '../abis/FathomVault.json';
+import FathomPriceOracle from '../abis/FathomPriceOracle.json';
 
 import { APOTHEM_ADDRESSES, XDC_ADDRESSES } from '../addresses';
 
@@ -176,6 +177,13 @@ export class SmartContractFactory {
     return {
       abi: FathomVault.abi as ContractInterface,
       address: vaultAddress,
+    };
+  }
+
+  public static FathomPriceOracle(chainId: number) {
+    return {
+      abi: FathomPriceOracle.abi as ContractInterface,
+      address: SmartContractFactory.Addresses(chainId).FATHOM_PRICE_ORACLE,
     };
   }
 
