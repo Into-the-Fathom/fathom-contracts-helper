@@ -520,7 +520,7 @@ export default class StableSwapService implements IStableSwapService {
       SmartContractFactory.StableSwapModule(this.chainId),
       this.provider,
     );
-    return StableSwapModule.dailySwapLimit();
+    return StableSwapModule.dailySwapLimitNumerator();
   }
 
   getPoolBalance(tokenAddress: string) {
