@@ -520,7 +520,31 @@ export default class StableSwapService implements IStableSwapService {
       SmartContractFactory.StableSwapModule(this.chainId),
       this.provider,
     );
-    return StableSwapModule.dailySwapLimitNumerator();
+    return StableSwapModule.remainingDailySwapAmount();
+  }
+
+  getTotalValueDeposited() {
+    const StableSwapModule = Web3Utils.getContractInstance(
+      SmartContractFactory.StableSwapModule(this.chainId),
+      this.provider,
+    );
+    return StableSwapModule.totalValueDeposited();
+  }
+
+  getSingleSwapLimitNumerator() {
+    const StableSwapModule = Web3Utils.getContractInstance(
+      SmartContractFactory.StableSwapModule(this.chainId),
+      this.provider,
+    );
+    return StableSwapModule.singleSwapLimitNumerator();
+  }
+
+  getSingleSwapLimitDenomerator() {
+    const StableSwapModule = Web3Utils.getContractInstance(
+      SmartContractFactory.StableSwapModule(this.chainId),
+      this.provider,
+    );
+    return StableSwapModule.SINGLE_SWAP_LIMIT_DENOMINATOR();
   }
 
   getPoolBalance(tokenAddress: string) {

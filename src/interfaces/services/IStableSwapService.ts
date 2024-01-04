@@ -60,6 +60,12 @@ export default interface IStableSwapService {
 
   getDailySwapLimit(): Promise<BigNumber>;
 
+  getTotalValueDeposited(): Promise<BigNumber>;
+
+  getSingleSwapLimitNumerator(): Promise<BigNumber>;
+
+  getSingleSwapLimitDenomerator(): Promise<BigNumber>;
+
   getPoolBalance(tokenAddress: string): Promise<BigNumber>;
 
   getAmounts(amount: string, account: string): Promise<BigNumber[]>;
