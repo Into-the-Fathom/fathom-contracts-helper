@@ -539,7 +539,7 @@ export default class StableSwapService implements IStableSwapService {
     return StableSwapModule.singleSwapLimitNumerator();
   }
 
-  getSingleSwapLimitDenomerator() {
+  getSingleSwapLimitDenominator() {
     const StableSwapModule = Web3Utils.getContractInstance(
       SmartContractFactory.StableSwapModule(this.chainId),
       this.provider,
