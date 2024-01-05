@@ -64,7 +64,7 @@ export default interface IStableSwapService {
 
   getSingleSwapLimitNumerator(): Promise<BigNumber>;
 
-  getSingleSwapLimitDenomerator(): Promise<BigNumber>;
+  getSingleSwapLimitDenominator(): Promise<BigNumber>;
 
   getPoolBalance(tokenAddress: string): Promise<BigNumber>;
 
