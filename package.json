@@ -1,6 +1,6 @@
 {
   "name": "fathom-sdk",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
   "type": "module",
   "scripts": {
