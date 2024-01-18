@@ -81,10 +81,53 @@ export default class StakingService implements IStakingService {
     });
   }
 
-  handleUnlock(
+  handleUnlock(account: string, lockId: number): Promise<number | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const Staking = Web3Utils.getContractInstance(
+          SmartContractFactory.Staking(this.chainId),
+          this.provider.getSigner(account),
+          'signer',
+        );
+
+        const options = { gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
+          Staking,
+          'unlock',
+          [lockId],
+          options,
+        );
+        options.gasLimit = gasLimit;
+
+        const transaction = await Staking.unlock(lockId, options);
+
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.HandleUnlock,
+        );
+
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.HandleUnlock,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.HandleUnlock,
+          error,
+        });
+        reject(error);
+      }
+    });
+  }
+
+  handlePartiallyUnlock(
     account: string,
     lockId: number,
-    amount: number,
+    amount: string,
   ): Promise<number | Error> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -98,7 +141,7 @@ export default class StakingService implements IStakingService {
         const gasLimit = await getEstimateGas(
           Staking,
           'unlockPartially',
-          [lockId, utils.parseEther(amount.toString())],
+          [lockId, utils.parseEther(amount)],
           options,
         );
         options.gasLimit = gasLimit;
