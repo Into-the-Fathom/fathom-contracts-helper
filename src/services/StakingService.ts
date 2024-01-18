@@ -104,19 +104,19 @@ export default class StakingService implements IStakingService {
         emitPendingTransaction(
           this.emitter,
           transaction.hash,
-          TransactionType.HandleUnlock,
+          TransactionType.StakingUnlock,
         );
 
         const receipt = await transaction.wait();
 
         this.emitter.emit('successTransaction', {
-          type: TransactionType.HandleUnlock,
+          type: TransactionType.StakingUnlock,
           receipt,
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.HandleUnlock,
+          type: TransactionType.StakingUnlock,
           error,
         });
         reject(error);
@@ -155,19 +155,19 @@ export default class StakingService implements IStakingService {
         emitPendingTransaction(
           this.emitter,
           transaction.hash,
-          TransactionType.HandleUnlock,
+          TransactionType.StakingUnlock,
         );
 
         const receipt = await transaction.wait();
 
         this.emitter.emit('successTransaction', {
-          type: TransactionType.HandleUnlock,
+          type: TransactionType.StakingUnlock,
           receipt,
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.HandleUnlock,
+          type: TransactionType.StakingUnlock,
           error,
         });
         reject(error);
@@ -201,19 +201,19 @@ export default class StakingService implements IStakingService {
         emitPendingTransaction(
           this.emitter,
           transaction.hash,
-          TransactionType.HandleEarlyWithdrawal,
+          TransactionType.StakingEarlyWithdrawal,
         );
 
         const receipt = await transaction.wait();
 
         this.emitter.emit('successTransaction', {
-          type: TransactionType.HandleEarlyWithdrawal,
+          type: TransactionType.StakingEarlyWithdrawal,
           receipt,
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.HandleEarlyWithdrawal,
+          type: TransactionType.StakingEarlyWithdrawal,
           error,
         });
         reject(error);
@@ -250,19 +250,19 @@ export default class StakingService implements IStakingService {
         emitPendingTransaction(
           this.emitter,
           transaction.hash,
-          TransactionType.HandleClaimRewards,
+          TransactionType.StakingClaimRewards,
         );
 
         const receipt = await transaction.wait();
 
         this.emitter.emit('successTransaction', {
-          type: TransactionType.HandleClaimRewards,
+          type: TransactionType.StakingClaimRewards,
           receipt,
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.HandleClaimRewards,
+          type: TransactionType.StakingClaimRewards,
           error,
         });
         reject(error);
@@ -299,19 +299,19 @@ export default class StakingService implements IStakingService {
         emitPendingTransaction(
           this.emitter,
           transaction.hash,
-          TransactionType.HandleWithdrawAll,
+          TransactionType.StakingWithdrawAll,
         );
 
         const receipt = await transaction.wait();
 
         this.emitter.emit('successTransaction', {
-          type: TransactionType.HandleWithdrawAll,
+          type: TransactionType.StakingWithdrawAll,
           receipt,
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.HandleWithdrawAll,
+          type: TransactionType.StakingWithdrawAll,
           error,
         });
         reject(error);
