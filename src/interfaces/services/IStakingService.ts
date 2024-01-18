@@ -13,10 +13,12 @@ export default interface IStakingService {
     unlockPeriod: number,
   ): Promise<number | Error>;
 
-  handleUnlock(
+  handleUnlock(account: string, lockId: number): Promise<number | Error>;
+
+  handlePartiallyUnlock(
     account: string,
     lockId: number,
-    amount: number,
+    amount: string,
   ): Promise<number | Error>;
 
   handleEarlyWithdrawal(
