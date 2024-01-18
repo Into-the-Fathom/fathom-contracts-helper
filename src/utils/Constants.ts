@@ -65,8 +65,7 @@ export const TRANSACTION_SUCCESS_MESSAGES = {
     'Withdrawal of claim fees was successful!',
   [TransactionType.CreateLock]: 'Lock position created successfully!',
   [TransactionType.StakingUnlock]: 'Position unlock was successful!',
-  [TransactionType.StakingEarlyWithdrawal]:
-    'Handling Early Unlock was successful!',
+  [TransactionType.StakingEarlyWithdrawal]: 'Early Unlock was successful!',
   [TransactionType.StakingClaimRewards]: 'Claim Rewards was successful!',
   [TransactionType.StakingWithdrawAll]: 'Withdraw all was successful!',
   [TransactionType.OpenVaultDeposit]: 'Deposit was successful!',
