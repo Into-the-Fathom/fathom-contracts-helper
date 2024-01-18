@@ -19,7 +19,7 @@ export enum TransactionType {
   WithdrawClaimedFees = 'WithdrawClaimedFees',
 
   CreateLock = 'CreateLock',
-  StakingUnlock = 'HandleUnlock',
+  StakingUnlock = 'StakingUnlock',
   StakingEarlyWithdrawal = 'StakingEarlyWithdrawal',
   StakingClaimRewards = 'StakingClaimRewards',
   StakingWithdrawAll = 'StakingWithdrawAll',
