@@ -18,8 +18,6 @@ export interface IVaultPosition {
 }
 
 export interface IVaultStrategyReport {
-  totalFees: string;
-  protocolFees: string;
   timestamp: string;
   gain: string;
   loss: string;
