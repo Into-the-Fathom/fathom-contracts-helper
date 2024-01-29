@@ -18,17 +18,10 @@ export interface IVaultPosition {
 }
 
 export interface IVaultStrategyReport {
-  totalFees: string;
-  protocolFees: string;
   timestamp: string;
   gain: string;
   loss: string;
   currentDebt: string;
-  results: [
-    {
-      apr: string;
-    },
-  ];
 }
 
 export interface IVaultStrategy {
@@ -36,6 +29,12 @@ export interface IVaultStrategy {
   delegatedAssets: string;
   currentDebt: string;
   maxDebt: string;
+  apr: string;
+  historicalApr: {
+    id: string;
+    apr: string;
+    timestamp: string;
+  };
   reports: IVaultStrategyReport[];
 }
 
@@ -56,10 +55,7 @@ export interface IVault {
   sharesSupply: string;
   balanceTokens: string;
   balanceTokensIdle: string;
-  totalDebtAmount: string;
   depositLimit: string;
-  totalFees: string;
-  protocolFees: string;
-  protocolFeeRecipient: string;
+  apr: string;
   strategies: IVaultStrategy[];
 }
