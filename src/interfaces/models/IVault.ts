@@ -34,7 +34,7 @@ export interface IVaultStrategy {
     id: string;
     apr: string;
     timestamp: string;
-  };
+  }[];
   reports: IVaultStrategyReport[];
 }
 
