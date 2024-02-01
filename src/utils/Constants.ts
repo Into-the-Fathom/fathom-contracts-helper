@@ -67,7 +67,7 @@ export const TRANSACTION_SUCCESS_MESSAGES = {
   [TransactionType.StakingUnlock]: 'Position unlock was successful!',
   [TransactionType.StakingEarlyWithdrawal]: 'Early Unlock was successful!',
   [TransactionType.StakingClaimRewards]: 'Claim Rewards was successful!',
-  [TransactionType.StakingWithdrawAll]: 'Withdraw all was successful!',
+  [TransactionType.StakingWithdrawAll]: 'Withdraw was successful!',
   [TransactionType.OpenVaultDeposit]: 'Deposit was successful!',
   [TransactionType.WithdrawVaultDeposit]: 'Withdraw was successful!',
 };
