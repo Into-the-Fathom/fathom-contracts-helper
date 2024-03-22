@@ -1,8 +1,7 @@
 {
   "name": "fathom-sdk",
-  "version": "0.1.45",
+  "version": "0.1.46",
   "description": "Package with methods for formatting data and executing transactions on the Fathom protocol.",
-  "type": "module",
   "scripts": {
     "build": "rm -r dist && tsc -p ./tsconfig.json && tsc -p ./tsconfig.json --module commonjs --outDir ./dist/cjs",
     "lint": "eslint src/**/*.ts",
