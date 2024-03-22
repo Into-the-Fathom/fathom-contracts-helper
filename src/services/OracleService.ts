@@ -1,6 +1,6 @@
 import { Web3Utils } from '../utils/Web3Utils';
 import { SmartContractFactory } from '../utils/SmartContractFactory';
-import IOracleService from 'interfaces/services/IOracleService';
+import IOracleService from '../interfaces/services/IOracleService';
 
 import { DefaultProvider } from '../types';
 
