@@ -14,6 +14,7 @@ import StakingGetter from '../abis/StakingGetter.json';
 import VeFathomAbi from '../abis/vFathom.json';
 import FathomVault from '../abis/FathomVault.json';
 import FathomPriceOracle from '../abis/FathomPriceOracle.json';
+import MultiSigWallet from '../abis/MultiSigWallet.json';
 
 import { APOTHEM_ADDRESSES, XDC_ADDRESSES } from '../addresses';
 
@@ -202,5 +203,12 @@ export class SmartContractFactory {
     const addresses = SmartContractFactory.Addresses(chainId);
     // @ts-ignore
     return addresses[name] ? addresses[name] : '';
+  }
+
+  public static MultiSigWallet(chainId: number) {
+    return {
+      abi: MultiSigWallet.abi as ContractInterface,
+      address: SmartContractFactory.Addresses(chainId).MULTI_SIG_WALLET,
+    };
   }
 }
