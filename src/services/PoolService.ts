@@ -27,6 +27,15 @@ export default class PoolService implements IPoolService {
     return ERC20.balanceOf(address);
   }
 
+  getTokenSymbol(forAddress: string) {
+    const ERC20 = Web3Utils.getContractInstance(
+      SmartContractFactory.ERC20(forAddress),
+      this.provider,
+    );
+
+    return ERC20.symbol();
+  }
+
   /**
    * Helper function which return decimals for provided ERC20 token address.
    * Use ERC20 Interface.

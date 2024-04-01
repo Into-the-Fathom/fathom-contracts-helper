@@ -9,6 +9,8 @@ export default interface IPoolService {
 
   getTokenDecimals(forAddress: string): Promise<BigNumber>;
 
+  getTokenSymbol(forAddress: string): Promise<string>;
+
   getDexPrice(forAddress: string): Promise<BigNumber>;
 
   getCollateralTokenAddress(forAddress: string): Promise<string>;
