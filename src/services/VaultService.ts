@@ -346,7 +346,7 @@ export default class VaultService implements IVaultService {
   /**
    * Get the amount of burnt share tokens by the amount of the asset to be withdrawn
    * @param amount - The amount of asset to be withdrawn.
-   * @param vaultAddress - Vault contract adress.
+   * @param vaultAddress - Vault contract address.
    */
   async previewWithdraw(amount: string, vaultAddress: string) {
     const FathomVault = Web3Utils.getContractInstance(
