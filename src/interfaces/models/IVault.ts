@@ -8,10 +8,12 @@ export interface IVaultPosition {
     id: string;
   };
   token: {
+    id: string;
     symbol: string;
     name: string;
   };
   shareToken: {
+    id: string;
     symbol: string;
     name: string;
   };
