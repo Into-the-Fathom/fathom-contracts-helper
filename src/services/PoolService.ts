@@ -22,6 +22,8 @@ export default class PoolService implements IPoolService {
     const ERC20 = Web3Utils.getContractInstance(
       SmartContractFactory.ERC20(forAddress),
       this.provider,
+      'provider',
+      'erc20'
     );
 
     return ERC20.balanceOf(address);

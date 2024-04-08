@@ -334,6 +334,8 @@ export default class VaultService implements IVaultService {
     const FathomVault = Web3Utils.getContractInstance(
       SmartContractFactory.FathomVault(vaultAddress),
       this.provider,
+      'provider',
+      'fathomVault',
     );
 
     const parsedAmount = utils.parseEther(shareAmount);
