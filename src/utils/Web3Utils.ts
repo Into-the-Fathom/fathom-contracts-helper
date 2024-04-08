@@ -12,8 +12,9 @@ export class Web3Utils {
     contractMetaData: ContractMetaData,
     provider: SignerOrProvider,
     type = 'provider',
+    contractKey = '',
   ): Contract {
-    const key = type + contractMetaData.address;
+    const key = type + contractMetaData.address + contractKey;
 
     if (Web3Utils.contracts.has(key)) {
       return Web3Utils.contracts.get(key) as Contract;
@@ -34,8 +35,9 @@ export class Web3Utils {
     address: string,
     provider: SignerOrProvider,
     type = 'provider',
+    contractKey = '',
   ): Contract {
-    const key = type + address;
+    const key = type + address + contractKey;
 
     if (Web3Utils.contracts.has(key)) {
       return Web3Utils.contracts.get(key) as Contract;
