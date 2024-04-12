@@ -723,7 +723,7 @@ export default class PositionService implements IPositionService {
 
     const debtCeiling = await poolConfigContract.getPositionDebtCeiling(poolId);
 
-    return BigNumber(debtCeiling)
+    return BigNumber(debtCeiling.toString())
       .dividedBy(WeiPerRad)
       .integerValue()
       .toString();
