@@ -1257,7 +1257,7 @@
       "inputs": [
         {
           "internalType": "uint256",
-          "name": "",
+          "name": "amount",
           "type": "uint256"
         }
       ],
@@ -1609,7 +1609,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "",
+          "name": "for",
           "type": "address"
         }
       ],
@@ -1628,7 +1628,7 @@
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "",
+          "name": "role",
           "type": "bytes32"
         }
       ],
@@ -1954,7 +1954,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "",
+          "name": "account",
           "type": "address"
         }
       ],
@@ -2123,7 +2123,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "",
+          "name": "strategy",
           "type": "address"
         }
       ],

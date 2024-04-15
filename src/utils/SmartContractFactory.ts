@@ -13,6 +13,7 @@ import Staking from '../abis/Staking.json';
 import StakingGetter from '../abis/StakingGetter.json';
 import VeFathomAbi from '../abis/vFathom.json';
 import FathomVault from '../abis/FathomVault.json';
+import FathomVaultStrategy from '../abis/TokenizedStrategy.json';
 import FathomPriceOracle from '../abis/FathomPriceOracle.json';
 import MultiSigWallet from '../abis/MultiSigWallet.json';
 
@@ -178,6 +179,13 @@ export class SmartContractFactory {
     return {
       abi: FathomVault.abi as ContractInterface,
       address: vaultAddress,
+    };
+  }
+
+  public static FathomVaultStrategy(vaultStrategyAddress: string) {
+    return {
+      abi: FathomVaultStrategy.abi as ContractInterface,
+      address: vaultStrategyAddress,
     };
   }
 
