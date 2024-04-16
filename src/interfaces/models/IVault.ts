@@ -60,4 +60,5 @@ export interface IVault {
   depositLimit: string;
   apr: string;
   strategies: IVaultStrategy[];
+  activationBlockNumber?: string;
 }
