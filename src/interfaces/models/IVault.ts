@@ -61,4 +61,5 @@ export interface IVault {
   apr: string;
   strategies: IVaultStrategy[];
   activationBlockNumber?: string;
+  shutdown: boolean;
 }
