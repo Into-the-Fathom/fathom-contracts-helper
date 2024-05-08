@@ -427,6 +427,14 @@ export default class StakingService implements IStakingService {
     );
     return DexPriceOracle.getPrice(token0, token1);
   }
+
+  getMaxLockPositions() {
+    const Staking = Web3Utils.getContractInstance(
+      SmartContractFactory.Staking(this.chainId),
+      this.provider,
+    );
+    return Staking.maxLockPositions();
+  }
   /**
    * Set JsonRpcProvider provider for service
    * @param provider - JsonRpcProvider provider

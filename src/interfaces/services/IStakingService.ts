@@ -56,6 +56,8 @@ export default interface IStakingService {
 
   getMinLockPeriod(): Promise<BigNumber>;
 
+  getMaxLockPositions(): Promise<BigNumber>;
+
   setChainId(chainId: number): void;
 
   setProvider(provider: DefaultProvider): void;
