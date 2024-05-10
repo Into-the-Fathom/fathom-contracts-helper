@@ -17,7 +17,7 @@ import FathomVaultStrategy from '../abis/TokenizedStrategy.json';
 import FathomPriceOracle from '../abis/FathomPriceOracle.json';
 import MultiSigWallet from '../abis/MultiSigWallet.json';
 
-import { APOTHEM_ADDRESSES, XDC_ADDRESSES } from '../addresses';
+import { APOTHEM_ADDRESSES, SEPOLIA_ADDRESSES, XDC_ADDRESSES } from '../addresses';
 
 import { ChainId } from '../types';
 import { ContractInterface } from 'fathom-ethers';
@@ -29,6 +29,8 @@ export class SmartContractFactory {
         return APOTHEM_ADDRESSES;
       case 50:
         return XDC_ADDRESSES;
+      case 11155111:
+        return SEPOLIA_ADDRESSES;
       default:
         return XDC_ADDRESSES;
     }
