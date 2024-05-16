@@ -31,10 +31,15 @@ export default class PositionService implements IPositionService {
 
   private _stableCoinProxyActionInterfaceMethodNames = [
     'openLockXDCAndDraw',
+    'openLockTokenAndDraw',
     'lockXDCAndDraw',
+    'lockTokenAndDraw',
     'lockXDC',
+    'lockToken',
     'wipeAllAndUnlockXDC',
+    'wipeAllAndUnlockToken',
     'wipeAndUnlockXDC',
+    'wipeAndUnlockToken',
   ];
 
   constructor(provider: DefaultProvider, chainId: number) {
@@ -54,7 +59,7 @@ export default class PositionService implements IPositionService {
     );
   }
   /**
-   * Create new position, lock collateral in contract and mint FXD stable coin.
+   * Create new position, lock collateral in contract and mint FXD stable coin. (Native token)
    * @param address - wallet address. Create or get proxy wallet for provided address.
    * @param pool - collateral pool model.
    * @param collateral - amount of collateral
@@ -106,6 +111,95 @@ export default class PositionService implements IPositionService {
         const options = {
           gasLimit: 0,
           value: utils.parseEther(collateral),
+        };
+
+        const gasLimit = await getEstimateGas(
+          wallet,
+          'execute',
+          [openPositionCall],
+          options,
+        );
+
+        options.gasLimit = gasLimit;
+        const transaction = await wallet.execute(openPositionCall, options);
+
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.OpenPosition,
+        );
+
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.OpenPosition,
+          receipt,
+        });
+
+        resolve(receipt.blockNumber);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.OpenPosition,
+          error,
+        });
+        reject(error);
+      }
+    });
+  }
+  /**
+   * Create new position, lock collateral in contract and mint FXD stable coin. (ERC20 token)
+   * @param address - wallet address. Create or get proxy wallet for provided address.
+   * @param pool - collateral pool model.
+   * @param collateral - amount of collateral
+   * @param fathomToken - amount for mint FXD stable coin.
+   */
+  openPositionERC20(
+    address: string,
+    pool: ICollateralPool,
+    collateral: string,
+    fathomToken: string,
+  ): Promise<number | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let proxyWalletAddress = await this.getProxyWallet(address);
+
+        if (proxyWalletAddress === ZERO_ADDRESS) {
+          proxyWalletAddress = await this.createProxyWallet(address);
+        }
+
+        /**
+         * Get Proxy Wallet
+         */
+        const wallet = Web3Utils.getContractInstanceFrom(
+          SmartContractFactory.proxyWallet.abi,
+          proxyWalletAddress,
+          this.provider.getSigner(address),
+          'signer',
+        );
+
+        const encodedResult = this._abiCoder.encode(['address'], [address]);
+        const roundedFathomTokenValue = BigNumber(fathomToken)
+          .precision(18, BigNumber.ROUND_DOWN)
+          .toString();
+
+        const openPositionCall =
+          this._stableCoinProxyActionInterface.encodeFunctionData(
+            'openLockTokenAndDraw',
+            [
+              SmartContractFactory.PositionManager(this.chainId).address,
+              SmartContractFactory.StabilityFeeCollector(this.chainId).address,
+              pool.tokenAdapterAddress,
+              SmartContractFactory.StablecoinAdapter(this.chainId).address,
+              pool.id,
+              utils.parseEther(collateral),
+              utils.parseEther(roundedFathomTokenValue),
+              true,
+              encodedResult,
+            ],
+          );
+
+        const options = {
+          gasLimit: 0,
         };
 
         const gasLimit = await getEstimateGas(
@@ -227,6 +321,92 @@ export default class PositionService implements IPositionService {
     });
   }
   /**
+   * Add extra collateral to existing position or/and mint more FXD stable coin. (ERC20 token)
+   * @param address - wallet address. Create or get proxy wallet for provided address.
+   * @param pool - collateral pool model.
+   * @param collateral - add extra collateral for existing position.
+   * @param fathomToken - mint additional FXD stable coin.
+   * @param positionId - existing position id.
+   */
+  topUpPositionAndBorrowERC20(
+    address: string,
+    pool: ICollateralPool,
+    collateral: string,
+    fathomToken: string,
+    positionId: string,
+  ): Promise<number | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let proxyWalletAddress = await this.getProxyWallet(address);
+
+        if (proxyWalletAddress === ZERO_ADDRESS) {
+          proxyWalletAddress = await this.createProxyWallet(address);
+        }
+
+        /**
+         * Get Proxy Wallet
+         */
+        const wallet = Web3Utils.getContractInstanceFrom(
+          SmartContractFactory.proxyWallet.abi,
+          proxyWalletAddress,
+          this.provider.getSigner(address),
+          'signer',
+        );
+
+        const encodedResult = this._abiCoder.encode(['address'], [address]);
+
+        const topUpPositionCall =
+          this._stableCoinProxyActionInterface.encodeFunctionData(
+            'lockTokenAndDraw',
+            [
+              SmartContractFactory.PositionManager(this.chainId).address,
+              SmartContractFactory.StabilityFeeCollector(this.chainId).address,
+              pool.tokenAdapterAddress,
+              SmartContractFactory.StablecoinAdapter(this.chainId).address,
+              positionId,
+              collateral ? utils.parseEther(collateral) : 0,
+              fathomToken ? utils.parseEther(fathomToken.toString()) : '0',
+              true,
+              encodedResult,
+            ],
+          );
+
+        const options = {
+          gasLimit: 0
+        };
+
+        const gasLimit = await getEstimateGas(
+          wallet,
+          'execute',
+          [topUpPositionCall],
+          options,
+        );
+        options.gasLimit = gasLimit;
+
+        const transaction = await wallet.execute(topUpPositionCall, options);
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.TopUpPositionAndBorrow,
+        );
+
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.TopUpPositionAndBorrow,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.TopUpPositionAndBorrow,
+          error,
+        });
+        reject(error);
+      }
+    });
+  }
+  /**
    * Add extra collateral to existing position.
    * @param address - wallet address. Create or get proxy wallet for provided address.
    * @param pool - collateral pool model.
@@ -270,6 +450,86 @@ export default class PositionService implements IPositionService {
         const options = {
           gasLimit: 0,
           value: collateral ? utils.parseEther(collateral.toString()) : '0',
+        };
+
+        const gasLimit = await getEstimateGas(
+          wallet,
+          'execute',
+          [topUpPositionCall],
+          options,
+        );
+
+        options.gasLimit = gasLimit;
+
+        const transaction = await wallet.execute(topUpPositionCall, options);
+
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.TopUpPosition,
+        );
+
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.TopUpPosition,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.TopUpPosition,
+          error,
+        });
+        reject(error);
+      }
+    });
+  }
+  /**
+   * Add extra collateral to existing position. (ERC20)
+   * @param address - wallet address. Create or get proxy wallet for provided address.
+   * @param pool - collateral pool model.
+   * @param collateral - add extra collateral for existing position without extra mint FXD stable coin.
+   * @param positionId - existing position id.
+   */
+  topUpPositionERC20(
+    address: string,
+    pool: ICollateralPool,
+    collateral: string,
+    positionId: string,
+  ): Promise<number | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let proxyWalletAddress = await this.getProxyWallet(address);
+
+        if (proxyWalletAddress === ZERO_ADDRESS) {
+          proxyWalletAddress = await this.createProxyWallet(address);
+        }
+
+        /**
+         * Get Proxy Wallet
+         */
+        const wallet = Web3Utils.getContractInstanceFrom(
+          SmartContractFactory.proxyWallet.abi,
+          proxyWalletAddress,
+          this.provider.getSigner(address),
+          'signer',
+        );
+
+        const encodedResult = this._abiCoder.encode(['address'], [address]);
+
+        const topUpPositionCall =
+          this._stableCoinProxyActionInterface.encodeFunctionData('lockToken', [
+            SmartContractFactory.PositionManager(this.chainId).address,
+            pool.tokenAdapterAddress,
+            positionId,
+            collateral ? utils.parseEther(collateral.toString()) : '0',
+            true,
+            encodedResult,
+          ],);
+
+        const options = {
+          gasLimit: 0
         };
 
         const gasLimit = await getEstimateGas(
@@ -410,6 +670,81 @@ export default class PositionService implements IPositionService {
     });
   }
   /**
+   * Repay full position and unlock all collateral, burn FXD stable coin. (ERC20)
+   * @param positionId - existing position id.
+   * @param pool - collateral pool model.
+   * @param address - wallet address.
+   * @param collateral - amount of collateral which will unlock after repay.
+   */
+  closePositionERC20(
+    positionId: string,
+    pool: ICollateralPool,
+    address: string,
+    collateral: string,
+  ): Promise<number | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const proxyWalletAddress = await this.getProxyWallet(address);
+
+        const wallet = Web3Utils.getContractInstanceFrom(
+          SmartContractFactory.proxyWallet.abi,
+          proxyWalletAddress,
+          this.provider.getSigner(address),
+          'signer',
+        );
+
+        const encodedResult = this._abiCoder.encode(['address'], [address]);
+
+        const wipeAllAndUnlockTokenCall =
+          this._stableCoinProxyActionInterface.encodeFunctionData(
+            'wipeAllAndUnlockToken',
+            [
+              SmartContractFactory.PositionManager(this.chainId).address,
+              pool.tokenAdapterAddress,
+              SmartContractFactory.StablecoinAdapter(this.chainId).address,
+              positionId,
+              collateral,
+              encodedResult,
+            ],
+          );
+
+        const options = { gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
+          wallet,
+          'execute',
+          [wipeAllAndUnlockTokenCall],
+          options,
+        );
+        options.gasLimit = gasLimit;
+
+        const transaction = await wallet.execute(
+          wipeAllAndUnlockTokenCall,
+          options,
+        );
+
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.RepayPosition,
+        );
+
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.RepayPosition,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.RepayPosition,
+          error,
+        });
+        reject(error);
+      }
+    });
+  }
+  /**
    * Partly repay position and unlock collateral, burn FXD stable coin.
    * @param positionId - existing position id.
    * @param pool - collateral pool model.
@@ -440,6 +775,84 @@ export default class PositionService implements IPositionService {
         const wipeAndUnlockTokenCall =
           this._stableCoinProxyActionInterface.encodeFunctionData(
             'wipeAndUnlockXDC',
+            [
+              SmartContractFactory.PositionManager(this.chainId).address,
+              pool.tokenAdapterAddress,
+              SmartContractFactory.StablecoinAdapter(this.chainId).address,
+              positionId,
+              collateral,
+              stableCoin,
+              encodedResult,
+            ],
+          );
+
+        const options = { gasLimit: 0 };
+        const gasLimit = await getEstimateGas(
+          wallet,
+          'execute',
+          [wipeAndUnlockTokenCall],
+          options,
+        );
+        options.gasLimit = gasLimit;
+
+        const transaction = await wallet.execute(
+          wipeAndUnlockTokenCall,
+          options,
+        );
+
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.RepayPosition,
+        );
+
+        const receipt = await transaction.wait();
+
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.RepayPosition,
+          receipt,
+        });
+        resolve(receipt.blockNumber);
+      } catch (error: any) {
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.RepayPosition,
+          error,
+        });
+        reject(error);
+      }
+    });
+  }
+  /**
+   * Partly repay position and unlock collateral, burn FXD stable coin. (ERC20)
+   * @param positionId - existing position id.
+   * @param pool - collateral pool model.
+   * @param address - wallet address.
+   * @param stableCoin - amount of FXD stable coin for repay.
+   * @param collateral - amount of collateral which will unlock after repay.
+   */
+  partiallyClosePositionERC20(
+    positionId: string,
+    pool: ICollateralPool,
+    address: string,
+    stableCoin: string,
+    collateral: string,
+  ): Promise<number | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const proxyWalletAddress = await this.getProxyWallet(address);
+
+        const wallet = Web3Utils.getContractInstanceFrom(
+          SmartContractFactory.proxyWallet.abi,
+          proxyWalletAddress,
+          this.provider.getSigner(address),
+          'signer',
+        );
+
+        const encodedResult = this._abiCoder.encode(['address'], [address]);
+
+        const wipeAndUnlockTokenCall =
+          this._stableCoinProxyActionInterface.encodeFunctionData(
+            'wipeAndUnlockToken',
             [
               SmartContractFactory.PositionManager(this.chainId).address,
               pool.tokenAdapterAddress,
