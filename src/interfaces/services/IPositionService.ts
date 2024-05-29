@@ -29,7 +29,7 @@ export default interface IPositionService {
     fathomToken: string,
     positionId: string,
   ): Promise<number | Error>;
-  
+
   topUpPositionAndBorrowERC20(
     address: string,
     pool: ICollateralPool,
@@ -44,7 +44,7 @@ export default interface IPositionService {
     collateral: string,
     positionId: string,
   ): Promise<number | Error>;
-  
+
   topUpPositionERC20(
     address: string,
     pool: ICollateralPool,
@@ -52,7 +52,7 @@ export default interface IPositionService {
     positionId: string,
   ): Promise<number | Error>;
 
-  createProxyWallet(address: string): Promise<string>;
+  createProxyWallet(address: string): Promise<string | Error>;
 
   getProxyWallet(address: string): Promise<string>;
 
@@ -62,7 +62,7 @@ export default interface IPositionService {
     address: string,
     collateral: string,
   ): Promise<number | Error>;
-  
+
   closePositionERC20(
     positionId: string,
     pool: ICollateralPool,
@@ -91,7 +91,7 @@ export default interface IPositionService {
     debt: string,
     collateralValue: string,
   ): Promise<number | Error>;
-  
+
   partiallyClosePositionERC20(
     positionId: string,
     pool: ICollateralPool,

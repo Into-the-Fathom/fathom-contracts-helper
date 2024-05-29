@@ -16,6 +16,7 @@ import IStableSwapService from '../interfaces/services/IStableSwapService';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
 import { utils } from 'fathom-ethers';
+import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
 
 export default class StableSwapService implements IStableSwapService {
   public provider: DefaultProvider;
@@ -80,10 +81,10 @@ export default class StableSwapService implements IStableSwapService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.SwapTokenToStableCoin,
-          error,
-          tokenName,
+          error: parsedError,
         });
         reject(error);
       }
@@ -139,10 +140,10 @@ export default class StableSwapService implements IStableSwapService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.SwapStableCoinToToken,
-          error,
-          tokenName,
+          error: parsedError,
         });
         reject(error);
       }
@@ -188,9 +189,10 @@ export default class StableSwapService implements IStableSwapService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.AddLiquidity,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -237,9 +239,10 @@ export default class StableSwapService implements IStableSwapService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.RemoveLiquidity,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -291,9 +294,10 @@ export default class StableSwapService implements IStableSwapService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.APPROVAL);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.Approve,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -345,9 +349,10 @@ export default class StableSwapService implements IStableSwapService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.APPROVAL);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.Approve,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -392,9 +397,10 @@ export default class StableSwapService implements IStableSwapService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.ClaimFeesRewards,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -436,9 +442,10 @@ export default class StableSwapService implements IStableSwapService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.WithdrawClaimedFees,
-          error,
+          error: parsedError,
         });
         reject(error);
       }

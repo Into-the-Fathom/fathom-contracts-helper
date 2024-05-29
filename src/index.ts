@@ -37,7 +37,16 @@ import IVaultService from './interfaces/services/IVaultService';
 import IOracleService from './interfaces/services/IOracleService';
 import { getEstimateGas } from './utils/getEstimateGas';
 import { ZERO_ADDRESS } from './utils/Constants';
-import { XDC_ADDRESSES, APOTHEM_ADDRESSES, SEPOLIA_ADDRESSES } from './addresses';
+import {
+  XDC_ADDRESSES,
+  APOTHEM_ADDRESSES,
+  SEPOLIA_ADDRESSES,
+} from './addresses';
+import {
+  TxErrorType,
+  getErrorTextFromError,
+  TxAction,
+} from './utils/errorHandler';
 
 export {
   PoolService,
@@ -77,4 +86,7 @@ export {
   XDC_ADDRESSES,
   APOTHEM_ADDRESSES,
   SEPOLIA_ADDRESSES,
+  TxErrorType,
+  getErrorTextFromError,
+  TxAction,
 };

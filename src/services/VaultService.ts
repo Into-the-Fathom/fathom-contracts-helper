@@ -12,6 +12,7 @@ import {
 import { DefaultProvider } from '../types';
 import { MAX_UINT256 } from '../utils/Constants';
 import BigNumber from 'bignumber.js';
+import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
 
 export default class VaultService implements IVaultService {
   public provider: DefaultProvider;
@@ -78,9 +79,10 @@ export default class VaultService implements IVaultService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.CreateLock,
-          error,
+          type: TransactionType.OpenVaultDeposit,
+          error: parsedError,
         });
         reject(error);
       }
@@ -147,9 +149,10 @@ export default class VaultService implements IVaultService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.CreateLock,
-          error,
+          type: TransactionType.WithdrawVaultDeposit,
+          error: parsedError,
         });
         reject(error);
       }
@@ -216,9 +219,10 @@ export default class VaultService implements IVaultService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.CreateLock,
-          error,
+          type: TransactionType.WithdrawVaultDeposit,
+          error: parsedError,
         });
         reject(error);
       }
@@ -273,9 +277,10 @@ export default class VaultService implements IVaultService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.APPROVAL);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.Approve,
-          error,
+          error: parsedError,
         });
         reject(error);
       }

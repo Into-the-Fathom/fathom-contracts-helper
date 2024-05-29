@@ -20,6 +20,7 @@ import IPositionService from '../interfaces/services/IPositionService';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
 import { utils } from 'fathom-ethers';
+import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
 
 export default class PositionService implements IPositionService {
   public provider: DefaultProvider;
@@ -138,9 +139,10 @@ export default class PositionService implements IPositionService {
 
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.OpenPosition,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -227,9 +229,10 @@ export default class PositionService implements IPositionService {
 
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.OpenPosition,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -312,9 +315,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.TopUpPositionAndBorrow,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -372,7 +376,7 @@ export default class PositionService implements IPositionService {
           );
 
         const options = {
-          gasLimit: 0
+          gasLimit: 0,
         };
 
         const gasLimit = await getEstimateGas(
@@ -398,9 +402,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.TopUpPositionAndBorrow,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -477,9 +482,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.TopUpPosition,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -526,10 +532,10 @@ export default class PositionService implements IPositionService {
             collateral ? utils.parseEther(collateral.toString()) : '0',
             true,
             encodedResult,
-          ],);
+          ]);
 
         const options = {
-          gasLimit: 0
+          gasLimit: 0,
         };
 
         const gasLimit = await getEstimateGas(
@@ -557,9 +563,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.TopUpPosition,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -569,29 +576,41 @@ export default class PositionService implements IPositionService {
    * Create proxy wallet for provided wallet address.
    * @param address - wallet address.
    */
-  async createProxyWallet(address: string) {
-    const proxyWalletRegistry = Web3Utils.getContractInstance(
-      SmartContractFactory.ProxyWalletRegistry(this.chainId),
-      this.provider.getSigner(address),
-      'signer',
-    );
+  createProxyWallet(address: string): Promise<string | Error> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const proxyWalletRegistry = Web3Utils.getContractInstance(
+          SmartContractFactory.ProxyWalletRegistry(this.chainId),
+          this.provider.getSigner(address),
+          'signer',
+        );
 
-    const transaction = await proxyWalletRegistry.build(address);
+        const transaction = await proxyWalletRegistry.build(address);
 
-    emitPendingTransaction(
-      this.emitter,
-      transaction.hash,
-      TransactionType.CreateProxyWallet,
-    );
+        emitPendingTransaction(
+          this.emitter,
+          transaction.hash,
+          TransactionType.CreateProxyWallet,
+        );
 
-    const receipt = await transaction.wait();
+        const receipt = await transaction.wait();
 
-    this.emitter.emit('successTransaction', {
-      type: TransactionType.CreateProxyWallet,
-      receipt,
+        this.emitter.emit('successTransaction', {
+          type: TransactionType.CreateProxyWallet,
+          receipt,
+        });
+
+        const proxyWallet = await proxyWalletRegistry.proxies(address);
+        resolve(proxyWallet);
+      } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
+        this.emitter.emit('errorTransaction', {
+          type: TransactionType.CreateProxyWallet,
+          error: parsedError,
+        });
+        reject(error);
+      }
     });
-
-    return proxyWalletRegistry.proxies(address);
   }
 
   /**
@@ -661,9 +680,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.RepayPosition,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -736,9 +756,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.RepayPosition,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -814,9 +835,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.RepayPosition,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -892,9 +914,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.RepayPosition,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -950,9 +973,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.APPROVAL);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.Approve,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -1036,9 +1060,10 @@ export default class PositionService implements IPositionService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.APPROVAL);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.Approve,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
