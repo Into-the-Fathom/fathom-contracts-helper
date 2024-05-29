@@ -32,6 +32,17 @@ export const getErrorTextFromError = (
     };
   }
 
+  if (
+    error.code === 'UNPREDICTABLE_GAS_LIMIT' ||
+    error.error.data.code === -32000
+  ) {
+    return {
+      error:
+        'Cannot estimate gas; transaction may fail or may require manual gas limit',
+      rawError: error,
+      txAction,
+    };
+  }
   // Try to parse the Pool error number from RPC provider revert error
   const errorBody = (error as any)?.error?.body;
 
