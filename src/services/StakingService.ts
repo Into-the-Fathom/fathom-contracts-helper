@@ -14,6 +14,7 @@ import { getEstimateGas } from '../utils/getEstimateGas';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
 import { utils } from 'fathom-ethers';
+import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
 
 const DAY_SECONDS = 24 * 60 * 60;
 
@@ -72,9 +73,10 @@ export default class StakingService implements IStakingService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.CreateLock,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -115,9 +117,10 @@ export default class StakingService implements IStakingService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.StakingUnlock,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -166,9 +169,10 @@ export default class StakingService implements IStakingService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.StakingUnlock,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -212,9 +216,10 @@ export default class StakingService implements IStakingService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.StakingEarlyWithdrawal,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -261,9 +266,10 @@ export default class StakingService implements IStakingService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.StakingClaimRewards,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -310,9 +316,10 @@ export default class StakingService implements IStakingService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.StakingWithdrawAll,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -364,9 +371,10 @@ export default class StakingService implements IStakingService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.APPROVAL);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.Approve,
-          error,
+          error: parsedError,
         });
         reject(error);
       }

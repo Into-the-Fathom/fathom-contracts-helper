@@ -12,6 +12,7 @@ import IProposalService from '../interfaces/services/IProposalService';
 import { emitPendingTransaction } from '../utils/emitPendingTransaction';
 import { DefaultProvider } from '../types';
 import { utils } from 'fathom-ethers';
+import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
 
 export default class ProposalService implements IProposalService {
   public provider: DefaultProvider;
@@ -79,9 +80,10 @@ export default class ProposalService implements IProposalService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
-          type: TransactionType.CreateLock,
-          error,
+          type: TransactionType.CreateProposal,
+          error: parsedError,
         });
         reject(error);
       }
@@ -143,9 +145,10 @@ export default class ProposalService implements IProposalService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.ExecuteProposal,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -199,9 +202,10 @@ export default class ProposalService implements IProposalService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.QueueProposal,
-          error,
+          error: parsedError,
         });
         reject(error);
       }
@@ -256,9 +260,10 @@ export default class ProposalService implements IProposalService {
         });
         resolve(receipt.blockNumber);
       } catch (error: any) {
+        const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
           type: TransactionType.CastVote,
-          error,
+          error: parsedError,
         });
         reject(error);
       }

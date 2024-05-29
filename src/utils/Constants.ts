@@ -38,7 +38,7 @@ export const TRANSACTION_PENDING_MESSAGES = {
   [TransactionType.StakingClaimRewards]: 'Claim Rewards Pending.',
   [TransactionType.StakingWithdrawAll]: 'Withdraw Rewards Pending.',
   [TransactionType.OpenVaultDeposit]: 'New Deposit Pending.',
-  [TransactionType.WithdrawVaultDeposit]: 'Withdraw Rewards Pending.',
+  [TransactionType.WithdrawVaultDeposit]: 'Withdraw Pending.',
 };
 
 export const TRANSACTION_SUCCESS_MESSAGES = {

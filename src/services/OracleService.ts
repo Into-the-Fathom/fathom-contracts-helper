@@ -24,7 +24,6 @@ export default class OracleService implements IOracleService {
 
     try {
       const xdcPrice = await FathomPriceOracle.getPrice();
-
       return xdcPrice;
     } catch (error: any) {
       console.error(error);
