@@ -601,7 +601,12 @@ export default class PositionService implements IPositionService {
         });
 
         const proxyWallet = await proxyWalletRegistry.proxies(address);
-        resolve(proxyWallet);
+
+        if (proxyWallet === ZERO_ADDRESS) {
+          throw new Error('Proxy wallet not created');
+        } else {
+          resolve(proxyWallet);
+        }
       } catch (error: any) {
         const parsedError = getErrorTextFromError(error, TxAction.MAIN_ACTION);
         this.emitter.emit('errorTransaction', {
