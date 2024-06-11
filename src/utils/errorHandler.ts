@@ -32,7 +32,7 @@ export const getErrorTextFromError = (
 
   if (
     error.code === 'UNPREDICTABLE_GAS_LIMIT' ||
-    error.error?.data?.code === -32000
+    error?.error?.data?.code === -32000
   ) {
     return {
       error:
@@ -42,9 +42,7 @@ export const getErrorTextFromError = (
     };
   }
 
-  if (
-    error.code === 'UNSUPPORTED_OPERATION'
-  ) {
+  if (error.code === 'UNSUPPORTED_OPERATION') {
     return {
       error:
         'The operation is not supported. Please check the method and parameters',
@@ -57,7 +55,7 @@ export const getErrorTextFromError = (
 
   if (errorBody) {
     const parsedError = JSON.parse((error as any)?.error?.body);
-    const parsedNumber = Number(parsedError.error.message.split(': ')[1]);
+    const parsedNumber = Number(parsedError?.error?.message.split(': ')[1]);
     if (!isNaN(parsedNumber)) {
       errorNumber = parsedNumber;
     }
