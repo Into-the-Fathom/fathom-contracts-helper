@@ -1,5 +1,3 @@
-import { ReactElement } from 'react';
-
 export enum TxAction {
   APPROVAL,
   MAIN_ACTION,
@@ -8,7 +6,7 @@ export enum TxAction {
 
 export type TxErrorType = {
   rawError: Error;
-  error: ReactElement | string | undefined;
+  error: string | undefined;
   txAction: TxAction;
 };
 
@@ -34,11 +32,22 @@ export const getErrorTextFromError = (
 
   if (
     error.code === 'UNPREDICTABLE_GAS_LIMIT' ||
-    error.error.data.code === -32000
+    error.error?.data?.code === -32000
   ) {
     return {
       error:
         'Cannot estimate gas; transaction may fail or may require manual gas limit',
+      rawError: error,
+      txAction,
+    };
+  }
+
+  if (
+    error.code === 'UNSUPPORTED_OPERATION'
+  ) {
+    return {
+      error:
+        'The operation is not supported. Please check the method and parameters',
       rawError: error,
       txAction,
     };
