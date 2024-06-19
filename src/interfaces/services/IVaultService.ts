@@ -43,6 +43,8 @@ export default interface IVaultService {
   previewWithdraw(amount: string, vaultAddress: string): Promise<string>;
   previewRedeem(shareAmount: string, vaultAddress: string): Promise<string>;
 
+  isStrategyShutdown(vaultAddress: string): Promise<boolean>;
+
   setChainId(chainId: number): void;
 
   setProvider(provider: DefaultProvider): void;
