@@ -40,6 +40,7 @@ export interface IVaultStrategy {
     timestamp: string;
   }[];
   reports: IVaultStrategyReport[];
+  isShutdown?: boolean;
 }
 
 export interface IAccountVaultPosition {
