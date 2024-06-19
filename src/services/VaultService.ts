@@ -446,6 +446,8 @@ export default class VaultService implements IVaultService {
     const FathomVault = Web3Utils.getContractInstance(
       SmartContractFactory.FathomTradeFlowVault(vaultAddress),
       this.provider,
+      'provider',
+      'fathomTradeFlowVault',
     );
 
     return (await FathomVault.minUserDeposit()).toString();
