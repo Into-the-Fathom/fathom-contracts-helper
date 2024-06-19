@@ -13,8 +13,8 @@ import { DefaultProvider } from '../types';
 import { MAX_UINT256, ZERO_ADDRESS } from '../utils/Constants';
 import BigNumber from 'bignumber.js';
 import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
-import DepositLimitModule from '../abis/DepositLimitModule.json';
-import TradeFintechStrategy from '../abis/TradeFintechStrategy.json';
+import DepositLimitModule from '../abis/Vaults/DepositLimitModule.json';
+import TradeFlowStrategy from '../abis/Vaults/TradeFlowStrategy.json';
 
 export default class VaultService implements IVaultService {
   public provider: DefaultProvider;
@@ -369,17 +369,16 @@ export default class VaultService implements IVaultService {
    */
   async getDepositLimit(
     vaultAddress: string,
-    wallet: string,
     isTradeFlowVault: boolean,
+    wallet?: string,
   ) {
     const FathomVault = Web3Utils.getContractInstance(
       SmartContractFactory.FathomVault(vaultAddress),
       this.provider,
     );
 
-    let currentDepositLimit = '0';
-
-    if (isTradeFlowVault) {
+    if (isTradeFlowVault && wallet) {
+      let currentDepositLimit = '0';
       const depositLimitModuleAddress = await FathomVault.depositLimitModule();
 
       if (depositLimitModuleAddress !== ZERO_ADDRESS) {
@@ -390,7 +389,9 @@ export default class VaultService implements IVaultService {
         );
 
         currentDepositLimit = (
-          await DepositLimitModuleContract.availableDepositLimit(wallet)
+          await DepositLimitModuleContract.availableDepositLimit(
+            wallet ? wallet : ZERO_ADDRESS,
+          )
         ).toString();
       }
 
@@ -423,7 +424,7 @@ export default class VaultService implements IVaultService {
 
   async getTradeFlowVaultDepositEndDate(strategyAddress: string) {
     const Strategy = Web3Utils.getContractInstanceFrom(
-      TradeFintechStrategy.abi as ContractInterface,
+      TradeFlowStrategy.abi as ContractInterface,
       strategyAddress,
       this.provider,
     );
@@ -433,12 +434,21 @@ export default class VaultService implements IVaultService {
 
   async getTradeFlowVaultLockEndDate(strategyAddress: string) {
     const Strategy = Web3Utils.getContractInstanceFrom(
-      TradeFintechStrategy.abi as ContractInterface,
+      TradeFlowStrategy.abi as ContractInterface,
       strategyAddress,
       this.provider,
     );
 
     return (await Strategy.lockPeriodEnds()).toString();
+  }
+
+  async getMinUserDeposit(vaultAddress: string) {
+    const FathomVault = Web3Utils.getContractInstance(
+      SmartContractFactory.FathomTradeFlowVault(vaultAddress),
+      this.provider,
+    );
+
+    return (await FathomVault.minUserDeposit()).toString();
   }
 
   isStrategyShutdown(strategyId: string) {

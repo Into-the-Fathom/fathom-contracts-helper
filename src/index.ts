@@ -27,7 +27,6 @@ import {
   IVaultPosition,
   IVaultStrategy,
   IVaultStrategyReport,
-  IAccountVaultPosition,
 } from './interfaces/models/IVault';
 import IPoolService from './interfaces/services/IPoolService';
 import IPositionService from './interfaces/services/IPositionService';
@@ -48,6 +47,7 @@ import {
   getErrorTextFromError,
   TxAction,
 } from './utils/errorHandler';
+import { ESTIMATE_GAS_MULTIPLIER } from './utils/Constants';
 
 export {
   PoolService,
@@ -75,7 +75,6 @@ export {
   IVaultPosition,
   IVaultStrategy,
   IVaultStrategyReport,
-  IAccountVaultPosition,
   IPoolService,
   IPositionService,
   IProposalService,
@@ -92,4 +91,5 @@ export {
   TxErrorType,
   getErrorTextFromError,
   TxAction,
+  ESTIMATE_GAS_MULTIPLIER,
 };

@@ -43,27 +43,6 @@ export interface IVaultStrategy {
   isShutdown?: boolean;
 }
 
-export interface IAccountVaultPosition {
-  id: string;
-  balancePosition: string;
-  balanceProfit: string;
-  balanceShares: string;
-  balanceTokens: string;
-  vault: {
-    id: string;
-  };
-  token: {
-    id: string;
-    symbol: string;
-    name: string;
-  };
-  shareToken: {
-    id: string;
-    symbol: string;
-    name: string;
-  };
-}
-
 export interface IVault {
   id: string;
   token: {
