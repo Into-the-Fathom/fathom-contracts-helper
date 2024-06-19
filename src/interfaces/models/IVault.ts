@@ -1,4 +1,4 @@
-import { VaultType } from "src/utils/Constants";
+import { VaultType } from 'src/utils/Constants';
 
 export interface IVaultPosition {
   id: string;
@@ -42,6 +42,27 @@ export interface IVaultStrategy {
   reports: IVaultStrategyReport[];
 }
 
+export interface IAccountVaultPosition {
+  id: string;
+  balancePosition: string;
+  balanceProfit: string;
+  balanceShares: string;
+  balanceTokens: string;
+  vault: {
+    id: string;
+  };
+  token: {
+    id: string;
+    symbol: string;
+    name: string;
+  };
+  shareToken: {
+    id: string;
+    symbol: string;
+    name: string;
+  };
+}
+
 export interface IVault {
   id: string;
   token: {
@@ -65,4 +86,4 @@ export interface IVault {
   activationBlockNumber?: string;
   shutdown: boolean;
   type: VaultType;
-};
+}
