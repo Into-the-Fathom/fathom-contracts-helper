@@ -36,7 +36,7 @@ import IStakingService from './interfaces/services/IStakingService';
 import IVaultService from './interfaces/services/IVaultService';
 import IOracleService from './interfaces/services/IOracleService';
 import { getEstimateGas } from './utils/getEstimateGas';
-import { ZERO_ADDRESS } from './utils/Constants';
+import { ZERO_ADDRESS, VaultType } from './utils/Constants';
 import {
   XDC_ADDRESSES,
   APOTHEM_ADDRESSES,
@@ -86,6 +86,7 @@ export {
   XDC_ADDRESSES,
   APOTHEM_ADDRESSES,
   SEPOLIA_ADDRESSES,
+  VaultType,
   TxErrorType,
   getErrorTextFromError,
   TxAction,

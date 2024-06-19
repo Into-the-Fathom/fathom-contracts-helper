@@ -1,5 +1,5 @@
 import EventEmitter from 'eventemitter3';
-import { utils } from 'fathom-ethers';
+import { ContractInterface, utils } from 'fathom-ethers';
 import IVaultService from '../interfaces/services/IVaultService';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
@@ -10,9 +10,11 @@ import {
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import { DefaultProvider } from '../types';
-import { MAX_UINT256 } from '../utils/Constants';
+import { MAX_UINT256, ZERO_ADDRESS } from '../utils/Constants';
 import BigNumber from 'bignumber.js';
 import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
+import KYCDepositLimitModule from '../abis/KYCDepositLimitModule.json';
+import TradeFintechStrategy from '../abis/TradeFintechStrategy.json';
 
 export default class VaultService implements IVaultService {
   public provider: DefaultProvider;
@@ -310,6 +312,85 @@ export default class VaultService implements IVaultService {
     return BigNumber(allowance.toString()).isGreaterThanOrEqualTo(
       utils.parseEther(deposit).toString(),
     );
+  }
+
+  async getDepositLimit(
+    vaultAddress: string,
+    wallet: string,
+    isTfType: boolean,
+  ) {
+    const FathomVault = Web3Utils.getContractInstance(
+      SmartContractFactory.FathomVault(vaultAddress),
+      this.provider,
+    );
+
+    if (isTfType) {
+      let currentDepositLimit = '0';
+
+      const depositLimitModuleAddress = await FathomVault.depositLimitModule();
+
+      if (depositLimitModuleAddress !== ZERO_ADDRESS) {
+        const KycDepositLimit = Web3Utils.getContractInstanceFrom(
+          KYCDepositLimitModule.abi as ContractInterface,
+          depositLimitModuleAddress,
+          this.provider,
+        );
+        currentDepositLimit = await KycDepositLimit.availableDepositLimit(
+          wallet,
+        );
+      }
+
+      return currentDepositLimit.toString();
+    }
+
+    const depositLimit = await FathomVault.depositLimit();
+
+    return depositLimit.toString();
+  }
+
+  async kycPassed(vaultAddress: string, wallet: string) {
+    const FathomVault = Web3Utils.getContractInstance(
+      SmartContractFactory.FathomVault(vaultAddress),
+      this.provider,
+    );
+
+    const depositLimitModuleAddress = await FathomVault.depositLimitModule();
+
+    if (depositLimitModuleAddress !== ZERO_ADDRESS) {
+      const KycDepositLimit = Web3Utils.getContractInstanceFrom(
+        KYCDepositLimitModule.abi as ContractInterface,
+        depositLimitModuleAddress,
+        this.provider,
+      );
+
+      const isUserRegistered = await KycDepositLimit.kycPassed(wallet);
+
+      return isUserRegistered;
+    } else {
+      return false;
+    }
+  }
+
+  async getTfVaultDepositEndDate(strategyAddress: string) {
+    const Strategy = Web3Utils.getContractInstanceFrom(
+      TradeFintechStrategy.abi as ContractInterface,
+      strategyAddress,
+      this.provider,
+    );
+    const depositEndDate = await Strategy.depositPeriodEnds();
+
+    return depositEndDate.toString();
+  }
+
+  async getTfVaultLockEndDate(strategyAddress: string) {
+    const Strategy = Web3Utils.getContractInstanceFrom(
+      TradeFintechStrategy.abi as ContractInterface,
+      strategyAddress,
+      this.provider,
+    );
+    const lockPeriodEndDate = await Strategy.lockPeriodEnds();
+
+    return lockPeriodEndDate.toString();
   }
 
   /**
