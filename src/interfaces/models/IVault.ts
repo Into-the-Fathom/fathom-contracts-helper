@@ -1,3 +1,5 @@
+import { VaultType } from "src/utils/Constants";
+
 export interface IVaultPosition {
   id: string;
   balancePosition: string;
@@ -63,4 +65,5 @@ export interface IVault {
   strategies: IVaultStrategy[];
   activationBlockNumber?: string;
   shutdown: boolean;
-}
+  type: VaultType;
+};

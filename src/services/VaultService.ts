@@ -1,5 +1,5 @@
 import EventEmitter from 'eventemitter3';
-import { utils } from 'fathom-ethers';
+import { ContractInterface, utils } from 'fathom-ethers';
 import IVaultService from '../interfaces/services/IVaultService';
 import { Web3Utils } from '../utils/Web3Utils';
 import { getEstimateGas } from '../utils/getEstimateGas';
@@ -10,9 +10,11 @@ import {
   TransactionType,
 } from '../interfaces/models/ITransaction';
 import { DefaultProvider } from '../types';
-import { MAX_UINT256 } from '../utils/Constants';
+import { MAX_UINT256, ZERO_ADDRESS } from '../utils/Constants';
 import BigNumber from 'bignumber.js';
 import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
+import DepositLimitModule from '../abis/DepositLimitModule.json';
+import TradeFintechStrategy from '../abis/TradeFintechStrategy.json';
 
 export default class VaultService implements IVaultService {
   public provider: DefaultProvider;
@@ -325,9 +327,7 @@ export default class VaultService implements IVaultService {
 
     const parsedAmount = utils.parseEther(amount);
 
-    const previewAmountShare = await FathomVault.previewDeposit(parsedAmount);
-
-    return previewAmountShare.toString();
+    return (await FathomVault.previewDeposit(parsedAmount)).toString();
   }
 
   /**
@@ -345,9 +345,7 @@ export default class VaultService implements IVaultService {
 
     const parsedAmount = utils.parseEther(shareAmount);
 
-    const previewAmountShare = await FathomVault.previewRedeem(parsedAmount);
-
-    return previewAmountShare.toString();
+    return (await FathomVault.previewRedeem(parsedAmount)).toString();
   }
 
   /**
@@ -363,9 +361,84 @@ export default class VaultService implements IVaultService {
 
     const parsedAmount = utils.parseEther(amount);
 
-    const previewAmountShare = await FathomVault.previewWithdraw(parsedAmount);
+    return (await FathomVault.previewWithdraw(parsedAmount)).toString();
+  }
 
-    return previewAmountShare.toString();
+  /**
+   * TradeFlow Methods.
+   */
+  async getDepositLimit(
+    vaultAddress: string,
+    wallet: string,
+    isTradeFlowVault: boolean,
+  ) {
+    const FathomVault = Web3Utils.getContractInstance(
+      SmartContractFactory.FathomVault(vaultAddress),
+      this.provider,
+    );
+
+    let currentDepositLimit = '0';
+
+    if (isTradeFlowVault) {
+      const depositLimitModuleAddress = await FathomVault.depositLimitModule();
+
+      if (depositLimitModuleAddress !== ZERO_ADDRESS) {
+        const DepositLimitModuleContract = Web3Utils.getContractInstanceFrom(
+          DepositLimitModule.abi as ContractInterface,
+          depositLimitModuleAddress,
+          this.provider,
+        );
+
+        currentDepositLimit = (
+          await DepositLimitModuleContract.availableDepositLimit(wallet)
+        ).toString();
+      }
+
+      return currentDepositLimit;
+    }
+
+    return (await FathomVault.depositLimit()).toString();
+  }
+
+  async kycPassed(vaultAddress: string, wallet: string) {
+    const FathomVault = Web3Utils.getContractInstance(
+      SmartContractFactory.FathomVault(vaultAddress),
+      this.provider,
+    );
+
+    const depositLimitModuleAddress = await FathomVault.depositLimitModule();
+
+    if (depositLimitModuleAddress !== ZERO_ADDRESS) {
+      const DepositLimitContract = Web3Utils.getContractInstanceFrom(
+        DepositLimitModule.abi as ContractInterface,
+        depositLimitModuleAddress,
+        this.provider,
+      );
+
+      return DepositLimitContract.kycPassed(wallet);
+    } else {
+      return Promise.resolve(false);
+    }
+  }
+
+  async getTradeFlowVaultDepositEndDate(strategyAddress: string) {
+    const Strategy = Web3Utils.getContractInstanceFrom(
+      TradeFintechStrategy.abi as ContractInterface,
+      strategyAddress,
+      this.provider,
+    );
+
+    return (await Strategy.depositPeriodEnds()).toString();
+  }
+
+  async getTradeFlowVaultLockEndDate(strategyAddress: string) {
+    const Strategy = Web3Utils.getContractInstanceFrom(
+      TradeFintechStrategy.abi as ContractInterface,
+      strategyAddress,
+      this.provider,
+    );
+
+    return (await Strategy.lockPeriodEnds()).toString();
   }
 
   isStrategyShutdown(strategyId: string) {

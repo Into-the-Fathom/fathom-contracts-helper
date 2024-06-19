@@ -71,3 +71,8 @@ export const TRANSACTION_SUCCESS_MESSAGES = {
   [TransactionType.OpenVaultDeposit]: 'Deposit was successful!',
   [TransactionType.WithdrawVaultDeposit]: 'Withdraw was successful!',
 };
+
+export enum VaultType {
+  DEFAULT = "DEFAULT",
+  TRADEFLOW = "TRADEFLOW",
+}

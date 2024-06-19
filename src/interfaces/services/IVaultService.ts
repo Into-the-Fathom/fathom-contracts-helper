@@ -39,6 +39,15 @@ export default interface IVaultService {
     collateral: string,
   ): Promise<boolean>;
 
+  getDepositLimit(
+    vaultAddress: string,
+    wallet: string,
+    isTfType: boolean,
+  ): Promise<string>;
+  kycPassed(vaultAddress: string, wallet: string): Promise<boolean>;
+  getTradeFlowVaultDepositEndDate(strategyAddress: string): Promise<string>;
+  getTradeFlowVaultLockEndDate(strategyAddress: string): Promise<string>;
+
   previewDeposit(amount: string, vaultAddress: string): Promise<string>;
   previewWithdraw(amount: string, vaultAddress: string): Promise<string>;
   previewRedeem(shareAmount: string, vaultAddress: string): Promise<string>;
