@@ -327,9 +327,7 @@ export default class VaultService implements IVaultService {
 
     const parsedAmount = utils.parseEther(amount);
 
-    const previewAmountShare = await FathomVault.previewDeposit(parsedAmount);
-
-    return previewAmountShare.toString();
+    return (await FathomVault.previewDeposit(parsedAmount)).toString();
   }
 
   /**
@@ -347,9 +345,7 @@ export default class VaultService implements IVaultService {
 
     const parsedAmount = utils.parseEther(shareAmount);
 
-    const previewAmountShare = await FathomVault.previewRedeem(parsedAmount);
-
-    return previewAmountShare.toString();
+    return (await FathomVault.previewRedeem(parsedAmount)).toString();
   }
 
   /**
@@ -365,9 +361,7 @@ export default class VaultService implements IVaultService {
 
     const parsedAmount = utils.parseEther(amount);
 
-    const previewAmountShare = await FathomVault.previewWithdraw(parsedAmount);
-
-    return previewAmountShare.toString();
+    return (await FathomVault.previewWithdraw(parsedAmount)).toString();
   }
 
   /**
@@ -394,14 +388,16 @@ export default class VaultService implements IVaultService {
           depositLimitModuleAddress,
           this.provider,
         );
-        currentDepositLimit =
-          await DepositLimitModuleContract.availableDepositLimit(wallet);
+
+        currentDepositLimit = (
+          await DepositLimitModuleContract.availableDepositLimit(wallet)
+        ).toString();
       }
-    } else {
-      currentDepositLimit = (await FathomVault.depositLimit()).toString();
+
+      return currentDepositLimit;
     }
 
-    return currentDepositLimit;
+    return (await FathomVault.depositLimit()).toString();
   }
 
   async kycPassed(vaultAddress: string, wallet: string) {
