@@ -45,8 +45,8 @@ export default interface IVaultService {
     isTfType: boolean,
   ): Promise<string>;
   kycPassed(vaultAddress: string, wallet: string): Promise<boolean>;
-  getTfVaultDepositEndDate(strategyAddress: string): Promise<string>;
-  getTfVaultLockEndDate(strategyAddress: string): Promise<string>;
+  getTradeFlowVaultDepositEndDate(strategyAddress: string): Promise<string>;
+  getTradeFlowVaultLockEndDate(strategyAddress: string): Promise<string>;
 
   previewDeposit(amount: string, vaultAddress: string): Promise<string>;
   previewWithdraw(amount: string, vaultAddress: string): Promise<string>;
