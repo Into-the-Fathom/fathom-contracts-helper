@@ -368,6 +368,15 @@ export default class VaultService implements IVaultService {
     return previewAmountShare.toString();
   }
 
+  isStrategyShutdown(strategyId: string) {
+    const FathomStrategy = Web3Utils.getContractInstance(
+      SmartContractFactory.FathomVaultStrategy(strategyId),
+      this.provider,
+    );
+
+    return FathomStrategy.isShutdown();
+  }
+
   /**
    * Set JsonRpcProvider provider for service
    * @param provider - JsonRpcProvider provider

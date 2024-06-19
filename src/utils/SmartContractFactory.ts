@@ -17,7 +17,11 @@ import FathomVaultStrategy from '../abis/TokenizedStrategy.json';
 import FathomPriceOracle from '../abis/FathomPriceOracle.json';
 import MultiSigWallet from '../abis/MultiSigWallet.json';
 
-import { APOTHEM_ADDRESSES, SEPOLIA_ADDRESSES, XDC_ADDRESSES } from '../addresses';
+import {
+  APOTHEM_ADDRESSES,
+  SEPOLIA_ADDRESSES,
+  XDC_ADDRESSES,
+} from '../addresses';
 
 import { ChainId } from '../types';
 import { ContractInterface } from 'fathom-ethers';
