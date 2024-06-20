@@ -204,7 +204,7 @@ export class SmartContractFactory {
     };
   }
 
-  public static FatTradeFlowStrategy(vaultStrategyAddress: string) {
+  public static FathomTradeFlowStrategy(vaultStrategyAddress: string) {
     return {
       abi: TradeFlowStrategy.abi as ContractInterface,
       address: vaultStrategyAddress,
