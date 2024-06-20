@@ -1,21 +1,22 @@
-import ERC20Abi from '../abis/ERC20.json';
-import CollateralPoolConfigAbi from '../abis/CollateralPoolConfig.json';
-import CollateralTokenAdapterAbi from '../abis/CollateralTokenAdapter.json';
-import DexPriceOracle from '../abis/DexPriceOracle.json';
-import FathomStableCoinProxyActionAbi from '../abis/FathomStablecoinProxyActions.json';
-import MainToken from '../abis/MainToken.json';
-import MainFathomGovernor from '../abis/MainFathomGovernor.json';
-import ProxyWalletAbi from '../abis/ProxyWallet.json';
-import ProxyWalletRegistryAbi from '../abis/ProxyWalletRegistry.json';
-import StableSwapModule from '../abis/StableSwapModule.json';
-import StableSwapModuleWrapper from '../abis/StableSwapModuleWrapper.json';
-import Staking from '../abis/Staking.json';
-import StakingGetter from '../abis/StakingGetter.json';
-import VeFathomAbi from '../abis/vFathom.json';
-import FathomVault from '../abis/FathomVault.json';
-import FathomVaultStrategy from '../abis/TokenizedStrategy.json';
-import FathomPriceOracle from '../abis/FathomPriceOracle.json';
-import MultiSigWallet from '../abis/MultiSigWallet.json';
+import ERC20Abi from '../abis/General/ERC20.json';
+import CollateralPoolConfigAbi from '../abis/Pools/CollateralPoolConfig.json';
+import CollateralTokenAdapterAbi from '../abis/Pools/CollateralTokenAdapter.json';
+import DexPriceOracle from '../abis/Oracles/DexPriceOracle.json';
+import FathomStableCoinProxyActionAbi from '../abis/Positions/FathomStablecoinProxyActions.json';
+import MainToken from '../abis/Staking/MainToken.json';
+import MainFathomGovernor from '../abis/Governance/MainFathomGovernor.json';
+import ProxyWalletAbi from '../abis/Positions/ProxyWallet.json';
+import ProxyWalletRegistryAbi from '../abis/Positions/ProxyWalletRegistry.json';
+import StableSwapModule from '../abis/StableSwap/StableSwapModule.json';
+import StableSwapModuleWrapper from '../abis/StableSwap/StableSwapModuleWrapper.json';
+import Staking from '../abis/Staking/Staking.json';
+import StakingGetter from '../abis/Staking/StakingGetter.json';
+import VeFathomAbi from '../abis/Governance/vFathom.json';
+import FathomVault from '../abis/Vaults/FathomVault.json';
+import FathomVaultStrategy from '../abis/Vaults/TokenizedStrategy.json';
+import TradeFlowVault from '../abis/Vaults/TradeFlowVault.json';
+import FathomPriceOracle from '../abis/Oracles/FathomPriceOracle.json';
+import MultiSigWallet from '../abis/MultiSig/MultiSigWallet.json';
 
 import {
   APOTHEM_ADDRESSES,
@@ -184,6 +185,13 @@ export class SmartContractFactory {
   public static FathomVault(vaultAddress: string) {
     return {
       abi: FathomVault.abi as ContractInterface,
+      address: vaultAddress,
+    };
+  }
+
+  public static FathomTradeFlowVault(vaultAddress: string) {
+    return {
+      abi: TradeFlowVault.abi as ContractInterface,
       address: vaultAddress,
     };
   }

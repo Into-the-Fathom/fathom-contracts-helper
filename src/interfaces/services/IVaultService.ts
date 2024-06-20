@@ -41,8 +41,8 @@ export default interface IVaultService {
 
   getDepositLimit(
     vaultAddress: string,
-    wallet: string,
     isTfType: boolean,
+    wallet?: string,
   ): Promise<string>;
   kycPassed(vaultAddress: string, wallet: string): Promise<boolean>;
   getTradeFlowVaultDepositEndDate(strategyAddress: string): Promise<string>;
@@ -52,6 +52,7 @@ export default interface IVaultService {
   previewWithdraw(amount: string, vaultAddress: string): Promise<string>;
   previewRedeem(shareAmount: string, vaultAddress: string): Promise<string>;
   isStrategyShutdown(strategyId: string): Promise<boolean>;
+  getMinUserDeposit(vaultAddress: string): Promise<number>;
 
   setChainId(chainId: number): void;
 

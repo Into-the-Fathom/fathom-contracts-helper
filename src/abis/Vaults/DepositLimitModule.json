@@ -1,5 +1,5 @@
 {
-  "contractName": "KYCDepositLimitModule",
+  "contractName": "DepositLimitModule",
   "abi": [
     {
       "inputs": [],
