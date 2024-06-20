@@ -12,11 +12,12 @@ import StableSwapModuleWrapper from '../abis/StableSwap/StableSwapModuleWrapper.
 import Staking from '../abis/Staking/Staking.json';
 import StakingGetter from '../abis/Staking/StakingGetter.json';
 import VeFathomAbi from '../abis/Governance/vFathom.json';
+import FathomPriceOracle from '../abis/Oracles/FathomPriceOracle.json';
+import MultiSigWallet from '../abis/MultiSig/MultiSigWallet.json';
 import FathomVault from '../abis/Vaults/FathomVault.json';
 import FathomVaultStrategy from '../abis/Vaults/TokenizedStrategy.json';
 import TradeFlowVault from '../abis/Vaults/TradeFlowVault.json';
-import FathomPriceOracle from '../abis/Oracles/FathomPriceOracle.json';
-import MultiSigWallet from '../abis/MultiSig/MultiSigWallet.json';
+import TradeFlowStrategy from '../abis/Vaults/TradeFlowStrategy.json';
 
 import {
   APOTHEM_ADDRESSES,
@@ -199,6 +200,13 @@ export class SmartContractFactory {
   public static FathomVaultStrategy(vaultStrategyAddress: string) {
     return {
       abi: FathomVaultStrategy.abi as ContractInterface,
+      address: vaultStrategyAddress,
+    };
+  }
+
+  public static FatTradeFlowStrategy(vaultStrategyAddress: string) {
+    return {
+      abi: TradeFlowStrategy.abi as ContractInterface,
       address: vaultStrategyAddress,
     };
   }

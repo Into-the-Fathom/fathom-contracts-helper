@@ -389,9 +389,7 @@ export default class VaultService implements IVaultService {
         );
 
         currentDepositLimit = (
-          await DepositLimitModuleContract.availableDepositLimit(
-            wallet ? wallet : ZERO_ADDRESS,
-          )
+          await DepositLimitModuleContract.availableDepositLimit(wallet)
         ).toString();
       }
 
