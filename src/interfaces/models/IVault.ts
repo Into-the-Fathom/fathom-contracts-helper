@@ -67,3 +67,11 @@ export interface IVault {
   shutdown: boolean;
   type: VaultType;
 }
+
+export interface IVaultTransaction {
+  id: string;
+  timestamp: string;
+  sharesMinted: string;
+  tokenAmount: string;
+  blockNumber: string;
+}

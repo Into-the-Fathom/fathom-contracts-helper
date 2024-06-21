@@ -27,6 +27,7 @@ import {
   IVaultPosition,
   IVaultStrategy,
   IVaultStrategyReport,
+  IVaultTransaction,
 } from './interfaces/models/IVault';
 import IPoolService from './interfaces/services/IPoolService';
 import IPositionService from './interfaces/services/IPositionService';
@@ -75,6 +76,7 @@ export {
   IVaultPosition,
   IVaultStrategy,
   IVaultStrategyReport,
+  IVaultTransaction,
   IPoolService,
   IPositionService,
   IProposalService,

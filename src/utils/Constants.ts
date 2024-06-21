@@ -73,6 +73,8 @@ export const TRANSACTION_SUCCESS_MESSAGES = {
 };
 
 export enum VaultType {
-  DEFAULT = "DEFAULT",
-  TRADEFLOW = "TRADEFLOW",
+  DEFI = 'DEFI',
+  TRADEFI = 'TRADEFI',
+  INCENTIVE = 'INCENTIVE',
+  DEFAULT = 'DEFAULT',
 }
