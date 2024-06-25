@@ -386,6 +386,8 @@ export default class VaultService implements IVaultService {
           DepositLimitModule.abi as ContractInterface,
           depositLimitModuleAddress,
           this.provider,
+          'provider',
+          'TradeFiVault',
         );
 
         currentDepositLimit = (
@@ -412,6 +414,8 @@ export default class VaultService implements IVaultService {
         DepositLimitModule.abi as ContractInterface,
         depositLimitModuleAddress,
         this.provider,
+        'provider',
+        'TradeFiVault',
       );
 
       return DepositLimitContract.kycPassed(wallet);
@@ -425,6 +429,7 @@ export default class VaultService implements IVaultService {
       TradeFlowStrategy.abi as ContractInterface,
       strategyAddress,
       this.provider,
+      'TradeFiVault',
     );
 
     return (await Strategy.depositPeriodEnds()).toString();
@@ -435,6 +440,7 @@ export default class VaultService implements IVaultService {
       TradeFlowStrategy.abi as ContractInterface,
       strategyAddress,
       this.provider,
+      'TradeFiVault',
     );
 
     return (await Strategy.lockPeriodEnds()).toString();
@@ -445,7 +451,7 @@ export default class VaultService implements IVaultService {
       SmartContractFactory.FathomTradeFlowVault(vaultAddress),
       this.provider,
       'provider',
-      'fathomTradeFlowVault',
+      'TradeFiVault',
     );
 
     return (await FathomVault.minUserDeposit()).toString();
@@ -455,6 +461,8 @@ export default class VaultService implements IVaultService {
     const FathomStrategy = Web3Utils.getContractInstance(
       SmartContractFactory.FathomVaultStrategy(strategyId),
       this.provider,
+      'provider',
+      'Strategy',
     );
 
     return FathomStrategy.isShutdown();
