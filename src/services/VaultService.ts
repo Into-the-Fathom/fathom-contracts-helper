@@ -386,6 +386,8 @@ export default class VaultService implements IVaultService {
           DepositLimitModule.abi as ContractInterface,
           depositLimitModuleAddress,
           this.provider,
+          'provider',
+          'TradeFiVault',
         );
 
         currentDepositLimit = (
@@ -403,8 +405,6 @@ export default class VaultService implements IVaultService {
     const FathomVault = Web3Utils.getContractInstance(
       SmartContractFactory.FathomVault(vaultAddress),
       this.provider,
-      'provider',
-      'TradeFiVault',
     );
 
     const depositLimitModuleAddress = await FathomVault.depositLimitModule();
