@@ -14,7 +14,7 @@ import { MAX_UINT256, ZERO_ADDRESS } from '../utils/Constants';
 import BigNumber from 'bignumber.js';
 import { getErrorTextFromError, TxAction } from '../utils/errorHandler';
 import DepositLimitModule from '../abis/Vaults/DepositLimitModule.json';
-import TradeFlowStrategy from '../abis/Vaults/TradeFlowStrategy.json';
+import TradeFlowStrategy from '../abis/Vaults/TradeFiStrategy.json';
 
 export default class VaultService implements IVaultService {
   public provider: DefaultProvider;

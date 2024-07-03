@@ -333,7 +333,7 @@ export default class StakingService implements IStakingService {
     return new Promise(async (resolve, reject) => {
       try {
         const FTHMToken = Web3Utils.getContractInstance(
-          SmartContractFactory.MainToken(fthmTokenAddress),
+          SmartContractFactory.FTHMTokenAddress(fthmTokenAddress),
           this.provider.getSigner(account),
           'signer',
         );
@@ -387,7 +387,7 @@ export default class StakingService implements IStakingService {
     fthmTokenAddress: string,
   ) {
     const FTHMToken = Web3Utils.getContractInstance(
-      SmartContractFactory.MainToken(fthmTokenAddress),
+      SmartContractFactory.FTHMTokenAddress(fthmTokenAddress),
       this.provider,
     );
 
