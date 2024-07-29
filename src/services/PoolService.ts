@@ -23,7 +23,7 @@ export default class PoolService implements IPoolService {
       SmartContractFactory.ERC20(forAddress),
       this.provider,
       'provider',
-      'erc20'
+      'erc20',
     );
 
     return ERC20.balanceOf(address);

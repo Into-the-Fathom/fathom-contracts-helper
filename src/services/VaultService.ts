@@ -331,9 +331,12 @@ export default class VaultService implements IVaultService {
   }
 
   /**
-   * Get amount tokens by amount of share token in position.
-   * @param shareAmount - The amount of share token.
-   * @param vaultAddress - Vault contract address.
+   * Calculates the equivalent asset amount for a given amount of share tokens to be redeemed from the vault.
+   * This method queries the vault contract to determine the equivalent asset amount that corresponds to the specified share token amount.
+   *
+   * @param shareAmount - The amount of share tokens to be redeemed, specified in the smallest unit of the token (e.g., wei for ETH).
+   * @param vaultAddress - The address of the vault contract from which the redemption will be made.
+   * @returns A promise that resolves to a string representing the equivalent asset amount for the specified share token amount.
    */
   async previewRedeem(shareAmount: string, vaultAddress: string) {
     const FathomVault = Web3Utils.getContractInstance(
@@ -349,9 +352,12 @@ export default class VaultService implements IVaultService {
   }
 
   /**
-   * Get the amount of burnt share tokens by the amount of the asset to be withdrawn
-   * @param amount - The amount of asset to be withdrawn.
-   * @param vaultAddress - Vault contract address.
+   * Calculates the amount of burnt share tokens based on the amount of the asset to be withdrawn from the vault.
+   * This method queries the vault contract to determine how many share tokens would be burnt for a given withdrawal amount.
+   *
+   * @param amount - The amount of asset to be withdrawn, specified in the smallest unit of the asset (e.g., wei for ETH).
+   * @param vaultAddress - The address of the vault contract from which the withdrawal will be made.
+   * @returns A promise that resolves to a string representing the amount of burnt share tokens for the specified withdrawal amount.
    */
   async previewWithdraw(amount: string, vaultAddress: string) {
     const FathomVault = Web3Utils.getContractInstance(
@@ -365,7 +371,14 @@ export default class VaultService implements IVaultService {
   }
 
   /**
-   * TradeFlow Methods.
+   * Retrieves the current deposit limit for a given vault. If the vault is a TradeFlow vault and a wallet address is provided,
+   * it queries the deposit limit module of the vault to determine the available deposit limit for that wallet.
+   * Otherwise, it returns the general deposit limit for the vault.
+   *
+   * @param vaultAddress - The address of the vault for which to retrieve the deposit limit.
+   * @param isTradeFlowVault - A boolean indicating whether the vault is a TradeFlow vault.
+   * @param wallet - Optional. The wallet address to check for an individual deposit limit in a TradeFlow vault.
+   * @returns A promise that resolves to a string representing the current deposit limit for the vault or for the individual wallet if specified.
    */
   async getDepositLimit(
     vaultAddress: string,
@@ -401,6 +414,14 @@ export default class VaultService implements IVaultService {
     return (await FathomVault.depositLimit()).toString();
   }
 
+  /**
+   * Checks if the KYC (Know Your Customer) process has been passed for a given wallet address in relation to a specific vault.
+   * This method queries the deposit limit module of the vault to determine the KYC status.
+   *
+   * @param vaultAddress - The address of the vault for which to check the KYC status.
+   * @param wallet - The wallet address to check for KYC completion.
+   * @returns A promise that resolves to a boolean indicating whether the KYC process has been passed for the given wallet.
+   */
   async kycPassed(vaultAddress: string, wallet: string) {
     const FathomVault = Web3Utils.getContractInstance(
       SmartContractFactory.FathomVault(vaultAddress),
@@ -424,6 +445,13 @@ export default class VaultService implements IVaultService {
     }
   }
 
+  /**
+   * Retrieves the end date of the deposit period for a TradeFlow vault.
+   * This method queries the TradeFlow strategy contract to obtain the timestamp when the deposit period ends.
+   *
+   * @param strategyAddress - The address of the TradeFlow strategy contract.
+   * @returns A promise that resolves to a string representing the timestamp of the deposit period end date.
+   */
   async getTradeFlowVaultDepositEndDate(strategyAddress: string) {
     const Strategy = Web3Utils.getContractInstanceFrom(
       TradeFlowStrategy.abi as ContractInterface,
@@ -435,6 +463,13 @@ export default class VaultService implements IVaultService {
     return (await Strategy.depositPeriodEnds()).toString();
   }
 
+  /**
+   * Retrieves the end date of the lock period for a TradeFlow vault.
+   * This method queries the TradeFlow strategy contract to obtain the timestamp when the lock period ends.
+   *
+   * @param strategyAddress - The address of the TradeFlow strategy contract.
+   * @returns A promise that resolves to a string representing the timestamp of the lock period end date.
+   */
   async getTradeFlowVaultLockEndDate(strategyAddress: string) {
     const Strategy = Web3Utils.getContractInstanceFrom(
       TradeFlowStrategy.abi as ContractInterface,
@@ -446,6 +481,13 @@ export default class VaultService implements IVaultService {
     return (await Strategy.lockPeriodEnds()).toString();
   }
 
+  /**
+   * Retrieves the minimum deposit amount required for a user to participate in a TradeFlow vault.
+   * This method queries the TradeFlow vault contract to obtain the minimum deposit amount.
+   *
+   * @param vaultAddress - The address of the TradeFlow vault for which to retrieve the minimum deposit amount.
+   * @returns A promise that resolves to a string representing the minimum deposit amount required for participation.
+   */
   async getMinUserDeposit(vaultAddress: string) {
     const FathomVault = Web3Utils.getContractInstance(
       SmartContractFactory.FathomTradeFlowVault(vaultAddress),
@@ -457,6 +499,13 @@ export default class VaultService implements IVaultService {
     return (await FathomVault.minUserDeposit()).toString();
   }
 
+  /**
+   * Checks if a given strategy is in shutdown mode.
+   * This method queries the strategy contract to determine its shutdown status.
+   *
+   * @param strategyId - The identifier of the strategy to check.
+   * @returns A promise that resolves to a boolean indicating whether the strategy is in shutdown mode.
+   */
   isStrategyShutdown(strategyId: string) {
     const FathomStrategy = Web3Utils.getContractInstance(
       SmartContractFactory.FathomVaultStrategy(strategyId),
