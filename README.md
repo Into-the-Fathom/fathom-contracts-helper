@@ -19,8 +19,8 @@ yarn add fathom-sdk
 
 ### Compatibility
 
-This library has a peer dependency of
-[ethers.js](https://docs.ethers.org/v5/) JsonRpcProvider.
+This library has a peer dependency of [ethers.js](https://docs.ethers.org/v5/)
+JsonRpcProvider.
 
 To install the correct version, run:
 
@@ -113,9 +113,9 @@ npm install ethers@5.7.2
 
 ### Usage Example
 
-Each Service require <code>provider</code> and <code>chainId</code> in constructor. Also, when provider or
-chainId changed need to pass new provider or chainId to service via
-<code>setProvider</code> and <code>setChainId</code>
+Each Service require <code>provider</code> and <code>chainId</code> in
+constructor. Also, when provider or chainId changed need to pass new provider or
+chainId to service via <code>setProvider</code> and <code>setChainId</code>
 
 Example of one main service <code>RootService</code>.
 
@@ -136,7 +136,7 @@ import {
   IStakingService,
   IVaultService,
 } from 'fathom-sdk';
-import { JsonRpcProvider } from "@ethersproject/providers";
+import { JsonRpcProvider } from '@ethersproject/providers';
 /**
  * Cache for contract instances.
  */
@@ -149,7 +149,8 @@ const DEFAULT_CHAIN_ID = 51;
  * Read-only mode.
  * Use public RPC for read on-chain data.
  */
-const getDefaultProvider = () => new JsonRpcProvider('https://erpc.apothem.network/');
+const getDefaultProvider = () =>
+  new JsonRpcProvider('https://erpc.apothem.network/');
 
 export class RootService {
   /*
