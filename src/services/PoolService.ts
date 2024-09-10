@@ -29,6 +29,29 @@ export default class PoolService implements IPoolService {
     return ERC20.balanceOf(address);
   }
 
+  /**
+   * Retrieves the total supply of an ERC20 token.
+   * This method queries the ERC20 contract to obtain the total supply of the token.
+   *
+   * @param forAddress - The address of the ERC20 token contract.
+   * @returns A promise that resolves to a string representing the total supply of the token.
+   */
+  getTotalSupply(forAddress: string) {
+    const ERC20 = Web3Utils.getContractInstance(
+      SmartContractFactory.ERC20(forAddress),
+      this.provider,
+    );
+
+    return ERC20.totalSupply();
+  }
+
+  /**
+   * Retrieves the symbol of an ERC20 token.
+   * This method queries the ERC20 contract to obtain the token symbol.
+   *
+   * @param forAddress - The address of the ERC20 token contract.
+   * @returns A promise that resolves to a string representing the symbol of the token.
+   */
   getTokenSymbol(forAddress: string) {
     const ERC20 = Web3Utils.getContractInstance(
       SmartContractFactory.ERC20(forAddress),
@@ -39,9 +62,11 @@ export default class PoolService implements IPoolService {
   }
 
   /**
-   * Helper function which return decimals for provided ERC20 token address.
-   * Use ERC20 Interface.
-   * @param forAddress
+   * Retrieves the number of decimals used by an ERC20 token.
+   * This method queries the ERC20 contract to obtain the decimals value, which indicates the token's precision.
+   *
+   * @param forAddress - The address of the ERC20 token contract.
+   * @returns A promise that resolves to a number representing the decimals used by the token.
    */
   getTokenDecimals(forAddress: string) {
     const ERC20 = Web3Utils.getContractInstance(
@@ -53,9 +78,11 @@ export default class PoolService implements IPoolService {
   }
 
   /**
-   * Return usdt price for provided ERC20 token address.
-   * Use DEX pair for it.
-   * @param forAddress
+   * Returns the USDT price for a provided ERC20 token address.
+   * This method uses a DEX pair to determine the price.
+   *
+   * @param forAddress - The address of the ERC20 token.
+   * @returns A promise that resolves to a string representing the price of the token in USDT.
    */
   async getDexPrice(forAddress: string) {
     const USStable = SmartContractFactory.USDT(this.chainId).address;
@@ -69,9 +96,13 @@ export default class PoolService implements IPoolService {
 
     return result[0];
   }
+
   /**
-   * Return collateral token address for given ERC20 token address
-   * @param forAddress - ERC20 borrow token address.
+   * Returns the collateral token address for a given ERC20 token address.
+   * This method queries the Collateral Token Adapter contract to obtain the collateral token address.
+   *
+   * @param forAddress - The address of the ERC20 borrow token.
+   * @returns A promise that resolves to a string representing the collateral token address.
    */
   getCollateralTokenAddress(forAddress: string) {
     const abi = SmartContractFactory.CollateralTokenAdapterAbi();
