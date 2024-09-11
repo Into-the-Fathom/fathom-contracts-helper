@@ -11,7 +11,7 @@ export default interface IPoolService {
 
   getTokenSymbol(forAddress: string): Promise<string>;
 
-  getTotalSupply(forAddress: string): Promise<string>;
+  getTotalSupply(forAddress: string): Promise<BigNumber>;
 
   getDexPrice(forAddress: string): Promise<BigNumber>;
 

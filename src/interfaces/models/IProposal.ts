@@ -5,8 +5,8 @@ export default interface IProposal {
   proposalId: string;
   proposer: string;
   startBlock: string;
-  blockNumber?: string;
-  blockTimestamp?: string;
+  blockNumber: string;
+  blockTimestamp: string;
   endBlock: string;
   description: string;
   forVotes: string;
