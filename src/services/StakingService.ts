@@ -44,17 +44,21 @@ export default class StakingService implements IStakingService {
 
         const endTime = unlockPeriod * DAY_SECONDS;
 
+        const formattedPosition = BigNumber(stakePosition.toString())
+          .precision(18, BigNumber.ROUND_DOWN)
+          .toString();
+
         const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           Staking,
           'createLock',
-          [utils.parseEther(stakePosition.toString()), endTime],
+          [utils.parseEther(formattedPosition), endTime],
           options,
         );
         options.gasLimit = gasLimit;
 
         const transaction = await Staking.createLock(
-          utils.parseEther(stakePosition.toString()),
+          utils.parseEther(formattedPosition),
           endTime,
           options,
         );
@@ -140,18 +144,22 @@ export default class StakingService implements IStakingService {
           'signer',
         );
 
+        const formattedWithdrawAmount = BigNumber(amount)
+          .precision(18, BigNumber.ROUND_DOWN)
+          .toString();
+
         const options = { gasLimit: 0 };
         const gasLimit = await getEstimateGas(
           Staking,
           'unlockPartially',
-          [lockId, utils.parseEther(amount)],
+          [lockId, utils.parseEther(formattedWithdrawAmount)],
           options,
         );
         options.gasLimit = gasLimit;
 
         const transaction = await Staking.unlockPartially(
           lockId,
-          utils.parseEther(amount.toString()),
+          utils.parseEther(formattedWithdrawAmount),
           options,
         );
 
